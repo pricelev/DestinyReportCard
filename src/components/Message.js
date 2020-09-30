@@ -13,6 +13,9 @@ function Message() {
         Welcome to Destiny Report Card:
       </p>
       <p>
+        This was added to test nothing
+      </p>
+      <p>
         <Button variant="primary">Learn more</Button>
       </p>
       </Jumbotron>
