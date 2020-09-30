@@ -10,7 +10,7 @@ function Message() {
       <Jumbotron>
       <h1>Destiny Tracker</h1>
       <p>
-        Welcome to Destiny Tracker bla bla bla
+        Welcome to Destiny Tracker:
       </p>
       <p>
         <Button variant="primary">Learn more</Button>
