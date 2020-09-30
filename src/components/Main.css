@@ -1,0 +1,8 @@
+.main-section {
+  text-align: left;
+  color: black;
+  height: 100%;
+  background-image: url("/destinybg.jpg");   
+  background-size: cover;
+  background-repeat: no-repeat;
+}
