@@ -8,9 +8,9 @@ function Message() {
   return (
     <div className="message-top text-center">
       <Jumbotron>
-      <h1>Destiny Tracker</h1>
+      <h1>Destiny Report Card</h1>
       <p>
-        Welcome to Destiny Tracker:
+        Welcome to Destiny Report Card:
       </p>
       <p>
         <Button variant="primary">Learn more</Button>
