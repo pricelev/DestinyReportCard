@@ -1,14 +1,16 @@
-import React from 'react'
-import './Main.css'
+import React from "react";
+import "./Main.css";
 
-import Message from './Message'
+import Searchbar from "./Searchbar";
+import Leaderboard from "./Leaderboard";
 
 function Main() {
   return (
     <div className="main-section">
-      <Message />
+      <Searchbar />
+      <Leaderboard />
     </div>
-  )
+  );
 }
 
-export default Main
+export default Main;
