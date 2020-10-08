@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 
 function Topnav() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" fixed="top">
     <Navbar.Brand href="#home">Destiny Report Card</Navbar.Brand>
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">

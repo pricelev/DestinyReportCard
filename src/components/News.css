@@ -1,0 +1,26 @@
+.news-section {
+  background-color: #1c2541;
+  padding: 100px;
+}
+
+.news-card {
+  height: 200px;
+}
+
+.card {
+  background-color: #0b132b;
+}
+
+.card-title {
+  color: yellowgreen;
+  font-family: "Oswald", sans-serif;
+}
+
+.card-text {
+  color: white;
+  font-family: "Montserrat", sans-serif;
+}
+
+.card-date {
+  text-align: right;
+}
