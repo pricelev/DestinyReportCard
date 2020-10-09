@@ -4,6 +4,7 @@ import "./Main.css";
 import Searchbar from "./Searchbar";
 import Leaderboard from "./Leaderboard";
 import News from "./News"
+import Footer from "./Footer"
 
 function Main() {
   return (
@@ -11,6 +12,7 @@ function Main() {
       <Searchbar />
       <Leaderboard />
       <News />
+      <Footer />
     </div>
   );
 }

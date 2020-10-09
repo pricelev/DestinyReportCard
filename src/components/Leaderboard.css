@@ -1,20 +1,82 @@
 .leaderboard-container {
-  background-color: #0b132b;
+  background-image: url("/bg-02.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-color: #0b132b; */
   padding-top: 80px;
-  padding-bottom: 80px;
+  padding-bottom: 100px;
   font-family: "Oswald", sans-serif;
 }
 
-.table {
-  margin: 0;
+.leaderboard-container .table {
+  margin-top: 15px;
 }
 
 .leaderboard-title {
-  margin: 0;
+  margin: auto;
   background-color: black;
 }
 
 .table-title {
   color: black;
-  background-color: #f0e4e4;
+  background-color: gold;
+  font-size: larger;
+}
+
+.table-heading {
+  color: white;
+}
+
+.leaderboard-container .carousel-indicators {
+  bottom: -50px;
+}
+
+.console-title {
+  color: white;
+}
+
+.leaderboard-container .carousel-control-prev {
+  bottom: -55px;
+  left: -50px;
+}
+
+.leaderboard-container .carousel-control-next {
+  bottom: -55px;
+  right: -50px;
+}
+
+.table-striped > tbody > tr:nth-child(2n + 1) > td,
+.table-striped > tbody > tr:nth-child(2n + 1) > th {
+  background-color: #0b132b;
+}
+
+.table-blue {
+  background-color: #1d316e;
+  color: rgb(173, 173, 173);
+}
+
+.table-bordered td,
+.table-bordered th {
+  border: 1px solid black;
+}
+
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid black;
+}
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+  color: gold;
+}
+
+@media only screen and (max-width: 650px) {
+  .leaderboard-container .carousel-control-prev {
+    left: 0;
+  }
+
+  .leaderboard-container .carousel-control-next {
+    right: 0;
+  }
 }

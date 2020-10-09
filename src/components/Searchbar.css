@@ -17,7 +17,7 @@
   margin: auto auto;
   height: 60px;
   width: 600px;
-  background-color: #353b48;
+  background-color: white;
   border-radius: 30px;
   padding: 10px;
 }
@@ -35,7 +35,7 @@
 }
 
 .search_icon {
-  background: white;
+  background: rgb(10, 51, 133);
   height: 40px;
   width: 40px;
   float: right;
@@ -45,6 +45,10 @@
   border-radius: 50%;
   color: white;
   text-decoration: none;
+}
+
+.img {
+  max-width: 100%;
 }
 
 @media screen and (max-width: 768px) {
