@@ -24,18 +24,18 @@
 
 .search_input {
   padding-left: 10px;
-  color: white;
+  color: black;
   border: 0;
   outline: 0;
   background: none;
   width: 520px;
   caret-color: red;
-  line-height: 40px;
+  line-height: 38px;
   transition: width 0.4s linear;
 }
 
 .search_icon {
-  background: rgb(10, 51, 133);
+  background: #1c3277;
   height: 40px;
   width: 40px;
   float: right;
