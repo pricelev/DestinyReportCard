@@ -8,8 +8,9 @@ import Spinner from "react-bootstrap/Spinner";
 
 let from = new Date(Date.now() - 2 * 86400000).toISOString().slice(0, 10);
 
+const CORS = "https://cors-anywhere.herokuapp.com/";
 const API =
-  "http://newsapi.org/v2/everything?" +
+  "newsapi.org/v2/everything?" +
   "q=destiny 2&" +
   "from=" +
   from +
@@ -28,7 +29,7 @@ class News extends Component {
   }
 
   componentDidMount() {
-    fetch(API)
+    fetch(CORS + API)
       .then((response) => response.json())
       .then((data) =>
         this.setState({
