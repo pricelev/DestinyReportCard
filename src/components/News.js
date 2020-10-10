@@ -8,17 +8,12 @@ import Spinner from "react-bootstrap/Spinner";
 
 let from = new Date(Date.now() - 2 * 86400000).toISOString().slice(0, 10);
 
+const token_1 = "&token=44591c1f4de66c503b27329cdb77a0e7";
+const token_2 = "&token=f8e02907a2acaf9d63ec7563c51f46a0";
 const CORS = "https://cors-anywhere.herokuapp.com/";
-const API =
-  "newsapi.org/v2/everything?" +
-  "q=destiny 2&" +
-  "from=" +
-  from +
-  "&" +
-  "sortBy=relevance&" +
-  "language=en&" +
-  "apiKey=cb34b9eac27a487fbfcdb3ab1db473ca";
 
+// USE SECOND TOKEN IF API LIMIT REACHED
+let API = "https://gnews.io/api/v4/search?q=destiny%202&lang=en" + token_1;
 class News extends Component {
   constructor(props) {
     super(props);
@@ -36,7 +31,10 @@ class News extends Component {
           isLoaded: true,
           newsItems: data.articles,
         })
-      );
+      )
+      .catch(() => {
+        alert("Error loading NEWS, change API token");
+      });
   }
 
   render() {
@@ -57,7 +55,7 @@ class News extends Component {
       const NewsItem = (article) => (
         <Card key={article.url}>
           <a href={article.url}>
-            <Card.Img variant="top" src={article.urlToImage} />
+            <Card.Img variant="top" src={article.image} />
           </a>
           <Card.Body>
             <p className="card-text">
@@ -70,7 +68,6 @@ class News extends Component {
             </a>
             <Card.Text>{article.description}</Card.Text>
             <footer className="blockquote-footer">
-              By {article.author} for{" "}
               <cite title="Source Author">{article.source.name}</cite>
             </footer>
           </Card.Body>
