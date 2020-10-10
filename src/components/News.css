@@ -26,6 +26,15 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+.news-spinner-container {
+  height: 200px;
+  color: white;
+}
+
+.news-spinner {
+  margin-top: 70px;
+}
+
 @media only screen and (max-width: 650px) {
   .news-section {
     background-color: #1c2541;

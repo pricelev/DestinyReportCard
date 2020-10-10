@@ -3,6 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
+import "./Topnav.css";
 
 function Topnav() {
   return (
@@ -11,11 +12,14 @@ function Topnav() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link href="#home" id="nav-item-white">
+          <Nav.Link href="/" id="nav-item-white">
             Home
           </Nav.Link>
-          <Nav.Link href="#leaderboards" id="nav-item-white">
+          <Nav.Link href="/leaderboards" id="nav-item-white">
             Leaderboards
+          </Nav.Link>
+          <Nav.Link href="/profile" id="nav-item-white">
+            Profile (MOCKUP)
           </Nav.Link>
           <NavDropdown title="Action" id="nav-item-white">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
