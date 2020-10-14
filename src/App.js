@@ -4,9 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
 
 import Topnav from "./components/Topnav";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import Footer from "./components/Footer";
-import Profile from "./components/Profile";
+import Profile from "./components/Profile/Profile";
 
 class App extends Component {
   render() {

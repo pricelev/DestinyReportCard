@@ -1,0 +1,27 @@
+.profile-top {
+  margin-top: 90px;
+  margin-left: 0;
+  margin-right: 0;
+  height: 185px;
+}
+
+.profile-top .container {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 0;
+  max-width: 100%;
+}
+
+.profile-img {
+  width: 150px;
+  height: 150px;
+}
+
+.profile-top .row {
+  width: 100%;
+}
+
+.profile-main {
+  background-color: blue;
+  height: 1000px;
+}
