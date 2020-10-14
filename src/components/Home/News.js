@@ -6,8 +6,6 @@ import Container from "react-bootstrap/Container";
 import CardDeck from "react-bootstrap/CardDeck";
 import Spinner from "react-bootstrap/Spinner";
 
-let from = new Date(Date.now() - 2 * 86400000).toISOString().slice(0, 10);
-
 const token_1 = "&token=44591c1f4de66c503b27329cdb77a0e7";
 const token_2 = "&token=f8e02907a2acaf9d63ec7563c51f46a0";
 const CORS = "https://cors-anywhere.herokuapp.com/";
