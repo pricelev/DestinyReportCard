@@ -6,14 +6,13 @@ import Container from "react-bootstrap/Container";
 import CardDeck from "react-bootstrap/CardDeck";
 import Spinner from "react-bootstrap/Spinner";
 
-let from = new Date(Date.now() - 2 * 86400000).toISOString().slice(0, 10);
-
 const token_1 = "&token=44591c1f4de66c503b27329cdb77a0e7";
 const token_2 = "&token=f8e02907a2acaf9d63ec7563c51f46a0";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
-// USE SECOND TOKEN IF API LIMIT REACHED
+// USE token_2 IF API LIMIT REACHED
 let API = "https://gnews.io/api/v4/search?q=destiny%202&lang=en" + token_1;
+// let API = "";
 class News extends Component {
   constructor(props) {
     super(props);
@@ -26,14 +25,16 @@ class News extends Component {
   componentDidMount() {
     fetch(CORS + API)
       .then((response) => response.json())
-      .then((data) =>
-        this.setState({
-          isLoaded: true,
-          newsItems: data.articles,
-        })
-      )
-      .catch(() => {
-        alert("Error loading NEWS, change API token");
+      .then((data) => {
+        if (data.articles) {
+          this.setState({
+            isLoaded: true,
+            newsItems: data.articles,
+          });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
       });
   }
 
@@ -41,11 +42,16 @@ class News extends Component {
     const { isLoaded, newsItems } = this.state;
     if (!isLoaded) {
       return (
-        <Spinner animation="border" role="status">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
+        <div className="news-spinner-container">
+          <Spinner className="news-spinner" animation="grow" role="status">
+            <span className="sr-only">Loading...</span>
+          </Spinner>
+          <p>Loading News...</p>
+          <p className="text-muted">If this does not load, check API limit</p>
+        </div>
       );
-    } else {
+    }
+    if (isLoaded) {
       let items = newsItems
         .filter((i) => {
           return i.title.toLowerCase().includes("destiny");
