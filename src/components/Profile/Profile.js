@@ -12,15 +12,27 @@ class Profile extends Component {
           <Container>
             <Row>
               <Col lg={1}>
-                <img src="bg-01.jpg" className="profile-img rounded-circle" />
+                <img src="user.png" className="profile-img rounded-circle" />
               </Col>
               <Col lg={3}>
-                <h1>Username</h1>
+                <h1 className="top-username">Username</h1>
               </Col>
             </Row>
           </Container>
         </div>
-        <div className="profile-main"></div>
+        <Container fluid className="profile-main-container">
+          <div className="profile-main">
+            <Row>
+              <Col lg={1}></Col>
+              <Col lg={10}>
+                <div className="profile-content">
+                  <h1> PROFILE CONTENTS </h1>
+                </div>
+              </Col>
+              <Col lg={1}></Col>
+            </Row>
+          </div>
+        </Container>
       </div>
     );
   }
