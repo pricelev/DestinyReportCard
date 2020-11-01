@@ -33,6 +33,8 @@ app.get('/getPlayer', (req, res) => {
   let Apipromise = Api.findPlayer(name);
 
 
+
+
     Promise.all([DBpromise,Apipromise]).then(data => {
     let dbResult = data[0];
     let apiResults = data[1].data.Response;
@@ -42,7 +44,7 @@ app.get('/getPlayer', (req, res) => {
       let temp = {
         DisplayName: rows.DisplayName,
         MembershipID: rows.MembershipID,
-        Emblem: "https://www.bungie.net/common/destiny2_content/icons/486c1483be15aabd1ef7adb7a87c7a72.jpg",
+        Emblem: rows.emblem,
         xbox: rows.Xbox,
         psn: rows.PSN,
         steam: rows.Steam,
@@ -54,15 +56,27 @@ app.get('/getPlayer', (req, res) => {
       let temp = {
         DisplayName: rows.displayName,
         MembershipID: rows.membershipId,
-        Emblem: "https://www.bungie.net/common/destiny2_content/icons/486c1483be15aabd1ef7adb7a87c7a72.jpg",
+        emblem: "https://www.bungie.net/common/destiny2_content/icons/486c1483be15aabd1ef7adb7a87c7a72.jpg",
         xbox: 0,
         psn: 0,
         steam: 0,
         membershipType: rows.membershipType
       }
-      if(rows.membershipType ==3){
-        temp.steam = 1;
+      switch(rows.membershipType){
+        case 1:
+          temp.xbox =1;
+          temp.emblem = "https://www.bungie.net/img/theme/bungienet/icons/xboxLiveLogo.png";
+          break;
+        case 2: 
+          temp.psn = 1;
+          temp.emblem = "https://www.bungie.net/img/theme/bungienet/icons/psnLogo.png";
+          break;
+        case 3:
+          temp.steam =1;
+          temp.emblem = "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
+          break;
       }
+      
       allPlayers.push(temp);
     }
     
