@@ -14,7 +14,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Topnav />
-          <Route path="/" component={Home} exact />
+          <Route exact  path="/" component={Home} exact />
           <Route path="/profile" component={Profile} />
           <Footer />
         </div>
