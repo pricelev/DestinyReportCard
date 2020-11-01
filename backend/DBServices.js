@@ -33,7 +33,7 @@ class Database {
 
 //searches the database for playsers that constain name
 function searchPlayer(name){
-    let q='select * from player where DisplayName like \"'+name +'%\" ';
+    let q='select p.* , max(c.playtime) as playtime, c.emblemicon as emblem, c.emblemfull as emblemfull from player p , characters c where  p.membershipID= c.membershipID and DisplayName like \"'+name +'%\" ';
     let db = new Database();
     return db.query( q );
 };
@@ -238,6 +238,8 @@ async function getMemberStats(memID){
 
 
 
+
+
   
   
   module.exports = {
@@ -245,4 +247,5 @@ async function getMemberStats(memID){
     updatePlayer,
     getReportCard,
     getMemberStats
+
   }
