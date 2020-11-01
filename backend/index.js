@@ -45,7 +45,8 @@ app.get('/getPlayer', (req, res) => {
         Emblem: "https://www.bungie.net/common/destiny2_content/icons/486c1483be15aabd1ef7adb7a87c7a72.jpg",
         xbox: rows.Xbox,
         psn: rows.PSN,
-        steam: rows.Steam
+        steam: rows.Steam,
+        membershipType: rows.MembershipType
       }
       allPlayers.push(temp);
     }
@@ -56,7 +57,8 @@ app.get('/getPlayer', (req, res) => {
         Emblem: "https://www.bungie.net/common/destiny2_content/icons/486c1483be15aabd1ef7adb7a87c7a72.jpg",
         xbox: 0,
         psn: 0,
-        steam: 0
+        steam: 0,
+        membershipType: rows.membershipType
       }
       if(rows.membershipType ==3){
         temp.steam = 1;
