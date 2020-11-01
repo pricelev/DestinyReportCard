@@ -7,6 +7,7 @@ import Topnav from "./components/Topnav";
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer";
 import Profile from "./components/Profile/Profile";
+import ReportCard from "./components/ReportCard/ReportCard";
 
 class App extends Component {
   render() {
@@ -16,6 +17,7 @@ class App extends Component {
           <Topnav />
           <Route exact  path="/" component={Home} exact />
           <Route path="/profile" component={Profile} />
+          <Route exact path="/reportcard/:membershipType/:membershipId" component={ReportCard} />
           <Footer />
         </div>
       </BrowserRouter>

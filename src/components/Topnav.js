@@ -21,6 +21,9 @@ function Topnav() {
           <Nav.Link href="/profile" id="nav-item-white">
             Profile (MOCKUP)
           </Nav.Link>
+          <Nav.Link href="/ReportCard" id="nav-item-white">
+            Report Card
+          </Nav.Link>
           <NavDropdown title="Action" id="nav-item-white">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
             <NavDropdown.Item href="#action/3.2">
