@@ -44,7 +44,7 @@ app.get('/getPlayer', (req, res) => {
       let temp = {
         DisplayName: rows.DisplayName,
         MembershipID: rows.MembershipID,
-        Emblem: rows.emblem,
+        emblem: rows.emblem,
         xbox: rows.Xbox,
         psn: rows.PSN,
         steam: rows.Steam,
@@ -115,11 +115,14 @@ app.listen(port, () => {
 
 app.get("/reportCard" , (req,res)=>{
   const memID = req.query.membershipId;
+  const memType = req.query.membershipType;
   if(!memID){
     throw new Error('REQUIRED PARAMETER MISSING')
   }
+  console.log("updating player")
+  DB.updatePlayer(memID,memType).then(DB.getReportCard(memID).then(data => res.send(data)))
 
-  DB.getReportCard(memID).then(data => res.send(data));
+  //DB.getReportCard(memID).then(data => res.send(data));
 
 
 
