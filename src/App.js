@@ -8,6 +8,8 @@ import Home from "./components/Home/Home";
 import Footer from "./components/Footer";
 import Profile from "./components/Profile/Profile";
 import ReportCard from "./components/ReportCard/ReportCard";
+import PlayerSearch from "./components/PlayerSearch/PlayerSearch";
+
 
 class App extends Component {
   render() {
@@ -18,6 +20,7 @@ class App extends Component {
           <Route exact  path="/" component={Home} exact />
           <Route path="/profile" component={Profile} />
           <Route exact path="/reportcard/:membershipType/:membershipId" component={ReportCard} />
+          <Route exact path="/PlayerSearch/:displayName" component={PlayerSearch} />
           <Footer />
         </div>
       </BrowserRouter>
