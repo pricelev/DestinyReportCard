@@ -57,11 +57,35 @@ async function updateChar(memID,memType,charID){
         const  emblemicon="https://www.bungie.net"+infoData.emblemPath;
         const  emblemfull="https://www.bungie.net"+infoData.emblemBackgroundPath;
         const lightlevel=infoData.light;
-        const  playtime=statsData.allPvP.allTime.secondsPlayed.basic.value+statsData.allPvE.allTime.secondsPlayed.basic.value
-        const raidclears=statsData.raid.allTime.activitiesCleared.basic.value;
-        const strikeCompletions=statsData.allStrikes.allTime.activitiesCleared.basic.value;
-        const nightfalls=data[2].data.Response.scored_nightfall.allTime.activitiesCleared.basic.value;
-        const  publicEvents=statsData.allPvE.allTime.publicEventsCompleted.basic.value;
+
+
+        let  pvpplaytime=0
+        let pveplaytime =0;
+        let raidclears = 0;
+        let strikecompletions=0;
+        let nightfalls =0;
+        let publicevents =0;
+        if(statsData.allPvP.allTime)
+            pvpplaytime=statsData.allPvP.allTime.secondsPlayed.basic.value;
+
+        if(statsData.allPvE.allTime)
+            pveplaytime = statsData.allPvE.allTime.secondsPlayed.basic.value;
+         let playtime = pvpplaytime+pveplaytime;   
+        
+         if(statsData.raid.allTime)
+            raidclears=statsData.raid.allTime.activitiesCleared.basic.value;    
+
+
+        if(statsData.allStrikes.allTime)
+            strikeCompletions=statsData.allStrikes.allTime.activitiesCleared.basic.value;
+        
+        if(data[2].data.Response.scored_nightfall.allTime)
+            nightfalls=data[2].data.Response.scored_nightfall.allTime.activitiesCleared.basic.value;
+
+        if(statsData.allPvE.allTime)
+          publicEvents=statsData.allPvE.allTime.publicEventsCompleted.basic.value;
+
+          
         if(trialsData){
             trialsWin = trialsData.activitiesWon.basic.value;
             trialsMatches = trialsData.activitiesEntered.basic.value;
