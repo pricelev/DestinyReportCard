@@ -33,7 +33,7 @@ class Database {
 
 //searches the database for playsers that constain name
 function searchPlayer(name){
-    let q='select p.* , max(c.playtime) as playtime, c.emblemicon as emblem, c.emblemfull as emblemfull from player p , characters c where  p.membershipID= c.membershipID and DisplayName like \"'+name +'%\" ';
+    let q='select p.* , max(c.playtime) as playtime, c.emblemicon as emblem, c.emblemfull as emblemfull from player p , characters c where  p.membershipID= c.membershipID and DisplayName like \"'+name +'%\" group by c.membershipID ';
     let db = new Database();
     return db.query( q );
 };
@@ -85,7 +85,7 @@ async function updateChar(memID,memType,charID){
         if(statsData.allPvE.allTime)
           publicEvents=statsData.allPvE.allTime.publicEventsCompleted.basic.value;
 
-          
+
         if(trialsData){
             trialsWin = trialsData.activitiesWon.basic.value;
             trialsMatches = trialsData.activitiesEntered.basic.value;
