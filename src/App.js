@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import Profile from "./components/Profile/Profile";
 import ReportCard from "./components/ReportCard/ReportCard";
 import PlayerSearch from "./components/PlayerSearch/PlayerSearch";
+import Login from "./components/Login/Login";
 
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
           <Route path="/profile" component={Profile} />
           <Route exact path="/reportcard/:membershipType/:membershipId" component={ReportCard} />
           <Route exact path="/PlayerSearch/:displayName" component={PlayerSearch} />
+          <Route exact path="/login"><Login /></Route>
           <Footer />
         </div>
       </BrowserRouter>
