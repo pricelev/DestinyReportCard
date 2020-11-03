@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import "./Topnav.css";
+import { Link } from "react-router-dom";
 
 function Topnav() {
   return (
@@ -37,7 +38,7 @@ function Topnav() {
           </NavDropdown>
         </Nav>
         <Nav>
-          <Button className="nav-button">Login</Button>
+          <Link to="/login"><Button className="nav-button">Login</Button></Link>
           <Button className="nav-button">Signup</Button>
         </Nav>
       </Navbar.Collapse>
