@@ -1,6 +1,6 @@
 ## Destiny Tracker
 
-This is a web app for generating report card statistics for Destiny players.
+This is a web app for generating report card statistics for Destiny 2 players.
 Look up your name to get an aggregate 'score' for your character.
 
 ## Authors
