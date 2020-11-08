@@ -59,7 +59,7 @@ class News extends Component {
         .slice(0, 3);
 
       const NewsItem = (article) => (
-        <Card key={article.url}>
+        <Card key={article.url} className="news-card">
           <a href={article.url}>
             <Card.Img variant="top" src={article.image} />
           </a>
@@ -79,7 +79,6 @@ class News extends Component {
           </Card.Body>
         </Card>
       );
-      console.log(items);
       const results = items.map((e) => NewsItem(e));
       return (
         <div className="news-section">
