@@ -16,24 +16,15 @@ class ReportSummary extends Component {
   }
 
   componentDidMount() {
-    // fetch(
-    //   CORS + API + this.state.memId + "&membershipType=" + this.state.memType
-    // )
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data) {
-    //       console.log("hello");
-    //       this.setState({
-    //         isLoaded: true,
-    //         profileData: data,
-    //         displayName: data.playerInfo.DisplayName.value,
-    //       });
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
+    let grades = this.props.grades;
+    document.getElementById(
+      "aggregate-grade"
+    ).innerHTML = `<img src=${this.getGradeIcon(grades[0])} />`;
+    for (let i = 1; i < grades.length; i++) {
+      document.getElementById(
+        "pos-" + i
+      ).innerHTML = `<img src=${this.getGradeIcon(grades[i])} />`;
+    }
   }
 
   render() {
@@ -44,9 +35,7 @@ class ReportSummary extends Component {
             <Row className="h-100">
               <Card className="aggregate-card">
                 <div className="aggregate-score">
-                  <div className="grade-img">
-                    <img src="./grade_c.png"></img>
-                  </div>
+                  <div className="grade-img" id="aggregate-grade"></div>
                   <br></br>
                   <h5>Aggregate Score</h5>
                 </div>
@@ -60,7 +49,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img">
+                        <div className="score-img" id="pos-1">
                           <img src="./grade_b.png"></img>
                         </div>
                       </Col>
@@ -77,7 +66,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img">
+                        <div className="score-img" id="pos-2">
                           <img src="./grade_a.png"></img>
                         </div>
                       </Col>
@@ -96,7 +85,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img">
+                        <div className="score-img" id="pos-3">
                           <img src="./grade_cplus.png"></img>
                         </div>
                       </Col>
@@ -113,7 +102,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img">
+                        <div className="score-img" id="pos-4">
                           <img src="./grade_d.png"></img>
                         </div>
                       </Col>
@@ -132,7 +121,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img">
+                        <div className="score-img" id="pos-5">
                           <img src="./grade_aminus.png"></img>
                         </div>
                       </Col>
@@ -149,7 +138,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img">
+                        <div className="score-img" id="pos-6">
                           <img src="./grade_bplus.png"></img>
                         </div>
                       </Col>
@@ -168,7 +157,29 @@ class ReportSummary extends Component {
         </Row>
       );
     } else {
-      return <p>loading</p>;
+      return null;
+    }
+  }
+
+  getGradeIcon(grade) {
+    if (grade >= 97) {
+      return "/grade_aplus.png";
+    } else if (grade >= 93) {
+      return "/grade_a.png";
+    } else if (grade >= 87) {
+      return "/grade_bplus.png";
+    } else if (grade >= 83) {
+      return "/grade_b.png";
+    } else if (grade >= 80) {
+      return "/grade_bminus.png";
+    } else if (grade >= 77) {
+      return "/grade_cplus.png";
+    } else if (grade >= 73) {
+      return "/grade_c.png";
+    } else if (grade >= 70) {
+      return "/grade_cminus.png";
+    } else {
+      return "/grade_d.png";
     }
   }
 }

@@ -23,7 +23,7 @@ class Profile extends Component {
         </div>
         <Container fluid className="profile-main-container">
           <div className="profile-main">
-            <ReportSummary />
+            <ReportSummary grades={[0, 0, 0, 0, 0, 0, 0]} />
           </div>
         </Container>
       </div>

@@ -49,7 +49,6 @@ class PlayerSearch extends Component {
               <Col lg={10}>
                 <div className="profile-content">
                   <h1> Players:</h1>
-
                   {this.state.players.map((player, index) => (
                     <p>
                       <img

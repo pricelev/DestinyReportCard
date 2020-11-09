@@ -7,10 +7,9 @@ import Topnav from "./components/Topnav";
 import Home from "./components/Home/Home";
 import Footer from "./components/Footer";
 import Profile from "./components/Profile/Profile";
-import ReportCard from "./components/ReportCard/ReportCard";
+import ReportCard from "./components/Profile/ReportCard";
 import PlayerSearch from "./components/PlayerSearch/PlayerSearch";
 import Login from "./components/Login/Login";
-
 
 class App extends Component {
   render() {
@@ -18,11 +17,21 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Topnav />
-          <Route exact  path="/" component={Home} exact />
+          <Route exact path="/" component={Home} exact />
           <Route path="/profile" component={Profile} />
-          <Route exact path="/reportcard/:membershipType/:membershipId" component={ReportCard} />
-          <Route exact path="/PlayerSearch/:displayName" component={PlayerSearch} />
-          <Route exact path="/login"><Login /></Route>
+          <Route
+            exact
+            path="/reportcard/:membershipType/:membershipId"
+            component={ReportCard}
+          />
+          <Route
+            exact
+            path="/PlayerSearch/:displayName"
+            component={PlayerSearch}
+          />
+          <Route exact path="/login">
+            <Login />
+          </Route>
           <Footer />
         </div>
       </BrowserRouter>
