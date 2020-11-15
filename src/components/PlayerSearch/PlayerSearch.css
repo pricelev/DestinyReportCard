@@ -1,0 +1,54 @@
+.search-header {
+  margin-bottom: 40px;
+  font-family: "Oswald", sans-serif;
+}
+
+.result-container {
+  background-color: white;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 60px;
+}
+
+.result-card {
+  width: 500px;
+  margin: 15px;
+  text-align: left;
+}
+
+.platform-icon {
+  margin-left: 15px;
+}
+
+.display-name {
+  font-size: 25px;
+  font-family: "Oswald", sans-serif;
+  padding: 0;
+}
+
+.result-container a {
+  text-decoration: none;
+}
+
+.result-content {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.query-error {
+  color: red;
+}
+
+.search-main {
+  margin: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  background-image: url("/bg-06.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 function Topnav() {
   return (
     <Navbar collapseOnSelect expand="lg" fixed="top">
-      <Navbar.Brand href="#home">Destiny Report Card</Navbar.Brand>
+      <div id="navbar-title">Destiny Report Card</div>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
@@ -25,20 +25,11 @@ function Topnav() {
           <Nav.Link href="/ReportCard" id="nav-item-white">
             Report Card
           </Nav.Link>
-          <NavDropdown title="Action" id="nav-item-white">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
-          </NavDropdown>
         </Nav>
         <Nav>
-          <Link to="/login"><Button className="nav-button">Login</Button></Link>
+          <Link to="/login">
+            <Button className="nav-button">Login</Button>
+          </Link>
           <Button className="nav-button">Signup</Button>
         </Nav>
       </Navbar.Collapse>

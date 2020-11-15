@@ -2,7 +2,9 @@ import React, { Component } from "react";
 
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
+import Spinner from "react-bootstrap/Spinner";
+import "./PlayerSearch.css";
 
 const API = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
@@ -18,13 +20,10 @@ class PlayerSearch extends Component {
   }
 
   componentDidMount() {
-    console.log("here");
     fetch(CORS + API + this.state.displayName)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data) {
-          console.log("hello");
           this.setState({
             isLoaded: true,
             players: data,
@@ -34,65 +33,137 @@ class PlayerSearch extends Component {
       .catch((error) => {
         console.log(error);
       });
+    // test for when server doesnt respond
+    // let test_data = [
+    //   {
+    //     DisplayName: "Gon",
+    //     membershipType: "3",
+    //   },
+    //   {
+    //     DisplayName: "Gondirk",
+    //     membershipType: "2",
+    //   },
+    //   {
+    //     DisplayName: "Gon John",
+    //     membershipType: "1",
+    //   },
+    // ];
+    // this.setState({
+    //   isLoaded: true,
+    //   players: test_data,
+    // });
   }
 
   render() {
     if (this.state.isLoaded) {
       let link = "../reportcard/";
       let temp = "";
-
-      return (
-        <Container fluid>
-          <div className="profile-main">
+      if (this.state.players.length == 0) {
+        return (
+          <div className="search-main">
             <Row>
               <Col lg={1}></Col>
               <Col lg={10}>
-                <div className="profile-content">
-                  <h1> Players:</h1>
-                  {this.state.players.map((player, index) => (
-                    <p>
-                      <img
-                        src={player.emblem}
-                        width="20"
-                        alt="Player Emblem"
-                      ></img>
-
-                      <a
-                        href={
-                          link +
-                          player.membershipType +
-                          "/" +
-                          player.MembershipID
-                        }
-                      >
-                        {" "}
-                        {player.DisplayName}
-                      </a>
-                    </p>
-                  ))}
+                <div className="result-container" style={{ height: "400px" }}>
+                  <div className="search-header">
+                    <h1> Search Results</h1>
+                  </div>
+                  <br></br>
+                  <br></br>
+                  <div class="query-error">
+                    <h4>
+                      No results found for the query "
+                      {this.props.match.params.displayName}"
+                    </h4>
+                  </div>
                 </div>
               </Col>
               <Col lg={1}></Col>
             </Row>
           </div>
-        </Container>
+        );
+      }
+      return (
+        <div className="search-main">
+          <Row>
+            <Col lg={1}></Col>
+            <Col lg={10}>
+              <div className="result-container">
+                <div className="search-header">
+                  <h1> Search Results</h1>
+                </div>
+                <Row>
+                  <Col lg={1}></Col>
+                  <Col lg={10}>
+                    {this.state.players.map((player, index) => {
+                      let icon = "";
+                      if (player.membershipType == 1) {
+                        icon = "/xbox-icon.png";
+                      } else if (player.membershipType == 2) {
+                        icon = "/ps-icon.png";
+                      } else {
+                        icon = "/steam-icon.png";
+                      }
+                      return (
+                        <a
+                          href={
+                            link +
+                            player.membershipType +
+                            "/" +
+                            player.MembershipID
+                          }
+                        >
+                          <Card className="result-card">
+                            <div className="result-content">
+                              <Row>
+                                <Col lg={2}>
+                                  <img
+                                    src={icon}
+                                    className="platform-icon"
+                                    width="40"
+                                    alt="Player Emblem"
+                                  ></img>
+                                </Col>
+                                <Col lg={10} className="display-name">
+                                  {player.DisplayName}
+                                </Col>
+                              </Row>
+                            </div>
+                          </Card>
+                        </a>
+                      );
+                    })}
+                  </Col>
+                </Row>
+              </div>
+            </Col>
+            <Col lg={1}></Col>
+          </Row>
+        </div>
       );
     } else {
       return (
-        <Container fluid>
-          <div className="profile-main">
-            <Row>
-              <Col lg={1}></Col>
-              <Col lg={10}>
-                <div className="profile-content">
-                  <h1> Report Card </h1>
-                  loading
+        <div className="search-main">
+          <Row>
+            <Col lg={1}></Col>
+            <Col lg={10}>
+              <div className="result-container">
+                <div className="summary-spinner-container">
+                  <Spinner
+                    className="summary-spinner"
+                    animation="grow"
+                    role="status"
+                  >
+                    <span className="sr-only">Loading...</span>
+                  </Spinner>
+                  <p>Fetching Data...</p>
+                  <p className="text-muted">This may take a while</p>
                 </div>
-              </Col>
-              <Col lg={1}></Col>
-            </Row>
-          </div>
-        </Container>
+              </div>
+            </Col>
+            <Col lg={1}></Col>
+          </Row>
+        </div>
       );
     }
   }

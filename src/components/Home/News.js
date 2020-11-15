@@ -12,7 +12,6 @@ const CORS = "https://cors-anywhere.herokuapp.com/";
 
 // USE token_2 IF API LIMIT REACHED
 let API = "https://gnews.io/api/v4/search?q=destiny%202&lang=en" + token_1;
-// let API = "";
 class News extends Component {
   constructor(props) {
     super(props);

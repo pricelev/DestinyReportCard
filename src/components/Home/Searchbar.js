@@ -18,21 +18,32 @@ function Searchbar() {
         <Row>
           <Col lg={12}>
             <div className="searchbar">
-              <input
-                className="search_input"
-                type="text"
-                name=""
-                placeholder="Find your Guardian..."
-              />
-              <a href="#" className="search_icon">
-                <img src="search.png" />
-              </a>
+              <form>
+                <input
+                  className="search_input"
+                  type="text"
+                  name=""
+                  id="search_text"
+                  placeholder="Find your Guardian..."
+                />
+                <button onClick={handleSearch} className="search_icon">
+                  <img src="search.png"></img>
+                </button>
+              </form>
             </div>
           </Col>
         </Row>
       </Container>
     </div>
   );
+}
+
+function handleSearch(e) {
+  e.preventDefault();
+  let name = document.getElementById("search_text").value;
+  if (name != "") {
+    window.location.replace("/playersearch/" + name);
+  }
 }
 
 export default Searchbar;
