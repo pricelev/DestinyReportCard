@@ -29,13 +29,15 @@ class Database {
 }
 
 //searches the database for playsers that constain name
-function searchPlayer(name) {
+ async function searchPlayer(name) {
   let q =
     'select p.* , max(c.playtime) as playtime, c.emblemicon as emblem, c.emblemfull as emblemfull from player p , characters c where  p.membershipID= c.membershipID and DisplayName like "' +
     name +
     '%" group by c.membershipID ';
   let db = new Database();
-  return db.query(q);
+  let results =await db.query(q);
+  db.close();
+  return  results;
 }
 
 // function to retreive api info an update a give char
@@ -46,7 +48,7 @@ async function updateChar(memID, memType, charID) {
   let nightfall = Api.getCharacterNightfall(memID, memType, charID);
   let trials = Api.getCharacterTrials(memID, memType, charID);
 
-  Promise.all([stats, info, nightfall, trials]).then((data) => {
+  await Promise.all([stats, info, nightfall, trials]).then((data) => {
     statsData = data[0].data.Response;
     infoData = data[1].data.Response.character.data;
     trialsData = data[3].data.Response.trials_of_osiris.allTime;
@@ -61,9 +63,9 @@ async function updateChar(memID, memType, charID) {
     let pvpplaytime = 0;
     let pveplaytime = 0;
     let raidclears = 0;
-    let strikecompletions = 0;
+    let strikeCompletions = 0;
     let nightfalls = 0;
-    let publicevents = 0;
+    let publicEvents = 0;
     if (statsData.allPvP.allTime)
       pvpplaytime = statsData.allPvP.allTime.secondsPlayed.basic.value;
 
@@ -125,7 +127,9 @@ async function updateChar(memID, memType, charID) {
 
     console.log(q);
     db.query(q);
+    
   });
+  db.close();
 }
 
 //updates database for give players memID and memType
@@ -222,7 +226,7 @@ async function updatePlayer(memID, memType) {
     console.log(q);
     db.query(q);
   });
-
+  db.close();
   return 200;
 }
 
@@ -266,7 +270,7 @@ async function getReportCard(memID) {
     ret["playerInfo"]["averageGrade"] =
       grades.reduce((a, b) => a + b) / grades.length;
   });
-
+  db.close();
   return ret;
 }
 function getGrade(value, avg, stdDev) {
@@ -294,7 +298,7 @@ async function getMemberStats(memID) {
     memID +
     " AND p.membershipID = c.membershipID";
   let playerInfo = db.query(q);
-
+  db.close();
   return playerInfo;
 }
 

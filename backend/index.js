@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-//THE PASSWORD FOR THE DATABASE: A5gkBj0h4m
+
 //api interface for get player, when request comes in we need to:
 //1: query database for any existing players by that name
 //2: query bungie for non-existing players by that name
