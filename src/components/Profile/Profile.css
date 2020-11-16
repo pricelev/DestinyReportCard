@@ -4,11 +4,11 @@
   margin-right: 0;
   margin-bottom: 0;
   height: 280px;
-  background-color: black;
-  background-image: url("/galaxy.jpg");
+  background-color: #0b132b;
+  /* background-image: url("/mountain-2.jpg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: cover; */
 }
 
 .profile-top .container {
