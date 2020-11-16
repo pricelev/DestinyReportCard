@@ -1,0 +1,12 @@
+.chart-container {
+  height: 600px;
+  margin-top: 20px;
+}
+
+.chart-row {
+  height: 100%;
+}
+
+.chart-container > .col-lg-8 {
+  padding: 0;
+}

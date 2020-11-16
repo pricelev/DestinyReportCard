@@ -4,7 +4,11 @@
   margin-right: 0;
   margin-bottom: 0;
   height: 280px;
-  background-color: #0b132b;
+  background-color: black;
+  background-image: url("/galaxy.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .profile-top .container {
@@ -17,7 +21,7 @@
 .profile-img {
   width: 150px;
   height: 150px;
-  background-color: white;
+  background-color: rgb(12, 11, 11);
   object-fit: cover;
   border: 2px solid gold;
 }
@@ -28,7 +32,12 @@
 
 .profile-main {
   margin: 0;
-  background-color: rgb(38, 0, 177);
+  background-image: url("/bg-05.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: black;
   padding-left: 0;
   padding-right: 0;
   padding-top: 80px;
@@ -56,13 +65,13 @@
   padding-top: 5px;
   padding-bottom: 5px;
   height: 300px;
-  background-color: rgb(196, 154, 224);
+  background-color: rgb(201, 178, 47);
 }
 
 .aggregate-card {
   height: 300px;
   width: 100%;
-  background-color: #0b132b;
+  background-color: #152249;
   color: white;
 }
 

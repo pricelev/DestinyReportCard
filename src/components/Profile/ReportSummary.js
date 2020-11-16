@@ -4,9 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 
-const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
-const CORS = "https://cors-anywhere.herokuapp.com/";
-
 class ReportSummary extends Component {
   constructor(props) {
     super(props);

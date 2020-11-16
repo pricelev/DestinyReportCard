@@ -6,7 +6,7 @@ import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 
 import ReportSummary from "./ReportSummary";
-import "./Profile.css";
+import ProfileChart from "./ProfileChart";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
@@ -64,6 +64,37 @@ class ReportCard extends Component {
         raids_grade,
       ];
 
+      let chart_data = [];
+      chart_data.push(["Player", "Player", "Community Average"]);
+      chart_data.push([
+        "Raid Clears",
+        this.state.profileData.stats.raidclears.value
+          ? this.state.profileData.stats.raidclears.value
+          : 0,
+        this.state.profileData.stats.raidclears.avg,
+      ]);
+      chart_data.push([
+        "Strike Completions",
+        this.state.profileData.stats.strikecompletions.value
+          ? this.state.profileData.stats.strikecompletions.value
+          : 0,
+        this.state.profileData.stats.strikecompletions.avg,
+      ]);
+      chart_data.push([
+        "Nightfalls",
+        this.state.profileData.stats.nightfalls.value
+          ? this.state.profileData.stats.nightfalls.value
+          : 0,
+        this.state.profileData.stats.nightfalls.avg,
+      ]);
+      chart_data.push([
+        "Public Events",
+        this.state.profileData.stats.publicevents.value
+          ? this.state.profileData.stats.publicevents.value
+          : 0,
+        this.state.profileData.stats.publicevents.avg,
+      ]);
+
       return (
         <div className="profile-container">
           <div className="profile-top">
@@ -71,7 +102,7 @@ class ReportCard extends Component {
               <Row>
                 <Col lg={2}>
                   <img
-                    src="/bg-01.jpg"
+                    src="/profile.jpg"
                     className="profile-img rounded-circle"
                   />
                 </Col>
@@ -86,6 +117,10 @@ class ReportCard extends Component {
           <Container fluid className="profile-main-container">
             <div className="profile-main">
               <ReportSummary grades={summary} />
+              <ProfileChart
+                data={chart_data}
+                username={this.state.profileData.playerInfo.DisplayName.value}
+              />
             </div>
           </Container>
         </div>
