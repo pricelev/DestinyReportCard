@@ -114,3 +114,19 @@ app.get("/reportCard", (req, res) => {
 
   //DB.getReportCard(memID).then(data => res.send(data));
 });
+
+app.get("/getLeaderboard", (req,res)=>{
+  const type = req.query.type;
+  if(!type){
+    throw new Error("REQUIRED PARAMETER MISSING");
+  }
+  if(type === "PvEKD" || type === "PvPKD" || type === 'PvPWL' || type === "TriumphScore" || type=== "Time" || type === "RaidClears" || type === "PublicEvents" || type ==="StrikeCompletions" || type === "Nightfalls" ||type === "Trials"){
+    DB.getLeaderboard(type).then((data)=>res.send(data));
+    
+  }
+  else{
+    throw new Error("Invalid paramater");
+  }
+
+
+});

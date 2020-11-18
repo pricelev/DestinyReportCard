@@ -187,7 +187,7 @@ async function updatePlayer(memID, memType) {
   });
 
   Apipromise3.then((response) => {
-    triumph = response.data.Response.profileRecords.data.score;
+    triumph = response.data.Response.profileRecords.data.lifetimeScore;
   });
 
   await Promise.all([Apipromise3, Apipromise2, Apipromise]).then((data) => {
@@ -302,9 +302,47 @@ async function getMemberStats(memID) {
   return playerInfo;
 }
 
+async function getLeaderboard(type){
+  let db = new Database();
+  let q;
+  
+  if(type == "PvEKD" || type == "PvPKD" || type == 'PvPWL' || type == "TriumphScore"){
+    q = "select MembershipID, MembershipType, DisplayName,"+type +" from player order by  "+type+" DESC Limit 15";
+    
+   
+  }
+  else if(type== "Time" ){
+    q = "select MembershipID, MembershipType, DisplayName, PVPTime+PVETime as Time from player order by  Time DESC Limit 15";
+    
+  }
+  else if(type == "RaidClears" || type == "PublicEvents" || type =="StrikeCompletions" || type == "Nightfalls"){
+    q = `select player.MemberShipID,MembershipType,DisplayName, typeQ.`+type+` from player,
+    (select MembershipID, sum(`+type+`) as `+type+` from characters group by MembershipID) as typeQ
+    where typeQ.MembershipID=player.MemberShipID
+    order by `+type+` DESC
+    Limit 15`;
+  }
+  else if(type == "Trials"){
+    q = `select player.MemberShipID,MembershipType,DisplayName, typeQ.Trials from player,
+    (select MembershipID, sum(trialsWins)/sum(trialsMatches) as Trials from characters group by MembershipID) as typeQ
+    where typeQ.MembershipID=player.MemberShipID
+    order by typeQ.Trials DESC
+    Limit 15`;
+  }
+  else{
+    throw new Error("Invalid type");
+  }
+
+  let leaderboard = db.query(q);
+  db.close();
+  return leaderboard;
+}
+
+
 module.exports = {
   searchPlayer,
   updatePlayer,
   getReportCard,
   getMemberStats,
+  getLeaderboard
 };
