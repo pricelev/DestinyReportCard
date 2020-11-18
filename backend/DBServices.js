@@ -29,15 +29,15 @@ class Database {
 }
 
 //searches the database for playsers that constain name
- async function searchPlayer(name) {
+async function searchPlayer(name) {
   let q =
     'select p.* , max(c.playtime) as playtime, c.emblemicon as emblem, c.emblemfull as emblemfull from player p , characters c where  p.membershipID= c.membershipID and DisplayName like "' +
     name +
     '%" group by c.membershipID ';
   let db = new Database();
-  let results =await db.query(q);
+  let results = await db.query(q);
   db.close();
-  return  results;
+  return results;
 }
 
 // function to retreive api info an update a give char
@@ -125,9 +125,7 @@ async function updateChar(memID, memType, charID) {
       trialsMatches +
       ")";
 
-    
     db.query(q);
-    
   });
   db.close();
 }
@@ -223,7 +221,6 @@ async function updatePlayer(memID, memType) {
       triumph +
       ")";
 
-    
     db.query(q);
   });
   db.close();
@@ -243,18 +240,20 @@ async function getReportCard(memID) {
 
   const communityQ = "select * from grades";
 
-  const charQ= "select characterID,class as classType,emblemIcon,emblemFull,LightLevel from characters where membershipID = "+memID+" order by LightLevel DESC";
+  const charQ =
+    "select characterID,class as classType,emblemIcon,emblemFull,LightLevel from characters where membershipID = " +
+    memID +
+    " order by LightLevel DESC";
 
   let playerInfo = db.query(q);
   let communityInfo = db.query(communityQ);
   let playerChars = db.query(charQ);
   let ret = {};
   ret["playerInfo"] = {};
-  ret["characters"]={};
+  ret["characters"] = {};
   ret["stats"] = {};
-  
- 
-  await Promise.all([playerInfo, communityInfo,playerChars]).then((data) => {
+
+  await Promise.all([playerInfo, communityInfo, playerChars]).then((data) => {
     //for column of player stats
     //new object record = (statCol, statColAVG, statColSTD)
     const playerInfo = data[0][0];
@@ -262,7 +261,7 @@ async function getReportCard(memID) {
     const characters = data[2];
     let grades = [];
     console.log(playerInfo);
-    console.log(data[2].length)
+    console.log(data[2].length);
     for (var col in playerInfo) {
       const value = playerInfo[col];
       const avg = communityInfo[col + "Avg"];
@@ -278,12 +277,10 @@ async function getReportCard(memID) {
     ret["playerInfo"]["averageGrade"] =
       grades.reduce((a, b) => a + b) / grades.length;
     let characterInfo = [];
-    data[2].forEach(char=>{
+    data[2].forEach((char) => {
       characterInfo.push(char);
-    })
-    ret["characters"]={characterInfo};
-      
-     
+    });
+    ret["characters"] = { characterInfo };
   });
   db.close();
   return ret;
@@ -317,34 +314,52 @@ async function getMemberStats(memID) {
   return playerInfo;
 }
 
-async function getLeaderboard(type){
+async function getLeaderboard(type) {
   let db = new Database();
   let q;
-  
-  if(type == "PvEKD" || type == "PvPKD" || type == 'PvPWL' || type == "TriumphScore"){
-    q = "select MembershipID, MembershipType, DisplayName,"+type +" from player order by  "+type+" DESC Limit 15";
-    
-   
-  }
-  else if(type== "Time" ){
-    q = "select MembershipID, MembershipType, DisplayName, PVPTime+PVETime as Time from player order by  Time DESC Limit 15";
-    
-  }
-  else if(type == "RaidClears" || type == "PublicEvents" || type =="StrikeCompletions" || type == "Nightfalls"){
-    q = `select player.MemberShipID,MembershipType,DisplayName, typeQ.`+type+` from player,
-    (select MembershipID, sum(`+type+`) as `+type+` from characters group by MembershipID) as typeQ
+
+  if (
+    type == "PvEKD" ||
+    type == "PvPKD" ||
+    type == "PvPWL" ||
+    type == "TriumphScore"
+  ) {
+    q =
+      "select MembershipID, MembershipType, DisplayName," +
+      type +
+      " from player order by  " +
+      type +
+      " DESC Limit 15";
+  } else if (type == "Time") {
+    q =
+      "select MembershipID, MembershipType, DisplayName, PVPTime+PVETime as Time from player order by  Time DESC Limit 15";
+  } else if (
+    type == "RaidClears" ||
+    type == "PublicEvents" ||
+    type == "StrikeCompletions" ||
+    type == "Nightfalls"
+  ) {
+    q =
+      `select player.MemberShipID,MembershipType,DisplayName, typeQ.` +
+      type +
+      ` from player,
+    (select MembershipID, sum(` +
+      type +
+      `) as ` +
+      type +
+      ` from characters group by MembershipID) as typeQ
     where typeQ.MembershipID=player.MemberShipID
-    order by `+type+` DESC
+    order by ` +
+      type +
+      ` DESC
     Limit 15`;
-  }
-  else if(type == "Trials"){
+  } else if (type == "Trials") {
     q = `select player.MemberShipID,MembershipType,DisplayName, typeQ.Trials from player,
     (select MembershipID, sum(trialsWins)/sum(trialsMatches) as Trials from characters group by MembershipID) as typeQ
     where typeQ.MembershipID=player.MemberShipID
     order by typeQ.Trials DESC
     Limit 15`;
-  }
-  else{
+  } else {
     throw new Error("Invalid type");
   }
 
@@ -353,11 +368,10 @@ async function getLeaderboard(type){
   return leaderboard;
 }
 
-
 module.exports = {
   searchPlayer,
   updatePlayer,
   getReportCard,
   getMemberStats,
-  getLeaderboard
+  getLeaderboard,
 };

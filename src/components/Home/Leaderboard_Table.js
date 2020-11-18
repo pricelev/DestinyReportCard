@@ -1,8 +1,28 @@
 import React, { Component } from "react";
 import Table from "react-bootstrap/Table";
+import "./Leaderboard.css";
 
 class Leaderboard_Table extends Component {
   render() {
+    let link = "../reportcard/";
+    const row = (item, rank, type) => (
+      <tr>
+        <td>{rank}</td>
+        <td>
+          <a
+            className="leaderboard-item"
+            href={link + item.MembershipType + "/" + item.MembershipID}
+          >
+            {item.DisplayName}
+          </a>
+        </td>
+        <td>{item[type]}</td>
+      </tr>
+    );
+    let table = this.props.data.map((i, index) =>
+      row(i, index + 1, this.props.type)
+    );
+
     return (
       <Table striped bordered hover className="table-blue">
         <thead>
@@ -14,42 +34,10 @@ class Leaderboard_Table extends Component {
           <tr className="table-heading">
             <th>#</th>
             <th>PLAYER</th>
-            <th>ELO</th>
-            <th>WINRATE</th>
+            <th>{this.props.subtitle}</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Mark</td>
-            <td>3000</td>
-            <td>99%</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Jacob</td>
-            <td>2900</td>
-            <td>90%</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Jacob</td>
-            <td>2800</td>
-            <td>80%</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>Jacob</td>
-            <td>2800</td>
-            <td>80%</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Jacob</td>
-            <td>2800</td>
-            <td>80%</td>
-          </tr>
-        </tbody>
+        <tbody>{table}</tbody>
       </Table>
     );
   }

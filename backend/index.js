@@ -10,7 +10,6 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-
 //api interface for get player, when request comes in we need to:
 //1: query database for any existing players by that name
 //2: query bungie for non-existing players by that name
@@ -115,18 +114,25 @@ app.get("/reportCard", (req, res) => {
   //DB.getReportCard(memID).then(data => res.send(data));
 });
 
-app.get("/getLeaderboard", (req,res)=>{
+app.get("/getLeaderboard", (req, res) => {
   const type = req.query.type;
-  if(!type){
+  if (!type) {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
-  if(type === "PvEKD" || type === "PvPKD" || type === 'PvPWL' || type === "TriumphScore" || type=== "Time" || type === "RaidClears" || type === "PublicEvents" || type ==="StrikeCompletions" || type === "Nightfalls" ||type === "Trials"){
-    DB.getLeaderboard(type).then((data)=>res.send(data));
-    
-  }
-  else{
+  if (
+    type === "PvEKD" ||
+    type === "PvPKD" ||
+    type === "PvPWL" ||
+    type === "TriumphScore" ||
+    type === "Time" ||
+    type === "RaidClears" ||
+    type === "PublicEvents" ||
+    type === "StrikeCompletions" ||
+    type === "Nightfalls" ||
+    type === "Trials"
+  ) {
+    DB.getLeaderboard(type).then((data) => res.send(data));
+  } else {
     throw new Error("Invalid paramater");
   }
-
-
 });

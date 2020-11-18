@@ -16,14 +16,8 @@ function Topnav() {
           <Nav.Link href="/" id="nav-item-white">
             Home
           </Nav.Link>
-          <Nav.Link href="/leaderboards" id="nav-item-white">
-            Leaderboards
-          </Nav.Link>
           <Nav.Link href="/profile" id="nav-item-white">
             Profile (MOCKUP)
-          </Nav.Link>
-          <Nav.Link href="/ReportCard" id="nav-item-white">
-            Report Card
           </Nav.Link>
         </Nav>
         <Nav>

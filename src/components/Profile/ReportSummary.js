@@ -39,7 +39,7 @@ class ReportSummary extends Component {
               </Card>
             </Row>
           </Col>
-          <Col lg={6}>
+          <Col lg={6} className="summary-col">
             <Card className="report-card">
               <Row className="report-card-row h-100">
                 <Col lg={6}>

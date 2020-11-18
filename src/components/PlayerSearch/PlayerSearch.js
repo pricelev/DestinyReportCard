@@ -57,8 +57,7 @@ class PlayerSearch extends Component {
   render() {
     if (this.state.isLoaded) {
       let link = "../reportcard/";
-      let temp = "";
-      if (this.state.players.length == 0) {
+      if (this.state.players.length === 0) {
         return (
           <div className="search-main">
             <Row>
@@ -97,9 +96,9 @@ class PlayerSearch extends Component {
                   <Col lg={10}>
                     {this.state.players.map((player, index) => {
                       let icon = "";
-                      if (player.membershipType == 1) {
+                      if (player.membershipType === 1) {
                         icon = "/xbox-icon.png";
-                      } else if (player.membershipType == 2) {
+                      } else if (player.membershipType === 2) {
                         icon = "/ps-icon.png";
                       } else {
                         icon = "/steam-icon.png";
