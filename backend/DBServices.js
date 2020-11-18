@@ -125,7 +125,7 @@ async function updateChar(memID, memType, charID) {
       trialsMatches +
       ")";
 
-    console.log(q);
+    
     db.query(q);
     
   });
@@ -223,7 +223,7 @@ async function updatePlayer(memID, memType) {
       triumph +
       ")";
 
-    console.log(q);
+    
     db.query(q);
   });
   db.close();
@@ -243,18 +243,26 @@ async function getReportCard(memID) {
 
   const communityQ = "select * from grades";
 
+  const charQ= "select characterID,class as classType,emblemIcon,emblemFull,LightLevel from characters where membershipID = "+memID+" order by LightLevel DESC";
+
   let playerInfo = db.query(q);
   let communityInfo = db.query(communityQ);
+  let playerChars = db.query(charQ);
   let ret = {};
   ret["playerInfo"] = {};
+  ret["characters"]={};
   ret["stats"] = {};
-  await Promise.all([playerInfo, communityInfo]).then((data) => {
+  
+ 
+  await Promise.all([playerInfo, communityInfo,playerChars]).then((data) => {
     //for column of player stats
     //new object record = (statCol, statColAVG, statColSTD)
     const playerInfo = data[0][0];
     const communityInfo = data[1][0];
+    const characters = data[2];
     let grades = [];
-
+    console.log(playerInfo);
+    console.log(data[2].length)
     for (var col in playerInfo) {
       const value = playerInfo[col];
       const avg = communityInfo[col + "Avg"];
@@ -269,6 +277,13 @@ async function getReportCard(memID) {
     }
     ret["playerInfo"]["averageGrade"] =
       grades.reduce((a, b) => a + b) / grades.length;
+    let characterInfo = [];
+    data[2].forEach(char=>{
+      characterInfo.push(char);
+    })
+    ret["characters"]={characterInfo};
+      
+     
   });
   db.close();
   return ret;
