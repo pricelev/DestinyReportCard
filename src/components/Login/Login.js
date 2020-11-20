@@ -4,7 +4,6 @@ import "./Login.css";
 import Axios from "axios";
 
 export default function Login() {
-  const CORS = "https://cors-anywhere.herokuapp.com/";
   const API = "http://www.destinyreportcard.com:3001/login";
 
   const [email, setEmail] = useState("");
@@ -13,7 +12,7 @@ export default function Login() {
   const [loginStatus, setloginStatus] = useState("");
 
   const login = () => {
-    Axios.post(CORS + API, {
+    Axios.post(API, {
       email: email,
       password: password,
     }).then((response) => {
