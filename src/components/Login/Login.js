@@ -13,6 +13,7 @@ export default function Login() {
   const [loginStatus, setloginStatus] = useState("");
 
   const login = () => {
+    setloginStatus(email + ", " + password);
     Axios.post(CORS + API, {
       email: email,
       password: password,
@@ -21,7 +22,7 @@ export default function Login() {
         setloginStatus(response.data.message);
       }
       else {
-        setloginStatus(response.data[0]);
+       // setloginStatus(response.data[0]);
       }
     });
   }
