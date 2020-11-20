@@ -31,7 +31,6 @@ class ReportCard extends Component {
       .then((data) => {
         console.log(data);
         if (data) {
-          console.log("hello");
           this.setState({
             isLoaded: true,
             profileData: data,
