@@ -11,13 +11,20 @@ export default function Signup() {
   const [password, setPassword] = useState("");
   const [membershipID, setMembershipID] = useState("");
 
+  const [registerStatus, setregisterStatus] = useState("");
+
   const register = () => {
-    Axios.post(CORS + API, {
+    Axios.post(API, {
       email: email,
       password: password,
       membershipID: membershipID
     }).then((response) => {
-      console.log(response.data);
+      if (response.data.message){
+        setregisterStatus(response.data.message);
+      }
+      else {
+        setregisterStatus(response.data[0]);
+      }
     });
   }
 
@@ -62,6 +69,7 @@ export default function Signup() {
           Signup
         </Button>
       </form>
+      <h1>{registerStatus}</h1>
     </div>
   );
 }
