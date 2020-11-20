@@ -331,14 +331,14 @@ async function getLeaderboard(type){
     
   }
   else if(type == "RaidClears" || type == "PublicEvents" || type =="StrikeCompletions" || type == "Nightfalls"){
-    q = `select player.MemberShipID,MembershipType,DisplayName, typeQ.`+type+` from player,
+    q = `select player.MembershipID,MembershipType,DisplayName, typeQ.`+type+` from player,
     (select MembershipID, sum(`+type+`) as `+type+` from characters group by MembershipID) as typeQ
     where typeQ.MembershipID=player.MemberShipID
     order by `+type+` DESC
     Limit 15`;
   }
   else if(type == "Trials"){
-    q = `select player.MemberShipID,MembershipType,DisplayName, typeQ.Trials from player,
+    q = `select player.MembershipID,MembershipType,DisplayName, typeQ.Trials from player,
     (select MembershipID, sum(trialsWins)/sum(trialsMatches) as Trials from characters group by MembershipID) as typeQ
     where typeQ.MembershipID=player.MemberShipID
     order by typeQ.Trials DESC
