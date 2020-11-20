@@ -13,7 +13,7 @@ export default function Login() {
   const [loginStatus, setloginStatus] = useState("");
 
   const login = () => {
-    Axios.post(API, {
+    Axios.post(CORS + API, {
       email: email,
       password: password,
     }).then((response) => {
