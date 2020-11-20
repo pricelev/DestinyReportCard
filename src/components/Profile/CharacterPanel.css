@@ -1,0 +1,57 @@
+.character-card {
+  background-color: rgb(208, 192, 235);
+  height: 250px;
+  margin-bottom: 25px;
+}
+
+.character-row {
+  height: 100%;
+  margin: 0;
+}
+
+.class-card {
+  background-color: #12151a;
+  text-align: right;
+  color: gold;
+  height: 100%;
+}
+
+.class-card .row {
+  margin: 0;
+}
+
+.character-row .col {
+  padding: 5px;
+}
+
+.power-level {
+  margin-right: 5px;
+}
+
+.warlock {
+  background-image: url("/warlock.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.hunter {
+  background-image: url("/hunter.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.titan {
+  background-image: url("/titan.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.noclass {
+  background-image: url("/noclass.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

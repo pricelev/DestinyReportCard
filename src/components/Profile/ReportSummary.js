@@ -29,7 +29,7 @@ class ReportSummary extends Component {
       return (
         <Row>
           <Col lg={{ span: 2, offset: 2 }}>
-            <Row className="h-100">
+            <Row className="h-100 margin-zero">
               <Card className="aggregate-card">
                 <div className="aggregate-score">
                   <div className="grade-img" id="aggregate-grade"></div>

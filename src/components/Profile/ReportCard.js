@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 
 import ReportSummary from "./ReportSummary";
 import ProfileChart from "./ProfileChart";
+import CharacterPanel from "./CharacterPanel";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
@@ -29,7 +30,6 @@ class ReportCard extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (data) {
           this.setState({
             isLoaded: true,
@@ -94,6 +94,8 @@ class ReportCard extends Component {
         this.state.profileData.stats.publicevents.avg,
       ]);
 
+      let character_data = this.state.profileData.characters.characterInfo;
+
       return (
         <div className="profile-container">
           <div className="profile-top">
@@ -115,6 +117,7 @@ class ReportCard extends Component {
           </div>
           <Container fluid className="profile-main-container">
             <div className="profile-main">
+              <CharacterPanel data={character_data} />
               <ReportSummary grades={summary} />
               <ProfileChart
                 data={chart_data}

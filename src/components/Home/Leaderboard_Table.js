@@ -4,6 +4,7 @@ import "./Leaderboard.css";
 
 class Leaderboard_Table extends Component {
   render() {
+    console.log(this.props.data);
     let link = "../reportcard/";
     const row = (item, rank, type) => (
       <tr>

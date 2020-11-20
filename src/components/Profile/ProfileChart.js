@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Chart from "react-google-charts";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 import "./ProfileChart.css";
 
@@ -31,32 +32,34 @@ class ProfileChart extends Component {
       <div className="chart-container">
         <Row className="chart-row">
           <Col lg={{ span: 8, offset: 2 }}>
-            <Chart
-              className="barchart"
-              width={"100%"}
-              height={"100%"}
-              chartType="ColumnChart"
-              loader={<div>Loading Statistics...</div>}
-              data={this.state.data}
-              options={{
-                title: "Player Statistics",
-                backgroundColor: "#0b132b",
-                color: "white",
-                legendTextStyle: { color: "#FFF" },
-                titleTextStyle: { color: "#FFF" },
-                chartArea: { width: "60%" },
-                colors: ["red", "blue"],
-                hAxis: {
-                  minValue: 0,
-                  textStyle: {
-                    color: "#FFFFFF",
+            <Card className="chart-card">
+              <Chart
+                className="barchart"
+                width={"100%"}
+                height={"100%"}
+                chartType="ColumnChart"
+                loader={<div>Loading Statistics...</div>}
+                data={this.state.data}
+                options={{
+                  title: "Player Statistics",
+                  backgroundColor: "#0b132b",
+                  color: "white",
+                  legendTextStyle: { color: "#FFF" },
+                  titleTextStyle: { color: "#FFF" },
+                  chartArea: { width: "60%" },
+                  colors: ["red", "blue"],
+                  hAxis: {
+                    minValue: 0,
+                    textStyle: {
+                      color: "#FFFFFF",
+                    },
                   },
-                },
-                vAxis: {},
-              }}
-              // For tests
-              rootProps={{ "data-testid": "4" }}
-            />
+                  vAxis: {},
+                }}
+                // For tests
+                rootProps={{ "data-testid": "4" }}
+              />
+            </Card>
           </Col>
         </Row>
       </div>

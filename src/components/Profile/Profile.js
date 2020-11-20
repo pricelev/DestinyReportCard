@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import ProfileChart from "./ProfileChart";
 import ReportSummary from "./ReportSummary";
+import CharacterPanel from "./CharacterPanel";
 
 class Profile extends Component {
   render() {
@@ -24,6 +25,13 @@ class Profile extends Component {
         </div>
         <Container fluid className="profile-main-container">
           <div className="profile-main">
+            <CharacterPanel
+              data={[
+                { LightLevel: 1200, classType: 0 },
+                { LightLevel: 1305, classType: 2 },
+                { LightLevel: 1150, classType: 1 },
+              ]}
+            />
             <ReportSummary grades={[0, 0, 0, 0, 0, 0, 0]} />
             <ProfileChart />
           </div>
