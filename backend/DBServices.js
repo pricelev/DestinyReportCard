@@ -368,6 +368,35 @@ async function getLeaderboard(type) {
   return leaderboard;
 }
 
+async function getFollowList(email){
+  let db = new Database();
+  let q =    `   Select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
+  sum(publicevents) as publicevents, p.pvpkd, p.pvpWL, p.CombatRatingPvP,sum(c.trialswins)/sum(c.trialsmatches) as trialsRecord, p.triumphscore ,c.emblemIcon, p.membershipType
+  from characters c , player p, follower f
+ where c.membershipID = p.MembershipID AND c.membershipID=f.followsID and f.email="`+email+`"
+ group by p.membershipID`;
+  let list = await db.query(q)
+  db.close();
+  return list;
+}
+
+async function addFollow(email,memID,followID){
+  let q = `REPLACE into follower (email,membershipID,followsID) 
+  VALUES ("`+email+`","`+memID+`","`+followID+`")`;
+  let db = new Database();
+  return await db.query(q);
+ 
+}
+
+async function removeFollow(email,memID,followID){
+  let q = `Delete from follower 
+  where email="`+email+`" AND membershipID="`+memID+`" AND followsID="`+followID+`"`;
+  console.log(q);
+  let db = new Database();
+  return await db.query(q);
+ 
+}
+
 //register new user
 async function registerNewUser(email, password, membershipID){
   let db = new Database();
@@ -392,5 +421,8 @@ module.exports = {
   getMemberStats,
   getLeaderboard,
   registerNewUser,
-  checkUser
+  checkUser,
+  getFollowList,
+  addFollow,
+  removeFollow
 };

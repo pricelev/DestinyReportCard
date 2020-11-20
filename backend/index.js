@@ -7,9 +7,6 @@ const app = express();
 const port = 3001;
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
-});
 
 //api interface for get player, when request comes in we need to:
 //1: query database for any existing players by that name
@@ -137,6 +134,37 @@ app.get("/getLeaderboard", (req, res) => {
   } else {
     throw new Error("Invalid paramater");
   }
+});
+
+app.get("/followList",(req,res)=>{
+
+  const email = req.query.email;
+  DB.getFollowList(email).then((data)=> res.send(data));
+});
+
+app.post("/addFollow",(req,res)=>{
+
+  const email = req.query.email;
+  const memID = req.query.membershipID;
+  const followID = req.query.followID;
+   if (!memID || !email || !followID) {
+    throw new Error("REQUIRED PARAMETER MISSING");
+  }
+  DB.addFollow(email,memID,followID).then((data)=>{
+    res.sendStatus(200);
+  })
+});
+
+app.post("/removeFollow",(req,res)=>{
+  const email = req.query.email;
+  const memID = req.query.membershipID;
+  const followID = req.query.followID;
+  if (!memID || !email || !followID) {
+    throw new Error("REQUIRED PARAMETER MISSING");
+  }
+  DB.removeFollow(email,memID,followID).then((data)=>{
+    res.sendStatus(200);
+  })
 });
 
 //api method for registering new user
