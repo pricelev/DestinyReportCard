@@ -1,11 +1,25 @@
 import React, { useState } from "react";
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Signup.css";
+import Axios from "axios";
 
 export default function Signup() {
+  const CORS = "https://cors-anywhere.herokuapp.com/";
+  const API = "http://www.destinyreportcard.com:3001/register";
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [membershipid, setMembershipid] = useState("");
+  const [membershipID, setMembershipID] = useState("");
+
+  const register = () => {
+    Axios.post(CORS + API, {
+      email: email,
+      password: password,
+      membershipID: membershipID
+    }).then((response) => {
+      console.log(response.data);
+    });
+  }
 
   function validateForm() {
     return email.length > 0 && password.length > 0;
@@ -32,8 +46,8 @@ export default function Signup() {
           <FormControl
             autoFocus
             type="text"
-            value={membershipid}
-            onChange={e => setMembershipid(e.target.value)}
+            value={membershipID}
+            onChange={e => setMembershipID(e.target.value)}
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
@@ -44,7 +58,7 @@ export default function Signup() {
             type="password"
           />
         </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit">
+        <Button block bsSize="large" disabled={!validateForm()} type="submit" onClick={register}>
           Signup
         </Button>
       </form>
