@@ -371,16 +371,17 @@ async function getLeaderboard(type) {
 //register new user
 async function registerNewUser(email, password, membershipID){
   let db = new Database();
-  const q = `INSERT INTO users (email, password, membershipID) VALUES (` + email + `, ` + password + `, ` + membershipID + `)`;
-  db.query(q);
+  let q = `INSERT INTO users (email, password, membershipID) VALUES (` + email + `, ` + password + `, ` + membershipID + `)`;
+  await db.query(q);
   db.close();
 }
 
-//check if user exists
+//check if user exists and return user object
 async function checkUser(email, password){
   let db = new Database();
-  const q = `SELECT * FROM users WHERE email = ` + email +` AND password = ` + password;
+  let q = `SELECT * FROM users WHERE email = ` + email +` AND password = ` + password;
   let result = await db.query(q);
+  db.close();
   return result; 
 }
 

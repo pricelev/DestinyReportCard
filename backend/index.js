@@ -2,9 +2,12 @@ const Api = require("./ApiServices.js");
 const DB = require("./DBServices.js");
 
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 const port = 3001;
+app.use(cors());
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -138,6 +141,7 @@ app.get("/getLeaderboard", (req, res) => {
   }
 });
 
+//api method for registering new user
 app.post("/register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -148,10 +152,11 @@ app.post("/register", (req, res) => {
     res.send(result);
   }
   else {
-    res.send({message: "You've successfully registered!"});
+    res.send({message: "Registration unsuccessful"})
   }
 });
 
+//api method for logging in
 app.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
