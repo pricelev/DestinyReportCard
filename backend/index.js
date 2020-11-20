@@ -144,9 +144,12 @@ app.post("/register", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   const membershipID = req.body.membershipID;
-  DB.registerNewUser(email, password, membershipID);
+  let response = DB.registerNewUser(email, password, membershipID);
   let result = DB.checkUser(email, password);
-  if (result.length > 0){
+  if (response == 200){
+    res.send(response);
+  }
+  else if (result.length > 0){
     res.send(result);
   }
   else {

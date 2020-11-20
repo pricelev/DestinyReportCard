@@ -368,18 +368,20 @@ async function getLeaderboard(type) {
   return leaderboard;
 }
 
-//register new user
+//add new user to database
 async function registerNewUser(email, password, membershipID){
   let db = new Database();
-  let q = `INSERT INTO users (email, password, membershipID) VALUES (` + email + `, ` + password + `, ` + membershipID + `)`;
-  await db.query(q);
-  db.close();
+  let q = "INSERT INTO users (email, password, membershipID) VALUES (" + email + ", " + password + ", " + membershipID + ")";
+  await db.query(q).then((data) => {
+    db.close();
+    return 200;
+  });
 }
 
 //check if user exists and return user object
 async function checkUser(email, password){
   let db = new Database();
-  let q = `SELECT * FROM users WHERE email = ` + email +` AND password = ` + password;
+  let q = "SELECT * FROM users WHERE email = " + email +" AND password = " + password;
   let result = await db.query(q);
   db.close();
   return result; 
