@@ -24,7 +24,9 @@ function Topnav() {
           <Link to="/login">
             <Button className="nav-button">Login</Button>
           </Link>
-          <Button className="nav-button">Signup</Button>
+          <Link to="/signup">
+            <Button className="nav-button">Signup</Button>
+          </Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

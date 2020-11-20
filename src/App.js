@@ -10,6 +10,7 @@ import Profile from "./components/Profile/Profile";
 import ReportCard from "./components/Profile/ReportCard";
 import PlayerSearch from "./components/PlayerSearch/PlayerSearch";
 import Login from "./components/Login/Login";
+import Signup from "./components/Signup/Signup";
 
 class App extends Component {
   render() {
@@ -31,6 +32,9 @@ class App extends Component {
           />
           <Route exact path="/login">
             <Login />
+          </Route>
+          <Route exact path="/signup">
+            <Signup />
           </Route>
           <Footer />
         </div>
