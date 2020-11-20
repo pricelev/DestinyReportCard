@@ -9,11 +9,14 @@ import Suggestions from "./Suggestions"
 const API = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
+
+
 class Searchbar extends Component {
 
   state = {
     query: '',
-    results:[]
+    results:[],
+    isLoaded: false,
   }
  
   handleInputChange = () => {
@@ -24,6 +27,13 @@ class Searchbar extends Component {
         if (this.state.query.length % 2 === 0) {
           this.getInfo()
         }
+      } else if (this.state.isLoaded === true && this.state.query.length === 0) {
+        this.setState({
+          results: [],
+        });
+        
+       // document.getElementById("testing").innerHTML = '<Suggestions results={this.state.results}/>';
+
       } 
     })
   }
@@ -74,8 +84,10 @@ class Searchbar extends Component {
               <button onClick={handleSearch} className="search_icon">
                 <img src="search.png"></img>
               </button>
-              <div className="autocom-box">
-                <Suggestions results={this.state.results}/>
+              <div className="autocom-box" id="testing">
+                <div className="autocom-box1">
+                  <Suggestions results={this.state.results}/>
+                </div>
               </div>
               
             </form>

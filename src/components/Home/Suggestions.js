@@ -1,4 +1,7 @@
+
 import React from 'react'
+import "./Searchbar.js"
+
 
 
 const Suggestions = (props) => {
@@ -12,16 +15,32 @@ const Suggestions = (props) => {
     } else {
       icon = "/steam-icon.png";
     } 
-      
-      return(<li><a href={link+player.membershipType+"/"+player.MembershipID}>
+      const retStyle = {
+        background: "white",
+        listStyleType: "none",
+        padding: 5,
+        borderBottom: "1px solid navy",
+      }
+
+      const linkStyle = {
+        display: "block",
+        textDecoration: "none",
+
+      }
+
+      return(<li style={retStyle}><a style={linkStyle} href={link+player.membershipType+"/"+player.MembershipID}>
       {player.DisplayName} <img src={icon} width="20" alt="Player Emblem"></img>
       </a></li>)
 
   });
     
   
-
-  return <ul>{options}</ul>
+  const autocomBox = {
+    height: 190,
+    width: 500,
+    overflow: "auto",
+  }
+  return <ul style={autocomBox}>{options}</ul>
 }
 
 export default Suggestions
