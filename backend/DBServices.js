@@ -132,6 +132,7 @@ async function updateChar(memID, memType, charID) {
 
 //updates database for give players memID and memType
 async function updatePlayer(memID, memType) {
+  let q;
   let db = new Database();
   let displayName = 0;
   let xbox = false;
@@ -145,7 +146,7 @@ async function updatePlayer(memID, memType) {
   let triumph = 0;
   let combatRating = 0;
 
-  let Apipromise = Api.findProfile(memID, memType);
+  let Apipromise =Api.findProfile(memID, memType);
   let Apipromise2 = Api.getPlayerStats(memID, memType);
   let Apipromise3 = Api.getRecords(memID, memType);
 
@@ -171,7 +172,7 @@ async function updatePlayer(memID, memType) {
     }
   });
 
-  Apipromise2.then((response) => {
+   Apipromise2.then((response) => {
     const pve =
       response.data.Response.mergedAllCharacters.results.allPvE.allTime;
     const pvp =
@@ -184,12 +185,12 @@ async function updatePlayer(memID, memType) {
     combatRating = pvp.combatRating.basic.value;
   });
 
-  Apipromise3.then((response) => {
+   Apipromise3.then((response) => {
     triumph = response.data.Response.profileRecords.data.lifetimeScore;
   });
 
   await Promise.all([Apipromise3, Apipromise2, Apipromise]).then((data) => {
-    let q =
+    q =
       "REPLACE INTO player" +
       "(membershipID, membershiptype, displayname, xbox, psn, steam,pvetime,pvptime,pvekd,pvpkd,pvpwl,combatRatingPVP,triumphscore)" +
       "VALUES" +
@@ -221,15 +222,29 @@ async function updatePlayer(memID, memType) {
       triumph +
       ")";
 
-    db.query(q);
+
+
   });
-  db.close();
-  return 200;
+  await db.query(q).then((data)=>{
+    
+    db.close();
+    return 200;
+  }
+  );
+
 }
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+async function getReportCard(memID,memType) {
+ await updatePlayer(memID,memType);
 
-async function getReportCard(memID) {
+
   let db = new Database();
-
   //gets a players stats from player table and character table
   const q =
     "Select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, sum(publicevents) as publicevents, p.pvpkd, p.pvpWL, p.`CombatRatingPvP`,sum(c.trialswins)/sum(c.trialsmatches) as trialsRecord, p.triumphscore " +
@@ -281,9 +296,11 @@ async function getReportCard(memID) {
       characterInfo.push(char);
     });
     ret["characters"] = { characterInfo };
+    
   });
   db.close();
   return ret;
+
 }
 function getGrade(value, avg, stdDev) {
   const step = 0.5 * stdDev;

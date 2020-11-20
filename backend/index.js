@@ -107,9 +107,10 @@ app.get("/reportCard", (req, res) => {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
   console.log("updating player");
-  DB.updatePlayer(memID, memType).then(
-    DB.getReportCard(memID).then((data) => res.send(data))
-  );
+
+    
+    DB.getReportCard(memID,memType).then((data) => res.send(data))
+
 
   //DB.getReportCard(memID).then(data => res.send(data));
 });
