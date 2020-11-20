@@ -137,3 +137,29 @@ app.get("/getLeaderboard", (req, res) => {
     throw new Error("Invalid paramater");
   }
 });
+
+app.post("/register", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  const membershipID = req.body.membershipID;
+  DB.registerNewUser(email, password, membershipID);
+  let result = DB.checkUser(email, password);
+  if (result.length > 0){
+    res.send(result);
+  }
+  else {
+    res.send({message: "You've successfully registered!"});
+  }
+});
+
+app.post("/login", (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  let result = DB.checkUser(email, password);
+  if (result.length > 0){
+    res.send(result);
+  }
+  else {
+    res.send({message: "Wrong username/password combination"});
+  }
+});

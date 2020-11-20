@@ -368,10 +368,28 @@ async function getLeaderboard(type) {
   return leaderboard;
 }
 
+//register new user
+async function registerNewUser(email, password, membershipID){
+  let db = new Database();
+  const q = `INSERT INTO users (email, password, membershipID) VALUES (` + email + `, ` + password + `, ` + membershipID + `)`;
+  db.query(q);
+  db.close();
+}
+
+//check if user exists
+async function checkUser(email, password){
+  let db = new Database();
+  const q = `SELECT * FROM users WHERE email = ` + email +` AND password = ` + password;
+  let result = await db.query(q);
+  return result; 
+}
+
 module.exports = {
   searchPlayer,
   updatePlayer,
   getReportCard,
   getMemberStats,
   getLeaderboard,
+  registerNewUser,
+  checkUser
 };
