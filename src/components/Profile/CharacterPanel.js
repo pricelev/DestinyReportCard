@@ -11,12 +11,16 @@ class CharacterPanel extends Component {
     let arr = this.props.data;
     for (let i = 1; i < 4; i++) {
       let type = "";
-      if (arr[i - 1].classType === 0) {
-        type = "titan";
-      } else if (arr[i - 1].classType === 1) {
-        type = "hunter";
-      } else if (arr[i - 1].classType === 2) {
-        type = "warlock";
+      if (arr[i - 1] != null) {
+        if (arr[i - 1].classType === 0) {
+          type = "titan";
+        } else if (arr[i - 1].classType === 1) {
+          type = "hunter";
+        } else if (arr[i - 1].classType === 2) {
+          type = "warlock";
+        } else {
+          type = "noclass";
+        }
       } else {
         type = "noclass";
       }
