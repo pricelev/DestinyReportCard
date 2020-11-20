@@ -103,6 +103,7 @@ class PlayerSearch extends Component {
                       } else {
                         icon = "/steam-icon.png";
                       }
+                      let emblem = player.emblem;
                       return (
                         <a
                           href={
@@ -115,7 +116,7 @@ class PlayerSearch extends Component {
                           <Card className="result-card">
                             <div className="result-content">
                               <Row>
-                                <Col lg={2}>
+                                <Col lg={1}>
                                   <img
                                     src={icon}
                                     className="platform-icon"
@@ -123,7 +124,15 @@ class PlayerSearch extends Component {
                                     alt="Player Emblem"
                                   ></img>
                                 </Col>
-                                <Col lg={10} className="display-name">
+                                <Col md="auto">
+                                <img 
+                                  src={emblem}
+                                  className="player-emblem"
+                                  width="40"
+                                  alt="Player Emblem"
+                                  ></img>
+                                </Col>
+                                <Col md="auto" className="display-name">
                                   {player.DisplayName}
                                 </Col>
                               </Row>

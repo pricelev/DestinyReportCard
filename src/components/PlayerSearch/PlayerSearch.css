@@ -21,6 +21,11 @@
   margin-left: 15px;
 }
 
+.player-emblem {
+  float: right;
+  margin-left: 30px;
+}
+
 .display-name {
   font-size: 25px;
   font-family: "Oswald", sans-serif;

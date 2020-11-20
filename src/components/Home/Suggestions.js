@@ -1,4 +1,3 @@
-
 import React from 'react'
 import "./Searchbar.js"
 
@@ -15,6 +14,7 @@ const Suggestions = (props) => {
     } else {
       icon = "/steam-icon.png";
     } 
+    let emblem = player.emblem;
       const retStyle = {
         background: "white",
         listStyleType: "none",
@@ -29,7 +29,7 @@ const Suggestions = (props) => {
       }
 
       return(<li style={retStyle}><a style={linkStyle} href={link+player.membershipType+"/"+player.MembershipID}>
-      {player.DisplayName} <img src={icon} width="20" alt="Player Emblem"></img>
+      {player.DisplayName} <img src={emblem} width="20" alt="Player Emblem"></img>  <img src={icon} width="20" alt="Player Platform"></img>
       </a></li>)
 
   });
