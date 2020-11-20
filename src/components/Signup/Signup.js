@@ -19,6 +19,9 @@ export default function Signup() {
       password: password,
       membershipID: membershipID
     }).then((response) => {
+      if (response.data == 200){
+        setregisterStatus(response);
+      }
       if (response.data.message){
         setregisterStatus(response.data.message);
       }
