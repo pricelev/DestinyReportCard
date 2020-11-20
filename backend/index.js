@@ -169,9 +169,9 @@ app.post("/removeFollow",(req,res)=>{
 
 //api method for registering new user
 app.post("/register", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
-  const membershipID = req.body.membershipID;
+  const email = req.query.email;
+  const password = req.query.password;
+  const membershipID = req.query.membershipID;
   let response = DB.registerNewUser(email, password, membershipID);
   let result = DB.checkUser(email, password);
   if (response == 200){
@@ -187,8 +187,8 @@ app.post("/register", (req, res) => {
 
 //api method for logging in
 app.post("/login", (req, res) => {
-  const email = req.body.email;
-  const password = req.body.password;
+  const email = req.query.email;
+  const password = req.query.password;
   let result = DB.checkUser(email, password);
   if (result.length > 0){
     res.send(result);
