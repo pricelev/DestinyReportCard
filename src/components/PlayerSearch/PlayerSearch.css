@@ -12,8 +12,8 @@
 }
 
 .result-card {
-  width: 500px;
-  margin: 15px;
+  width: 800px;
+  margin: auto;
   text-align: left;
 }
 
@@ -51,7 +51,7 @@
   padding-right: 0;
   padding-top: 80px;
   padding-bottom: 80px;
-  background-image: url("/bg-06.jpg");
+  background-image: url("/bg-09.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import "./Searchbar.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -76,7 +75,7 @@ class Searchbar extends Component {
                     type="text"
                     name=""
                     id="search_text"
-                    autocomplete="off"
+                    autoComplete="off"
                     ref={(input) => (this.search = input)}
                     placeholder="Find your Guardian..."
                     onChange={this.handleInputChange}

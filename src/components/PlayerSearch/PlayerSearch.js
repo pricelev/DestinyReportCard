@@ -9,6 +9,9 @@ import "./PlayerSearch.css";
 const API = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
+const steam_white =
+  "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
+
 class PlayerSearch extends Component {
   constructor(props) {
     super(props);
@@ -85,8 +88,8 @@ class PlayerSearch extends Component {
       return (
         <div className="search-main">
           <Row>
-            <Col lg={1}></Col>
-            <Col lg={10}>
+            <Col lg={2}></Col>
+            <Col lg={8}>
               <div className="result-container">
                 <div className="search-header">
                   <h1> Search Results</h1>
@@ -95,15 +98,10 @@ class PlayerSearch extends Component {
                   <Col lg={1}></Col>
                   <Col lg={10}>
                     {this.state.players.map((player, index) => {
-                      let icon = "";
-                      if (player.membershipType === 1) {
-                        icon = "/xbox-icon.png";
-                      } else if (player.membershipType === 2) {
-                        icon = "/ps-icon.png";
-                      } else {
-                        icon = "/steam-icon.png";
-                      }
                       let emblem = player.emblem;
+                      if (emblem == steam_white) {
+                        emblem = "/steam-icon.png";
+                      }
                       return (
                         <a
                           href={
@@ -113,23 +111,15 @@ class PlayerSearch extends Component {
                             player.MembershipID
                           }
                         >
-                          <Card className="result-card">
+                          <Card className="result-card shadow p-3 mb-5 bg-white rounded">
                             <div className="result-content">
                               <Row>
-                                <Col lg={1}>
+                                <Col md="auto">
                                   <img
-                                    src={icon}
-                                    className="platform-icon"
+                                    src={emblem}
+                                    className="player-emblem"
                                     width="40"
                                     alt="Player Emblem"
-                                  ></img>
-                                </Col>
-                                <Col md="auto">
-                                <img 
-                                  src={emblem}
-                                  className="player-emblem"
-                                  width="40"
-                                  alt="Player Emblem"
                                   ></img>
                                 </Col>
                                 <Col md="auto" className="display-name">
@@ -145,7 +135,7 @@ class PlayerSearch extends Component {
                 </Row>
               </div>
             </Col>
-            <Col lg={1}></Col>
+            <Col lg={2}></Col>
           </Row>
         </div>
       );

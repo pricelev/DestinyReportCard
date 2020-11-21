@@ -1,46 +1,48 @@
-import React from 'react'
-import "./Searchbar.js"
+import React from "react";
+import "./Searchbar.js";
 
-
+const steam_white =
+  "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
 
 const Suggestions = (props) => {
   let link = "../reportcard/";
   const options = props.results.map((player, index) => {
-    let icon = "";
-    if (player.membershipType == 1) {
-      icon = "/xbox-icon.png";
-    } else if (player.membershipType == 2) {
-      icon = "/ps-icon.png";
-    } else {
-      icon = "/steam-icon.png";
-    } 
     let emblem = player.emblem;
-      const retStyle = {
-        background: "white",
-        listStyleType: "none",
-        padding: 5,
-        borderBottom: "1px solid navy",
-      }
+    if (emblem == steam_white) {
+      emblem = "/steam-icon.png";
+    }
 
-      const linkStyle = {
-        display: "block",
-        textDecoration: "none",
+    const retStyle = {
+      background: "white",
+      listStyleType: "none",
+      padding: 7,
+      borderTop: "1px solid pink",
+    };
 
-      }
+    const linkStyle = {
+      display: "block",
+      textDecoration: "none",
+    };
 
-      return(<li style={retStyle}><a style={linkStyle} href={link+player.membershipType+"/"+player.MembershipID}>
-      {player.DisplayName} <img src={emblem} width="20" alt="Player Emblem"></img>  <img src={icon} width="20" alt="Player Platform"></img>
-      </a></li>)
-
+    return (
+      <li style={retStyle}>
+        <a
+          style={linkStyle}
+          href={link + player.membershipType + "/" + player.MembershipID}
+        >
+          <img src={emblem} width="20" alt="Player Emblem"></img>
+          {player.DisplayName}
+        </a>
+      </li>
+    );
   });
-    
-  
+
   const autocomBox = {
     height: 190,
     width: 500,
     overflow: "auto",
-  }
-  return <ul style={autocomBox}>{options}</ul>
-}
+  };
+  return <ul style={autocomBox}>{options}</ul>;
+};
 
-export default Suggestions
+export default Suggestions;

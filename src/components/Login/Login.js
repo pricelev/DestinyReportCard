@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import {
+  Button,
+  FormGroup,
+  FormControl,
+  FormLabel,
+  Card,
+} from "react-bootstrap";
 import "./Login.css";
 import Axios from "axios";
-import {useHistory} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const CORS = "https://cors-anywhere.herokuapp.com/";
@@ -23,20 +29,19 @@ export default function Login() {
       email: emailReg,
       password: passwordReg,
     }).then((response) => {
-      if (response.data.message){
+      if (response.data.message) {
         setloginStatus(response.data.message);
-      }
-      else {
+      } else {
         setloginStatus(response.data[0].email);
-        history.push('/');
+        history.push("/");
       }
       console.log(response.data);
     });
-  }
+  };
 
   useEffect(() => {
     Axios.get(localAPI).then((response) => {
-      if (response.data.loggedIn == true){
+      if (response.data.loggedIn == true) {
         setloginStatus(response.data.user[0].email);
       }
     });
@@ -51,30 +56,40 @@ export default function Login() {
   }
 
   return (
-    <div className="Login">
-      <form onSubmit={handleSubmit}>
-        <FormGroup controlId="email" bsSize="large">
-          <FormLabel>Email</FormLabel>
-          <FormControl
-            autoFocus
-            type="email"
-            value={emailReg}
-            onChange={e => setEmail(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large">
-          <FormLabel>Password</FormLabel>
-          <FormControl
-            value={passwordReg}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-          />
-        </FormGroup>
-        <Button block bsSize="large" disabled={!validateForm()} type="submit" onClick={login}>
-          Login
-        </Button>
-      </form>
-      <h1>{loginStatus}</h1>
+    <div className="login-main">
+      <Card className="login-card shadow p-3 mb-5 bg-white rounded">
+        <div className="Login">
+          <form onSubmit={handleSubmit}>
+            <FormGroup controlId="email" bsSize="large">
+              <FormLabel>Email</FormLabel>
+              <FormControl
+                autoFocus
+                type="email"
+                value={emailReg}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormGroup>
+            <FormGroup controlId="password" bsSize="large">
+              <FormLabel>Password</FormLabel>
+              <FormControl
+                value={passwordReg}
+                onChange={(e) => setPassword(e.target.value)}
+                type="password"
+              />
+            </FormGroup>
+            <Button
+              block
+              bsSize="large"
+              disabled={!validateForm()}
+              type="submit"
+              onClick={login}
+            >
+              Login
+            </Button>
+          </form>
+          <h1>{loginStatus}</h1>
+        </div>
+      </Card>
     </div>
   );
 }

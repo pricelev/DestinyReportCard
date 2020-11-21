@@ -1,10 +1,25 @@
 @media all and (min-width: 480px) {
-    .Signup {
-      padding: 60px 0;
-    }
-  
-    .Signup form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
+  .Signup {
+    padding: 60px 0;
   }
+
+  .Signup form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
+.signup-card {
+  margin: auto;
+  max-width: 500px;
+}
+
+.signup-main {
+  background-image: url("/bg-11.jpg");
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 700px;
+  padding-top: 150px;
+}
