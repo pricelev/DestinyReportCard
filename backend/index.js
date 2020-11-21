@@ -3,9 +3,17 @@ const DB = require("./DBServices.js");
 
 const express = require("express");
 
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
+
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
+
 const app = express();
-const port = 3001;
 app.use(express.json());
+
+const port = 3001;
 
 
 //api interface for get player, when request comes in we need to:
@@ -172,6 +180,11 @@ app.post("/register", (req, res) => {
   const email = req.query.email;
   const password = req.query.password;
   const membershipID = req.query.membershipID;
+
+  if (!email || !password) {
+    throw new Error("REQUIRED PARAMETER MISSING");
+  }
+
   let response = DB.registerNewUser(email, password, membershipID);
   let result = DB.checkUser(email, password);
   if (response == 200){
@@ -189,6 +202,11 @@ app.post("/register", (req, res) => {
 app.post("/login", (req, res) => {
   const email = req.query.email;
   const password = req.query.password;
+
+  if (!email || !password) {
+    throw new Error("REQUIRED PARAMETER MISSING");
+  }
+
   let result = DB.checkUser(email, password);
   if (result.length > 0){
     res.send(result);
