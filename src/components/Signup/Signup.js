@@ -6,34 +6,26 @@ import Axios from "axios";
 export default function Signup() {
   const CORS = "https://cors-anywhere.herokuapp.com/";
   const API = "http://www.destinyreportcard.com:3001/register";
+  const localAPI = "http://localhost:3001/register";
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [membershipID, setMembershipID] = useState("");
+  const [emailReg, setEmail] = useState("");
+  const [passwordReg, setPassword] = useState("");
+  const [membershipIDReg, setMembershipID] = useState("");
 
   const [registerStatus, setregisterStatus] = useState("");
 
   const register = () => {
-    setregisterStatus(email + ", " + password)
     Axios.post(CORS + API, {
-      email: email,
-      password: password,
-      membershipID: membershipID
+      email: emailReg,
+      password: passwordReg,
+      membershipID: membershipIDReg,
     }).then((response) => {
-      if (response.data == 200){
-        setregisterStatus(response);
-      }
-      if (response.data.message){
-        setregisterStatus(response.data.message);
-      }
-      else {
-        setregisterStatus(response.data[0]);
-      }
+      console.log(response);
     });
-  }
+  };
 
   function validateForm() {
-    return email.length > 0 && password.length > 0;
+    return emailReg.length > 0 && passwordReg.length > 0;
   }
 
   function handleSubmit(event) {
@@ -48,7 +40,7 @@ export default function Signup() {
           <FormControl
             autoFocus
             type="email"
-            value={email}
+            value={emailReg}
             onChange={e => setEmail(e.target.value)}
           />
         </FormGroup>
@@ -57,14 +49,14 @@ export default function Signup() {
           <FormControl
             autoFocus
             type="text"
-            value={membershipID}
+            value={membershipIDReg}
             onChange={e => setMembershipID(e.target.value)}
           />
         </FormGroup>
         <FormGroup controlId="password" bsSize="large">
           <FormLabel>Password</FormLabel>
           <FormControl
-            value={password}
+            value={passwordReg}
             onChange={e => setPassword(e.target.value)}
             type="password"
           />
