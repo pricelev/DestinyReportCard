@@ -82,7 +82,7 @@ export default function Signup() {
               Signup
             </Button>
           </form>
-          <h1>{registerStatus}</h1>
+          <h2>{registerStatus}</h2>
         </div>
       </Card>
     </div>
