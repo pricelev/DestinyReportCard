@@ -1,8 +1,10 @@
 const Api = require("./ApiServices.js");
 const DB = require("./DBServices.js");
+const mysql = require("mysql");
+const conf = require("./config.json");
 
+const cors = require("cors")
 const express = require("express");
-
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -12,6 +14,32 @@ const saltRounds = 10;
 
 const app = express();
 app.use(express.json());
+app.use(cors({
+  origin: ["http://localhost:3000"],
+  methods: ["GET", "POST"],
+  credentials: true,
+}));
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(
+  session({
+    key: "userId",
+    secret: "comp-426",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      expires: 60 * 60 * 24,
+    },
+  })
+);
+
+const db = mysql.createConnection({
+  host: conf.host,
+  user: conf.user,
+  password: conf.password,
+  database: conf.database,
+});
 
 const port = 3001;
 
@@ -177,41 +205,57 @@ app.post("/removeFollow",(req,res)=>{
 
 //api method for registering new user
 app.post("/register", (req, res) => {
-  const email = req.query.email;
-  const password = req.query.password;
-  const membershipID = req.query.membershipID;
+  const email = req.body.email;
+  const password = req.body.password;
+  const membershipID = req.body.membershipID;
 
-  if (!email || !password) {
-    throw new Error("REQUIRED PARAMETER MISSING");
-  }
+  bcrypt.hash(password, saltRounds, (err, hash) => {
+    if (err) {
+      console.log(err);
+    }
+    db.query("INSERT INTO users (email, password, membershipID) VALUES (?, ?, ?)",
+    [email, hash, membershipID],
+    (err, result) =>{
+      console.log(err);
+    });
+  });
+});
 
-  let response = DB.registerNewUser(email, password, membershipID);
-  let result = DB.checkUser(email, password);
-  if (response == 200){
-    res.send(response);
-  }
-  else if (result.length > 0){
-    res.send(result);
+app.get("/login", (req, res) => {
+  if (req.session.user) {
+    res.send({loggedIn: true, user: req.session.user})
   }
   else {
-    res.send({message: "Registration unsuccessful"})
+    res.send({loggedIn: false });
   }
 });
 
 //api method for logging in
 app.post("/login", (req, res) => {
-  const email = req.query.email;
-  const password = req.query.password;
+  const email = req.body.email;
+  const password = req.body.password;
+  
+  db.query("SELECT * FROM users WHERE email = ?",
+  email,
+  (err, result) =>{
+    if (err) {
+      res.send({err: err});
+    }
 
-  if (!email || !password) {
-    throw new Error("REQUIRED PARAMETER MISSING");
-  }
-
-  let result = DB.checkUser(email, password);
-  if (result.length > 0){
-    res.send(result);
-  }
-  else {
-    res.send({message: "Wrong username/password combination"});
-  }
+    if (result.length > 0){
+      bcrypt.compare(password, result[0].password, (err, response) => {
+        if (response){
+          req.session.user = result;
+          console.log(req.session.user);
+          res.send(result);
+        }
+        else {
+          res.send({message: "Wrong username/password combination."})
+        }
+      });
+    }
+    else {
+      res.send({message: "User does not exist."})
+    }
+  });
 });

@@ -397,37 +397,12 @@ async function removeFollow(email,memID,followID){
  
 }
 
-//register new user
-async function registerNewUser(email, password, membershipID){
-  let db = new Database();
-  let q = `INSERT into users (email, password, membershipID) 
-  VALUES ("`+email+`","`+password+`","`+membershipID+`")`;
-  console.log(q);
-  await db.query(q).then((data) => {
-    db.close();
-    return 200;
-  });
-}
-
-//check if user exists and return user object
-async function checkUser(email, password){
-  let db = new Database();
-  let q = `SELECT * from users 
-  where email="`+email+`" AND password="`+password+`"`;
-  console.log(q);
-  let result = await db.query(q);
-  db.close();
-  return result; 
-}
-
 module.exports = {
   searchPlayer,
   updatePlayer,
   getReportCard,
   getMemberStats,
   getLeaderboard,
-  registerNewUser,
-  checkUser,
   getFollowList,
   addFollow,
   removeFollow
