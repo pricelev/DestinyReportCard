@@ -8,33 +8,12 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session);
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
 const app = express();
-app.use(express.json());
-app.use(cors({
-  origin: ["http://www.destinyreportcard.com:3000"],
-  //origin: ["http://localhost:3000"],
-  methods: ["GET", "POST"],
-  credentials: true,
-}));
-app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.use(
-  session({
-    key: "userId",
-    secret: "comp-426",
-    resave: false,
-    saveUninitialized: false,
-    proxy: true,
-    cookie: {
-      expires: 5184000000,
-    },
-  })
-);
 
 const db = mysql.createConnection({
   host: conf.host,
@@ -42,6 +21,42 @@ const db = mysql.createConnection({
   password: conf.password,
   database: conf.database,
 });
+
+const sessionStore = new MySQLStore({
+  createDatabaseTable: true,
+  schema: {
+    tableName: 'User_Sessions',
+    columnNames: {
+      session_id: 'session_id',
+      expires: 'expires',
+      data: 'data'
+    }
+  }
+}, db);
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors({
+  origin: "*",
+  //origin: ["http://localhost:3000"],
+  methods: ["GET", "POST"],
+  //credentials: true,
+}));
+
+app.use(
+  session({
+    key: "User",
+    secret: "comp-426",
+    resave: false,
+    saveUninitialized: false,
+    proxy: true,
+    store: sessionStore,
+    cookie: {
+      expires: 5184000000,
+    },
+  })
+);
 
 const port = 3001;
 
@@ -245,7 +260,7 @@ app.post("/register", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
-  if (req.session.user) {
+  if (req.session) {
     res.send({loggedIn: true, user: req.session.user})
   }
   else {
