@@ -20,7 +20,7 @@ export default function Login() {
 
   const [loginStatus, setloginStatus] = useState("");
 
-  Axios.defaults.withCredentials = true;
+  //Axios.defaults.withCredentials = true;
 
   let history = useHistory();
 

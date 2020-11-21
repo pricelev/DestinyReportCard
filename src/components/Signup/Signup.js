@@ -28,6 +28,7 @@ export default function Signup() {
       password: passwordReg,
       membershipID: membershipIDReg,
     }).then((response) => {
+      setregisterStatus(response);
       console.log(response);
     });
   };
