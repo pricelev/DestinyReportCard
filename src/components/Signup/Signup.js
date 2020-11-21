@@ -23,12 +23,12 @@ export default function Signup() {
   const [registerStatus, setregisterStatus] = useState("");
 
   const register = () => {
-    Axios.post(CORS + API, {
+    Axios.post(localAPI, {
       email: emailReg,
       password: passwordReg,
       membershipID: membershipIDReg,
     }).then((response) => {
-      setregisterStatus(response);
+      setregisterStatus(response.data.message);
       console.log(response);
     });
   };
