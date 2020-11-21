@@ -15,9 +15,10 @@ const saltRounds = 10;
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ["http://www.destinyreportcard.com:3000"],
+  //origin: ["http://www.destinyreportcard.com:3000"],
+  origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
-  //credentials: true,
+  credentials: true,
 }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -220,6 +221,27 @@ app.post("/register", (req, res) => {
       console.log(err);
     });
   });
+  db.query("SELECT * FROM users WHERE email = ?",
+  email,
+  (err, result) =>{
+    if (err) {
+      res.send({err: err});
+    }
+    if (result.length > 0){
+      bcrypt.compare(password, result[0].password, (err, response) => {
+        if (response){
+          res.send({message: "Registration successful! You may now login."});
+        }
+        else {
+          res.send({message: "Email already registered. Please choose a different email"})
+        }
+      });
+    }
+    else {
+      res.send({message: "Registration failed. Please try again."})
+    }
+  });
+
 });
 
 app.get("/login", (req, res) => {
