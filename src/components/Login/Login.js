@@ -22,7 +22,7 @@ export default function Login() {
         setloginStatus(response.data.message);
       }
       else {
-       // setloginStatus(response.data[0]);
+       setloginStatus(response.data[0]);
       }
     });
   }

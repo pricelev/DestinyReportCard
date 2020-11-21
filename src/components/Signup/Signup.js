@@ -14,6 +14,7 @@ export default function Signup() {
   const [registerStatus, setregisterStatus] = useState("");
 
   const register = () => {
+    setregisterStatus(email + ", " + password)
     Axios.post(CORS + API, {
       email: email,
       password: password,
