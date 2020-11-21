@@ -10,6 +10,7 @@ import ProfileChart from "./ProfileChart";
 import CharacterPanel from "./CharacterPanel";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
+const API1 = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
 class ReportCard extends Component {
@@ -21,6 +22,7 @@ class ReportCard extends Component {
       memId: this.props.match.params.membershipId,
       profileData: {},
       displayName: "",
+      profPic: "/profile.jpg",
     };
   }
 
@@ -31,18 +33,41 @@ class ReportCard extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
+          let character1 = data.characters.characterInfo[0];
+          let character2 = data.characters.characterInfo[1];
+          let character3 = data.characters.characterInfo[2];
+          if (character1.LightLevel > character2.LightLevel) {
+            if (character1.LightLevel > character3.LightLevel) {
+              this.setState({
+                profPic: character1.emblemIcon,
+              });
+            } else {
+              this.setState({
+                profPic: character3.emblemIcon,
+              });
+            }
+          } else if (character2.LightLevel > character3.LightLevel) {
+            this.setState({
+              profPic: character2.emblemIcon,
+            });
+          } else {
+            this.setState({
+              profPic: character3.emblemIcon,
+            });
+          }
           this.setState({
             isLoaded: true,
             profileData: data,
             displayName: data.playerInfo.DisplayName.value,
           });
+          console.log(data);
         }
       })
       .catch((error) => {
         console.log(error);
       });
+    
   }
-
   render() {
     if (this.state.isLoaded) {
       let aggregate = this.state.profileData.stats.playtime.grade;
@@ -103,7 +128,7 @@ class ReportCard extends Component {
               <Row>
                 <Col lg={2}>
                   <img
-                    src="/profile.jpg"
+                    src={this.state.profPic}
                     className="profile-img rounded-circle"
                   />
                 </Col>
