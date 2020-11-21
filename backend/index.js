@@ -28,6 +28,7 @@ app.use(
     secret: "comp-426",
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
       expires: 60 * 60 * 24,
     },
