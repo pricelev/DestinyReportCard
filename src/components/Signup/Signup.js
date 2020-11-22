@@ -13,8 +13,8 @@ import Axios from "axios";
 
 export default function Signup() {
   const CORS = "https://cors-anywhere.herokuapp.com/";
-  const API = "http://www.destinyreportcard.com:3001/register";
-  const localAPI = "http://localhost:3001/register";
+  const registerAPI = "http://www.destinyreportcard.com:3001/register";
+  const localRegisterAPI = "http://localhost:3001/register";
 
   const [emailReg, setEmail] = useState("");
   const [passwordReg, setPassword] = useState("");
@@ -23,7 +23,7 @@ export default function Signup() {
   const [registerStatus, setregisterStatus] = useState("");
 
   const register = () => {
-    Axios.post(CORS + API, {
+    Axios.post(CORS + registerAPI, {
       email: emailReg,
       password: passwordReg,
       membershipID: membershipIDReg,

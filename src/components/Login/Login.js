@@ -12,20 +12,20 @@ import { useHistory } from "react-router-dom";
 
 export default function Login() {
   const CORS = "https://cors-anywhere.herokuapp.com/";
-  const API = "http://www.destinyreportcard.com:3001/login";
-  const localAPI = "http://localhost:3001/login";
+  const loginAPI = "http://www.destinyreportcard.com:3001/login";
+  const localloginAPI = "http://localhost:3001/login";
 
   const [emailReg, setEmail] = useState("");
   const [passwordReg, setPassword] = useState("");
 
   const [loginStatus, setloginStatus] = useState("");
 
-  //Axios.defaults.withCredentials = true;
+  Axios.defaults.withCredentials = true;
 
   let history = useHistory();
 
   const login = () => {
-    Axios.post(CORS + API, {
+    Axios.post(CORS + loginAPI, {
       email: emailReg,
       password: passwordReg,
     }).then((response) => {
@@ -40,9 +40,10 @@ export default function Login() {
   };
 
   useEffect(() => {
-    Axios.get(localAPI).then((response) => {
+    Axios.get(CORS + loginAPI).then((response) => {
       if (response.data.loggedIn == true) {
         setloginStatus(response.data.user[0].email);
+        console.log(response.data);
       }
     });
   }, []);
