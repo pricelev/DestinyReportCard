@@ -38,15 +38,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({
-  origin: "*",
+  origin: ["http://destinyreportcard.com:3000"],
   //origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
-  //credentials: true,
+  credentials: true,
 }));
 
 app.use(
   session({
-    key: "User",
+    key: "UserID",
     secret: "comp-426",
     resave: false,
     saveUninitialized: false,
@@ -259,8 +259,9 @@ app.post("/register", (req, res) => {
 
 });
 
+//check login status
 app.get("/login", (req, res) => {
-  if (req.session) {
+  if (req.session.user) {
     res.send({loggedIn: true, user: req.session.user})
   }
   else {
@@ -288,12 +289,21 @@ app.post("/login", (req, res) => {
           res.send(result);
         }
         else {
-          res.send({message: "Wrong username/password combination."})
+          res.send({message: "Wrong username/password combination."});
         }
       });
     }
     else {
-      res.send({message: "User does not exist."})
+      res.send({message: "User does not exist."});
     }
   });
+});
+
+//api method for logging out
+app.get("/logout", (req, res) => {
+  if (req.session.user) {
+    res.clearCookie('UserID');
+    req.session.destroy();
+    res.send({loggedIn: false});
+  }
 });
