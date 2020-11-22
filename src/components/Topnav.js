@@ -5,7 +5,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import "./Topnav.css";
 import { Link } from "react-router-dom";
-import Axios from "../../backend/node_modules/axios";
+import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
 function Topnav() {
