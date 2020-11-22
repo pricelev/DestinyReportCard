@@ -38,9 +38,9 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({
-  //origin: ["http://destinyreportcard.com"],
-  Access-Control-Allow-Origin: ["http://destinyreportcard.com"],
-  Vary: Origin,
+  origin: ["http://destinyreportcard.com"],
+  //Access-Control-Allow-Origin: ["http://destinyreportcard.com"],
+  //Vary: Origin,
   //origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
   credentials: true,
