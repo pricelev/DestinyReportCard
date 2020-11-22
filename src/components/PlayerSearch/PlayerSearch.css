@@ -21,6 +21,10 @@
   margin-left: 15px;
 }
 
+.followButton {
+  margin-left: 100px;
+}
+
 .player-emblem {
   float: right;
   margin-left: 30px;

@@ -44,8 +44,6 @@ class Searchbar extends Component {
           this.setState({
             results: [],
           });
-
-          // document.getElementById("testing").innerHTML = '<Suggestions results={this.state.results}/>';
         }
       }
     );
@@ -90,7 +88,7 @@ class Searchbar extends Component {
                     autoComplete="off"
                     ref={(input) => (this.search = input)}
                     placeholder="Find your Guardian..."
-                    onChange={this.debounced(500, this.handleInputChange)}
+                    onChange={this.debounced(400, this.handleInputChange)}
                   />
                   <button onClick={handleSearch} className="search_icon">
                     <img src="search.png"></img>

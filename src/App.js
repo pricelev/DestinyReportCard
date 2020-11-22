@@ -11,6 +11,7 @@ import ReportCard from "./components/Profile/ReportCard";
 import PlayerSearch from "./components/PlayerSearch/PlayerSearch";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
+import Followers from "./components/Profile/Followers";
 
 class App extends Component {
   render() {
@@ -24,6 +25,11 @@ class App extends Component {
             exact
             path="/reportcard/:membershipType/:membershipId"
             component={ReportCard}
+          />
+          <Route
+            exact
+            path="/reportcard/:membershipType/:membershipId/followers"
+            component={Followers}
           />
           <Route
             exact

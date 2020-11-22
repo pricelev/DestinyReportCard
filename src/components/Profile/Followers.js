@@ -4,17 +4,17 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
-import "./PlayerSearch.css";
-import { Button } from "react-bootstrap";
+import "../PlayerSearch/PlayerSearch.css";
+import { Button } from "react-bootstrap"
 
-const API = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
+const API = "http://www.destinyreportcard.com:3001/followList";
 const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
 const steam_white =
   "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
 
-class PlayerSearch extends Component {
+class Followers extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class PlayerSearch extends Component {
   }
 
   componentDidMount() {
-    fetch(CORS + API + this.state.displayName)
+    fetch(CORS + API)
       .then((response) => response.json())
       .then((data) => {
         if (data) {
@@ -38,25 +38,6 @@ class PlayerSearch extends Component {
       .catch((error) => {
         console.log(error);
       });
-    // test for when server doesnt respond
-    // let test_data = [
-    //   {
-    //     DisplayName: "Gon",
-    //     membershipType: "3",
-    //   },
-    //   {
-    //     DisplayName: "Gondirk",
-    //     membershipType: "2",
-    //   },
-    //   {
-    //     DisplayName: "Gon John",
-    //     membershipType: "1",
-    //   },
-    // ];
-    // this.setState({
-    //   isLoaded: true,
-    //   players: test_data,
-    // });
   }
   
   follow = () => {
@@ -78,7 +59,7 @@ class PlayerSearch extends Component {
               <Col lg={10}>
                 <div className="result-container" style={{ height: "400px" }}>
                   <div className="search-header">
-                    <h1> Search Results</h1>
+                    <h1> Followers </h1>
                   </div>
                   <br></br>
                   <br></br>
@@ -102,7 +83,7 @@ class PlayerSearch extends Component {
             <Col lg={8}>
               <div className="result-container">
                 <div className="search-header">
-                  <h1> Search Results</h1>
+                  <h1> Followers</h1>
                 </div>
                 <Row>
                   <Col lg={1}></Col>
@@ -186,4 +167,4 @@ class PlayerSearch extends Component {
   }
 }
 
-export default PlayerSearch;
+export default Followers;

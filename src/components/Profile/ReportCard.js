@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
+import { Button } from "react-bootstrap"
 
 import ReportSummary from "./ReportSummary";
 import ProfileChart from "./ProfileChart";
@@ -67,6 +68,7 @@ class ReportCard extends Component {
             displayName: data.playerInfo.DisplayName.value,
           });
         }
+        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -82,6 +84,8 @@ class ReportCard extends Component {
       let strikes_grade = this.state.profileData.stats.strikecompletions.grade;
       let triumph_grade = this.state.profileData.stats.triumphscore.grade;
       let raids_grade = this.state.profileData.stats.raidclears.grade;
+      let link = "../reportcard/";
+      
 
       let summary = [
         aggregate,
@@ -139,11 +143,35 @@ class ReportCard extends Component {
                   />
                 </Col>
                 <Col lg={6}>
-                  <h1 className="top-username">
-                    {this.state.profileData.playerInfo.DisplayName.value}
-                  </h1>
+                  <Row>
+                    <h1 className="top-username">
+                      {this.state.profileData.playerInfo.DisplayName.value}
+                    </h1>
+                  </Row>
+                  <Row>
+                    <a 
+                      href={
+                        "./" +
+                        this.state.memId + "/" +
+                        "followers"
+                      }
+                      className="followLink"
+                    >Followers</a>
+                  </Row>
+                  <Row>
+                    <Button
+                      className="repFollowButton"
+                      style={{marginTop: 10}}
+                      type="submit"
+                      onClick={this.follow}
+                      >
+                      Follow
+                    </Button>
+                  </Row>
                 </Col>
               </Row>
+              
+
             </Container>
           </div>
           <Container fluid className="profile-main-container">
