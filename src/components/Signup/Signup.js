@@ -14,7 +14,7 @@ import Axios from "axios";
 export default function Signup() {
   const CORS = "https://cors-anywhere.herokuapp.com/";
   const registerAPI = "http://www.destinyreportcard.com:3001/register";
-  const localRegisterAPI = "http://localhost:3001/register";
+  
 
   const [emailReg, setEmail] = useState("");
   const [passwordReg, setPassword] = useState("");

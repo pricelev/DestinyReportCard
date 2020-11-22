@@ -13,8 +13,6 @@ function Topnav() {
   const logoutAPI = "http://www.destinyreportcard.com:3001/logout";
   const loginAPI = "http://www.destinyreportcard.com:3001/login";
 
-  const locallogoutAPI = "http://localhost:3001/logout";
-  const localloginAPI = "http://localhost:3001/login";
 
 
   const [loginStatus, setloginStatus] = useState(false);

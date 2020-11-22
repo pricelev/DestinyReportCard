@@ -13,7 +13,6 @@ import { useHistory } from "react-router-dom";
 export default function Login() {
   const CORS = "https://cors-anywhere.herokuapp.com/";
   const loginAPI = "http://www.destinyreportcard.com:3001/login";
-  const localloginAPI = "http://localhost:3001/login";
 
   const [emailReg, setEmail] = useState("");
   const [passwordReg, setPassword] = useState("");
