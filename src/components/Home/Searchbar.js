@@ -22,9 +22,9 @@ class Searchbar extends Component {
       if (timer) {
         clearTimeout(timer);
       }
-      timerId = setTimeout(() => {
+      timer = setTimeout(() => {
         fn(...args);
-        timerId = null;
+        timer = null;
       }, delay);
     }
   }
