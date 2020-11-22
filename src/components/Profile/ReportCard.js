@@ -10,7 +10,6 @@ import ProfileChart from "./ProfileChart";
 import CharacterPanel from "./CharacterPanel";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
-const API1 = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
 class ReportCard extends Component {
@@ -33,34 +32,40 @@ class ReportCard extends Component {
       .then((response) => response.json())
       .then((data) => {
         if (data) {
-          let character1 = data.characters.characterInfo[0];
-          let character2 = data.characters.characterInfo[1];
-          let character3 = data.characters.characterInfo[2];
-          if (character1.LightLevel > character2.LightLevel) {
-            if (character1.LightLevel > character3.LightLevel) {
+          if (data.characters.characterInfo.length === 3) {
+            let character1 = data.characters.characterInfo[0];
+            let character2 = data.characters.characterInfo[1];
+            let character3 = data.characters.characterInfo[2];
+            if (character1.LightLevel >= character2.LightLevel) {
+              if (character1.LightLevel >= character3.LightLevel) {
+                this.setState({
+                  profPic: character1.emblemIcon,
+                });
+              } else {
+                this.setState({
+                  profPic: character3.emblemIcon,
+                });
+              }
+            } else if (character2.LightLevel >= character3.LightLevel) {
               this.setState({
-                profPic: character1.emblemIcon,
+                profPic: character2.emblemIcon,
               });
             } else {
               this.setState({
                 profPic: character3.emblemIcon,
               });
             }
-          } else if (character2.LightLevel > character3.LightLevel) {
-            this.setState({
-              profPic: character2.emblemIcon,
-            });
           } else {
             this.setState({
-              profPic: character3.emblemIcon,
-            });
+              profPic: data.characters.characterInfo[0].emblemIcon,
+            })
           }
+          
           this.setState({
             isLoaded: true,
             profileData: data,
             displayName: data.playerInfo.DisplayName.value,
           });
-          console.log(data);
         }
       })
       .catch((error) => {
@@ -120,7 +125,7 @@ class ReportCard extends Component {
       ]);
 
       let character_data = this.state.profileData.characters.characterInfo;
-
+      let profilepic = this.state.profPic;
       return (
         <div className="profile-container">
           <div className="profile-top">
@@ -128,8 +133,9 @@ class ReportCard extends Component {
               <Row>
                 <Col lg={2}>
                   <img
-                    src={this.state.profPic}
+                    src={profilepic}
                     className="profile-img rounded-circle"
+                    alt="Profile Pic"
                   />
                 </Col>
                 <Col lg={6}>

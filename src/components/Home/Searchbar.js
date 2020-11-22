@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Suggestions from "./Suggestions";
+import { fn } from "jquery";
 
 const API = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
@@ -15,16 +16,27 @@ class Searchbar extends Component {
     isLoaded: false,
   };
 
+  debounced(delay, fn) {
+    let timer;
+    return function (...args) {
+      if (timer) {
+        clearTimeout(timer);
+      }
+      timerId = setTimeout(() => {
+        fn(...args);
+        timerId = null;
+      }, delay);
+    }
+  }
+
   handleInputChange = () => {
     this.setState(
       {
         query: this.search.value,
       },
       () => {
-        if (this.state.query && this.state.query.length > 1) {
-          if (this.state.query.length % 2 === 0) {
-            this.getInfo();
-          }
+        if (this.state.query && this.state.query.length > 2) {
+          this.getInfo();
         } else if (
           this.state.isLoaded === true &&
           this.state.query.length === 0
@@ -78,7 +90,7 @@ class Searchbar extends Component {
                     autoComplete="off"
                     ref={(input) => (this.search = input)}
                     placeholder="Find your Guardian..."
-                    onChange={this.handleInputChange}
+                    onChange={this.debounced(500, this.handleInputChange)}
                   />
                   <button onClick={handleSearch} className="search_icon">
                     <img src="search.png"></img>
