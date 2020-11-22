@@ -38,10 +38,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cors({
-  origin: ["http://destinyreportcard.com"],
-  //Access-Control-Allow-Origin: ["http://destinyreportcard.com"],
-  //Vary: Origin,
-  //origin: ["http://localhost:3000"],
+  //origin: ["http://destinyreportcard.com"],
+  origin: ["http://192.168.86.75:3000"],
   methods: ["GET", "POST"],
   credentials: true,
 }));
@@ -224,6 +222,7 @@ app.post("/removeFollow",(req,res)=>{
 
 //api method for registering new user
 app.post("/register", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
   const email = req.body.email;
   const password = req.body.password;
   const membershipID = req.body.membershipID;
@@ -263,6 +262,7 @@ app.post("/register", (req, res) => {
 
 //check login status
 app.get("/login", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
   if (req.session.user) {
     res.send({loggedIn: true, user: req.session.user})
   }
@@ -273,6 +273,7 @@ app.get("/login", (req, res) => {
 
 //api method for logging in
 app.post("/login", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
   const email = req.body.email;
   const password = req.body.password;
   
@@ -303,6 +304,7 @@ app.post("/login", (req, res) => {
 
 //api method for logging out
 app.get("/logout", (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
   if (req.session.user) {
     res.clearCookie('UserID');
     req.session.destroy();
