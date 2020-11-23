@@ -7,19 +7,19 @@ import Spinner from "react-bootstrap/Spinner";
 import "../PlayerSearch/PlayerSearch.css";
 import { Button } from "react-bootstrap"
 
-const API = "http://www.destinyreportcard.com:3001/followList";
-const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
+const API = "http://www.destinyreportcard.com:3001/followingList/?email=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
 const steam_white =
   "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
 
-class Followers extends Component {
+class Following extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoaded: false,
       displayName: this.props.match.params.displayName,
+      email: this.props.match.params.displayName,
       players: [],
     };
   }
@@ -33,20 +33,13 @@ class Followers extends Component {
             isLoaded: true,
             players: data,
           });
+          console.log(this.state.email);
         }
       })
       .catch((error) => {
         console.log(error);
       });
   }
-  
-  follow = () => {
-    Axios.post(CORS + followAPI, {
-      
-    }).then((response) => {
-      
-    });
-  };
 
   render() {
     if (this.state.isLoaded) {
@@ -59,7 +52,7 @@ class Followers extends Component {
               <Col lg={10}>
                 <div className="result-container" style={{ height: "400px" }}>
                   <div className="search-header">
-                    <h1> Followers </h1>
+                    <h1> {this.state.displayName} is following: </h1>
                   </div>
                   <br></br>
                   <br></br>
@@ -83,7 +76,7 @@ class Followers extends Component {
             <Col lg={8}>
               <div className="result-container">
                 <div className="search-header">
-                  <h1> Followers</h1>
+                  <h1> {this.state.displayName} is following: </h1>
                 </div>
                 <Row>
                   <Col lg={1}></Col>
@@ -158,4 +151,4 @@ class Followers extends Component {
   }
 }
 
-export default Followers;
+export default Following;

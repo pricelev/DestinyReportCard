@@ -156,7 +156,7 @@ class ReportCard extends Component {
                         "followers"
                       }
                       className="followLink"
-                    >Followers</a>
+                    >Following</a>
                   </Row>
                   <Row>
                     <Button
