@@ -174,13 +174,13 @@ app.listen(port, () => {
  * @param {query param} membershipType unique membership type from bungie to represent home platform
  * @returns {Object} JSON object filled with player stats
  * @name reportCard
- * @example `get: http://www.destinyreportcard.com:3001/reportCard/?membershipId=4611686018468548442&membershipType=3
+ * @example get: http://www.destinyreportcard.com:3001/reportCard/?membershipId=4611686018468548442&membershipType=3
  * this is wehre the object should be{
  * 
  * dkdandkandka: djkadnfa
  * 
  * 
- * }`
+ * }
  * 
  */
 app.get("/reportCard", (req, res) => {
