@@ -34,7 +34,9 @@ class Following extends Component {
           email: response.data.user[0].email
         });
         Axios.get(API, {
-          email: response.data.user[0].email
+          params: {
+            email: response.data.user[0].email,
+          }
         }).then((response) => {
           console.log(response.data);
           this.setState({
