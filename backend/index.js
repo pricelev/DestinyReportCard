@@ -183,107 +183,107 @@ app.listen(port, () => {
  *           "value": "4611686018468548442"
  *       },
  *       "DisplayName": {
-            "value": "terryboot"
-        },
-        "averageGrade": 80.76923076923077
-    },
-    "characters": {
-        "characterInfo": [
-            {
-                "characterID": "2305843009359784864",
-                "classType": 0,
-                "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/57a9abd2d6ebf19020dce2f7ca04b8a7.jpg",
-                "emblemFull": "https://www.bungie.net/common/destiny2_content/icons/e94ea631cbfc6ddad3646b386dca4f05.jpg",
-                "LightLevel": 1262
-            },
-            {
-                "characterID": "2305843009358396092",
-                "classType": 2,
-                "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/57a9abd2d6ebf19020dce2f7ca04b8a7.jpg",
-                "emblemFull": "https://www.bungie.net/common/destiny2_content/icons/e94ea631cbfc6ddad3646b386dca4f05.jpg",
-                "LightLevel": 1261
-            },
-            {
-                "characterID": "2305843009361025170",
-                "classType": 1,
-                "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/486c1483be15aabd1ef7adb7a87c7a72.jpg",
-                "emblemFull": "https://www.bungie.net/common/destiny2_content/icons/3d0142ffcf985e9fab3d3e7d89ec192c.jpg",
-                "LightLevel": 1261
-            }
-        ]
-    },
-    "stats": {
-        "playtime": {
-            "value": 4211210,
-            "avg": 1277305.6296,
-            "stdDev": 2380292.787778026,
-            "grade": 95
-        },
-        "pvekd": {
-            "value": 19.87,
-            "avg": 26.61,
-            "stdDev": 53.819461524391976,
-            "grade": 75
-        },
-        "raidclears": {
-            "value": 128,
-            "avg": 50.5185,
-            "stdDev": 156.53691325888607,
-            "grade": 85
-        },
-        "strikecompletions": {
-            "value": 621,
-            "avg": 198.7778,
-            "stdDev": 376.2904053198835,
-            "grade": 95
-        },
-        "nightfalls": {
-            "value": 193,
-            "avg": 60.8148,
-            "stdDev": 118.9407063724321,
-            "grade": 95
-        },
-        "publicevents": {
-            "value": 697,
-            "avg": 230.8889,
-            "stdDev": 466.61915102014996,
-            "grade": 95
-        },
-        "pvpkd": {
-            "value": 0.78,
-            "avg": 0.704643,
-            "stdDev": 0.5316247477770193,
-            "grade": 75
-        },
-        "pvpWL": {
-            "value": 0.66,
-            "avg": 0.827143,
-            "stdDev": 0.7460460400521882,
-            "grade": 75
-        },
-        "CombatRatingPvP": {
-            "value": 108,
-            "avg": 90.9643,
-            "stdDev": 53.819461524391976,
-            "grade": 85
-        },
-        "trialsRecord": {
-            "value": 0.2695,
-            "avg": 0.46378571,
-            "stdDev": 0.28005986823520135,
-            "grade": 65
-        },
-        "triumphscore": {
-            "value": 89780,
-            "avg": 26665.3929,
-            "stdDev": 41331.73439755401,
-            "grade": 100
-        }
-    }
-}
+ *           "value": "terryboot"
+ *       },
+ *       "averageGrade": 80.76923076923077
+ *   },
+ *   "characters": {
+ *       "characterInfo": [
+ *           {
+ *               "characterID": "2305843009359784864",
+ *               "classType": 0,
+ *               "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/57a9abd2d6ebf19020dce2f7ca04b8a7.jpg",
+ *               "emblemFull": "https://www.bungie.net/common/destiny2_content/icons/e94ea631cbfc6ddad3646b386dca4f05.jpg",
+ *               "LightLevel": 1262
+ *           },
+ *           {
+ *               "characterID": "2305843009358396092",
+ *               "classType": 2,
+ *               "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/57a9abd2d6ebf19020dce2f7ca04b8a7.jpg",
+ *               "emblemFull": "https://www.bungie.net/common/destiny2_content/icons/e94ea631cbfc6ddad3646b386dca4f05.jpg",
+ *               "LightLevel": 1261
+ *           },
+ *           {
+ *               "characterID": "2305843009361025170",
+ *               "classType": 1,
+ *               "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/486c1483be15aabd1ef7adb7a87c7a72.jpg",
+ *               "emblemFull": "https://www.bungie.net/common/destiny2_content/icons/3d0142ffcf985e9fab3d3e7d89ec192c.jpg",
+ *               "LightLevel": 1261
+ *           }
+ *       ]
+ *   },
+ *   "stats": {
+ *       "playtime": {
+ *           "value": 4211210,
+ *           "avg": 1277305.6296,
+ *           "stdDev": 2380292.787778026,
+ *           "grade": 95
+ *       },
+ *       "pvekd": {
+ *           "value": 19.87,
+ *           "avg": 26.61,
+ *           "stdDev": 53.819461524391976,
+ *           "grade": 75
+ *       },
+ *       "raidclears": {
+ *           "value": 128,
+ *           "avg": 50.5185,
+ *           "stdDev": 156.53691325888607,
+ *           "grade": 85
+ *       },
+ *       "strikecompletions": {
+ *           "value": 621,
+ *           "avg": 198.7778,
+ *           "stdDev": 376.2904053198835,
+ *           "grade": 95
+ *       },
+ *       "nightfalls": {
+ *           "value": 193,
+ *           "avg": 60.8148,
+ *           "stdDev": 118.9407063724321,
+ *           "grade": 95
+ *       },
+ *       "publicevents": {
+ *           "value": 697,
+ *           "avg": 230.8889,
+ *           "stdDev": 466.61915102014996,
+ *           "grade": 95
+ *       },
+ *       "pvpkd": {
+ *           "value": 0.78,
+ *           "avg": 0.704643,
+ *           "stdDev": 0.5316247477770193,
+ *           "grade": 75
+ *       },
+ *       "pvpWL": {
+ *           "value": 0.66,
+ *           "avg": 0.827143,
+ *           "stdDev": 0.7460460400521882,
+ *           "grade": 75
+ *       },
+ *       "CombatRatingPvP": {
+ *           "value": 108,
+ *           "avg": 90.9643,
+ *           "stdDev": 53.819461524391976,
+ *           "grade": 85
+ *       },
+ *       "trialsRecord": {
+ *           "value": 0.2695,
+ *           "avg": 0.46378571,
+ *           "stdDev": 0.28005986823520135,
+ *           "grade": 65
+ *       },
+ *       "triumphscore": {
+ *           "value": 89780,
+ *           "avg": 26665.3929,
+ *           "stdDev": 41331.73439755401,
+ *           "grade": 100
+ *       }
+ *   }
+ *}
  * 
  * 
- * }
+ * 
  * 
  */
 app.get("/reportCard", (req, res) => {
