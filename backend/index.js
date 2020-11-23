@@ -145,11 +145,11 @@ app.get("/getPlayer", (req, res) => {
 */
 /**
  *  Retrieves current data from bungie.net api and updeates destinyreportcard database
- * @param {query param} membershipID unique member ID number used by destinyreportcard and bungie
- * 
- * @returns {Object} Array of matching player information
+ * @param {query param} membershipId unique member ID number used by destinyreportcard and bungie
+ * @param {query param} membershipType unique membership type from bungie to represent home platform
+ * @returns {status} 200 on success
  * @name updatePlayer
- * @example get: http://www.destinyreportcard.com:3001/getPlayer/?displayName=terryboot
+ * @example get: http://www.destinyreportcard.com:3001/updatePlayer/?membershipId=4611686018468548442&membershipType=3
  * 
  */
 app.get("/updatePlayer", (req, res) => {
@@ -168,19 +168,33 @@ app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
+/**
+ * Updates database with stats from Bungie api. Then forms a graded report card to represent stat. These stats are in comparison to community averages
+ * @param {query param} membershipId unique member ID number used by destinyreportcard and bungie
+ * @param {query param} membershipType unique membership type from bungie to represent home platform
+ * @returns {Object} JSON object filled with player stats
+ * @name reportCard
+ * @example `get: http://www.destinyreportcard.com:3001/reportCard/?membershipId=4611686018468548442&membershipType=3
+ * this is wehre the object should be{
+ * 
+ * dkdandkandka: djkadnfa
+ * 
+ * 
+ * }`
+ * 
+ */
 app.get("/reportCard", (req, res) => {
   const memID = req.query.membershipId;
   const memType = req.query.membershipType;
   if (!memID) {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
-  console.log("updating player");
 
     
     DB.getReportCard(memID,memType).then((data) => res.send(data))
 
 
-  //DB.getReportCard(memID).then(data => res.send(data));
+ 
 });
 
 app.get("/getLeaderboard", (req, res) => {
