@@ -64,7 +64,15 @@ export default function Signup() {
                 type="password"
               />
             </FormGroup>
-            <Searchbar />
+            <FormGroup controlId="text" bsSize="large">
+              <FormLabel>Membership ID</FormLabel>
+              <FormControl
+                autoFocus
+                type="text"
+                value={membershipIDReg}
+                onChange={(e) => setMembershipID(e.target.value)}
+              />
+            </FormGroup>
             <Button
               block
               bsSize="large"
