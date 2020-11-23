@@ -69,7 +69,7 @@ const port = 3001;
 
 /**
  * Queries both bungie and destinyreportcard.com for users matching given name
- * @param {String} displayName username to search for
+ * @param {query param} displayName username to search for
  * @returns {Object} Array of matching player information
  * @name getPlayer
  * @example get: http://www.destinyreportcard.com:3001/getPlayer/?displayName=terryboot
@@ -144,12 +144,13 @@ app.get("/getPlayer", (req, res) => {
   Requires membership id param
 */
 /**
- * Queries both bungie and destinyreportcard.com for users matching given name
- * @param {String} displayName username to search for
+ *  Retrieves current data from bungie.net api and updeates destinyreportcard database
+ * @param {query param} membershipID unique member ID number used by destinyreportcard and bungie
+ * 
  * @returns {Object} Array of matching player information
  * @name updatePlayer
  * @example get: http://www.destinyreportcard.com:3001/getPlayer/?displayName=terryboot
- * @property get
+ * 
  */
 app.get("/updatePlayer", (req, res) => {
   const memID = req.query.membershipId + "";

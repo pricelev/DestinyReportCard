@@ -7,8 +7,8 @@ import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
 
 const API = "http://www.destinyreportcard.com:3001/getLeaderboard/?type=";
-//const CORS = "https://cors-anywhere.herokuapp.com/";
-const CORS = "";
+const CORS = "https://cors-anywhere.herokuapp.com/";
+
 const endpoints = [
   CORS + "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvPKD",
   CORS + "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvEKD",
