@@ -132,8 +132,10 @@ app.get("/getPlayer", (req, res) => {
               "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
             break;
         }
-        allPlayers.forEach(memID =>{
-          if(memID == temp.memb){
+        allPlayers.forEach(mem =>{
+         
+          if(mem.MembershipID != temp.MembershipID){
+           
             flag = true;
           }
         });
