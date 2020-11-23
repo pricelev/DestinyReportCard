@@ -520,9 +520,9 @@ app.get("/checkFollow",(req,res)=>{
   const followID = req.body.followID;
   DB.checkFollower(email,memID,followID).then((data) =>{
     if(data>0)
-      res.send(true)
+      res.send({isFollow:true})
     else{
-      res.send(false);
+      res.send({isFollow:false});
     }
   })
 });
