@@ -5,10 +5,12 @@ import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 import "../PlayerSearch/PlayerSearch.css";
-import { Button } from "react-bootstrap"
+import { Button } from "react-bootstrap";
+import Axios from 'axios';
 
 const API = "http://www.destinyreportcard.com:3001/followingList/?email=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
+const loginAPI = "http://www.destinyreportcard.com:3001/login";
 
 const steam_white =
   "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
@@ -21,10 +23,33 @@ class Following extends Component {
       displayName: this.props.match.params.displayName,
       email: this.props.match.params.displayName,
       players: [],
+      loginstatus: false,
     };
   }
 
   componentDidMount() {
+    Axios.get(loginAPI).then((response) => {
+      if (response.data.loggedIn === true) {
+        this.setState({
+          loginstatus: true,
+          email: response.data.user[0].email
+        });
+        Axios.get(API, {
+          email: response.data.user[0].email
+        }).then((response) => {
+          this.setState({
+            players: response
+          })
+        });
+      }
+      else {
+        this.setState({
+          loginstatus: false
+        })
+      }
+    });
+  }
+ /* componentDidMount() {
     fetch(CORS + API)
       .then((response) => response.json())
       .then((data) => {
@@ -39,7 +64,7 @@ class Following extends Component {
       .catch((error) => {
         console.log(error);
       });
-  }
+  } */
 
   render() {
     if (this.state.isLoaded) {
