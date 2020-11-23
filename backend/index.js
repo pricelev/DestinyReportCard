@@ -73,7 +73,18 @@ const port = 3001;
  * @returns {Object} Array of matching player information
  * @name getPlayer
  * @example get: http://www.destinyreportcard.com:3001/getPlayer/?displayName=terryboot
- * @property get
+ * returnss object:
+ * [
+ *   {
+ *       "DisplayName": "terryboot",
+ *       "MembershipID": "4611686018468548442",
+ *       "emblem": "https://www.bungie.net/common/destiny2_content/icons/57a9abd2d6ebf19020dce2f7ca04b8a7.jpg",
+ *       "xbox": 1,
+ *       "psn": 1,
+ *       "steam": 1,
+ *       "membershipType": 3
+ *   }
+*]
  */
 app.get("/getPlayer", (req, res) => {
   const name = req.query.displayName;
@@ -310,6 +321,108 @@ app.get("/reportCard", (req, res) => {
  
 });
 
+
+/**
+ *  retrieves the leaderboard of a mode type from destinyreportcard based off of players in the db
+ * @param {query param} type unique type for different activities in Destiniy
+ * @returns {object} objects filled wiht a desc list of players
+ * @name getLeaderboard
+ * @example get: http://www.destinyreportcard.com:3001/getLeaderboard/?type=RaidClears
+ * returns object:
+ * [
+ *   {
+ *       "MembershipID": "4611686018467284386",
+ *       "MembershipType": 3,
+ *       "DisplayName": "Datto",
+ *       "RaidClears": 819
+ *   },
+ *   {
+ *       "MembershipID": "4611686018468548442",
+ *       "MembershipType": 3,
+ *       "DisplayName": "terryboot",
+ *       "RaidClears": 128
+ *   },
+ *   {
+ *       "MembershipID": "4611686018476536768",
+ *       "MembershipType": 3,
+ *       "DisplayName": "Frostie",
+ *       "RaidClears": 127
+ *   },
+ *   {
+ *       "MembershipID": "4611686018483765326",
+ *       "MembershipType": 3,
+ *       "DisplayName": "STEV",
+ *       "RaidClears": 117
+ *   },
+ *   {
+ *       "MembershipID": "4611686018467209903",
+ *       "MembershipType": 3,
+ *       "DisplayName": "nKuch",
+ *       "RaidClears": 109
+ *   },
+ *   {
+ *       "MembershipID": "4611686018477042917",
+ *       "MembershipType": 3,
+ *       "DisplayName": "Chigachow",
+ *       "RaidClears": 39
+ *   },
+ *   {
+ *       "MembershipID": "4611686018429548091",
+ *       "MembershipType": 1,
+ *       "DisplayName": "Mazillius",
+ *       "RaidClears": 10
+ *   },
+ *   {
+ *       "MembershipID": "4611686018429561036",
+ *       "MembershipType": 1,
+ *       "DisplayName": "Sand6605193",
+ *       "RaidClears": 3
+ *   },
+ *   {
+ *       "MembershipID": "4611686018450583621",
+ *       "MembershipType": 1,
+ *       "DisplayName": "SCHYMN",
+ *       "RaidClears": 3
+ *   },
+ *   {
+ *       "MembershipID": "4611686018443844207",
+ *       "MembershipType": 1,
+ *       "DisplayName": "Hit The Grind",
+ *       "RaidClears": 3
+ *   },
+ *   {
+ *       "MembershipID": "4611686018431731488",
+ *       "MembershipType": 1,
+ *       "DisplayName": "jesland",
+ *       "RaidClears": 3
+ *   },
+ *   {
+ *       "MembershipID": "4611686018430155691",
+ *       "MembershipType": 1,
+ *       "DisplayName": "Mooslo",
+ *       "RaidClears": 3
+ *   },
+ *   {
+ *       "MembershipID": "4611686018509753875",
+ *       "MembershipType": 3,
+ *       "DisplayName": "Terry",
+ *       "RaidClears": 0
+ *   },
+ *   {
+ *       "MembershipID": "4611686018509669614",
+ *       "MembershipType": 3,
+ *       "DisplayName": "Marc",
+ *       "RaidClears": 0
+ *   },
+ *   {
+ *       "MembershipID": "4611686018509275802",
+ *       "MembershipType": 3,
+ *       "DisplayName": "ST",
+ *       "RaidClears": 0
+ *   }
+*]
+ * 
+ */
 app.get("/getLeaderboard", (req, res) => {
   const type = req.query.type;
   if (!type) {
@@ -333,6 +446,55 @@ app.get("/getLeaderboard", (req, res) => {
   }
 });
 
+
+/*
+  Api method for client to request a player update
+  Requires membership id param
+*/
+/**
+ *  Retrieves a list of players that a user follows
+ * @param {query param} email unique member ID number used by destinyreportcard and bungie
+ * @returns {Object} List of objects
+ * @name followingList
+ * @example get: http://www.destinyreportcard.com:3001/updatePlayer/?membershipId=4611686018468548442&membershipType=3
+ * Object Response
+ * [
+    {
+        "membershipID": "4611686018467284386",
+        "DisplayName": "Datto",
+        "playtime": 10086763,
+        "pvekd": 49.36,
+        "raidclears": 819,
+        "strikecompletions": 1672,
+        "nightfalls": 460,
+        "publicevents": 1768,
+        "pvpkd": 1.58,
+        "pvpWL": 1.8,
+        "CombatRatingPvP": 174,
+        "trialsRecord": 0.6728,
+        "triumphscore": 143042,
+        "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/99ad4e538b233298b16cc434e24f53c9.jpg",
+        "membershipType": 3
+    },
+    {
+        "membershipID": "4611686018476536768",
+        "DisplayName": "Frostie",
+        "playtime": 4143411,
+        "pvekd": 23.37,
+        "raidclears": 127,
+        "strikecompletions": 608,
+        "nightfalls": 191,
+        "publicevents": 665,
+        "pvpkd": 1.05,
+        "pvpWL": 0.7,
+        "CombatRatingPvP": 119,
+        "trialsRecord": 0.2695,
+        "triumphscore": 94587,
+        "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/ef696558825f40dc18234fd0851e9ae9.jpg",
+        "membershipType": 3
+    }
+]
+ */
 app.get("/followingList",(req,res)=>{
 
   const email = req.query.email;
@@ -342,9 +504,9 @@ app.get("/followingList",(req,res)=>{
 
 app.post("/addFollow",(req,res)=>{
 
-  const email = req.query.email;
-  const memID = req.query.membershipID;
-  const followID = req.query.followID;
+  const email = req.body.email;
+  const memID = req.body.membershipID;
+  const followID = req.body.followID;
    if (!memID || !email || !followID) {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
