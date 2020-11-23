@@ -395,9 +395,11 @@ async function removeFollow(email,memID,followID){
 }
 
 async function checkFollower(email,memID,followID){
-  let q = `select * from follower where email="`+email+`" AND membershipID="`+memID+`" AND followsID="`+followID+`"`;
+  let q = `select * from follower where email ="`+email+`" and followsID=`+followID+` and membershipID = `+memID+``;
+  console.log(q);
   let db = new Database();
-  let run =await db.query(q)
+  let run =await db.query(q);
+  console.log(run);
   return run.length;
   
 }
