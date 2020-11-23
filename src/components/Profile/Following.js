@@ -37,7 +37,8 @@ class Following extends Component {
           email: response.data.user[0].email
         }).then((response) => {
           this.setState({
-            players: response
+            players: response,
+            isLoaded: true,
           })
         });
       }
