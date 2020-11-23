@@ -28,7 +28,7 @@ class App extends Component {
           />
           <Route
             exact
-            path="/reportcard/:membershipType/:membershipId/following"
+            path="/following"
             component={Following}
           />
           <Route
