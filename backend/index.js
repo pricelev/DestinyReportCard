@@ -133,11 +133,11 @@ app.get("/getPlayer", (req, res) => {
             break;
         }
         allPlayers.forEach(memID =>{
-          if(memID == temp.displayName){
+          if(memID == temp.memb){
             flag = true;
           }
-        })
-        if(flag)
+        });
+        if(flag==true)
           allPlayers.push(temp);
       }
       res.send(allPlayers);
@@ -426,7 +426,7 @@ app.post("/login", (req, res) => {
   db.query(`SELECT u.* , p.displayName, p.membershipType, c.emblemIcon
   FROM users u , player p, characters c
   WHERE email = ? AND u.membershipID=p.membershipID AND p.membershipID = c.membershipID
-  group by c.membershipIDt
+  group by c.membershipID
   `,
   email,
   (err, result) =>{
