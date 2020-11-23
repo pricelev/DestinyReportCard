@@ -327,9 +327,6 @@ app.post("/login", (req, res) => {
       bcrypt.compare(password, result[0].password, (err, response) => {
         if (response){
           req.session.user = result;
-          req.session.membershipType=3;
-          req.session.membershipId=4611686018468548442;
-          req.session.emblemIcon = "https://www.bungie.net/common/destiny2_content/icons/69adea04559ff05a3422358109747187.jpg";
           console.log(req.session.user);
           res.send(result);
         }
