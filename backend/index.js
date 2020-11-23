@@ -147,7 +147,7 @@ app.get("/getPlayer", (req, res) => {
  * Queries both bungie and destinyreportcard.com for users matching given name
  * @param {String} displayName username to search for
  * @returns {Object} Array of matching player information
- * @name getPlayer
+ * @name updatePlayer
  * @example get: http://www.destinyreportcard.com:3001/getPlayer/?displayName=terryboot
  * @property get
  */
