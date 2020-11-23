@@ -24,7 +24,7 @@ export default function Login() {
   let history = useHistory();
 
   const login = () => {
-    Axios.post(loginAPI, {
+    Axios.post(CORS + loginAPI, {
       email: emailReg,
       password: passwordReg,
     }).then((response) => {
@@ -39,7 +39,7 @@ export default function Login() {
   };
 
   useEffect(() => {
-    Axios.get(loginAPI).then((response) => {
+    Axios.get(CORS + loginAPI).then((response) => {
       if (response.data.loggedIn == true) {
         setloginStatus(response.data.user[0].email);
         console.log(response.data);
@@ -87,6 +87,8 @@ export default function Login() {
               Login
             </Button>
           </form>
+          <br></br>
+          <a href="../signup" style={{textDecoration: "underline"}}>Don't have an account? Sign up here!</a>
           <h1>{loginStatus}</h1>
         </div>
       </Card>
