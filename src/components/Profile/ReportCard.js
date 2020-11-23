@@ -34,6 +34,18 @@ class ReportCard extends Component {
   }
 
   componentDidMount() {
+    Axios.get(loginAPI).then((response) => {
+      if (response.data.loggedIn == true) {
+        this.setState({
+          loginStatus: true,
+        });
+      }
+      else {
+        this.setState({
+          loginStatus: false,
+        });
+      }
+    });
     fetch(
       CORS + API + this.state.memId + "&membershipType=" + this.state.memType
     )
@@ -87,9 +99,6 @@ class ReportCard extends Component {
     Axios.get(loginAPI).then((response) => {
       console.log(response);
       if (response.data.loggedIn == true) {
-        this.setState({
-          loginStatus: true,
-        });
         Axios.post(followAPI, {
           email: response.data.user[0].email,
           membershipID: response.data.user[0].membershipID,
@@ -111,9 +120,6 @@ class ReportCard extends Component {
     Axios.get(loginAPI).then((response) => {
       console.log(response);
       if (response.data.loggedIn == true) {
-        this.setState({
-          loginStatus: true,
-        });
         Axios.post(removeFollowAPI, {
           email: response.data.user[0].email,
           membershipID: response.data.user[0].membershipID,
