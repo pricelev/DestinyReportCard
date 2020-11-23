@@ -36,8 +36,9 @@ class Following extends Component {
         Axios.get(API, {
           email: response.data.user[0].email
         }).then((response) => {
+          console.log(response.data);
           this.setState({
-            players: response,
+            players: response.data,
             isLoaded: true,
           })
         });
