@@ -211,16 +211,6 @@ class ReportCard extends Component {
                     </h1>
                   </Row>
                   <Row>
-                    <a 
-                      href={
-                        "./" +
-                        this.state.memId + "/" +
-                        "following"
-                      }
-                      className="followLink"
-                    >Following</a>
-                  </Row>
-                  <Row>
                     {this.state.loginStatus == true && this.state.following == false && (
                     <Button
                       className="repFollowButton"
