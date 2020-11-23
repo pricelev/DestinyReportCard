@@ -522,6 +522,8 @@ app.get("/checkFollow",(req,res)=>{
   console.log(email);
   console.log(memID);
   console.log(req.query);
+  console.log(req.params);
+  console.log()
   DB.checkFollower(email,memID,followID).then((data) =>{
     if(data>0)
       res.send({isFollow:true})
@@ -568,12 +570,13 @@ app.post("/removeFollow",(req,res)=>{
   const email = req.body.email;
   const memID = req.body.membershipID;
   const followID = req.body.followID;
+
   if (!memID || !email || !followID) {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
   DB.removeFollow(email,memID,followID).then((data)=>{
 
-    res.send(200);
+  res.send(200);
   })
 });
 

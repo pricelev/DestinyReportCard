@@ -390,6 +390,7 @@ async function addFollow(email,memID,followID){
 async function removeFollow(email,memID,followID){
   let q = `Delete from follower 
   where email="`+email+`" AND membershipID="`+memID+`" AND followsID="`+followID+`"`;
+  let db = new Database();
   console.log(q);
   let res= await db.query(q);
   db.close();
