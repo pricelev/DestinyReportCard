@@ -6,7 +6,6 @@ import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 import "../PlayerSearch/PlayerSearch.css";
 import { Button } from "react-bootstrap";
-import Axios from 'axios';
 
 const API = "http://www.destinyreportcard.com:3001/followingList/?email=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
