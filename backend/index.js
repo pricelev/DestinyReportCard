@@ -71,6 +71,7 @@ const port = 3001;
  * Queries both bungie and destinyreportcard.com for users matching given name
  * @param {String} displayName username to search for
  * @returns {Object} Array of matching player information
+ * @name /getPlayer
  */
 app.get("/getPlayer", (req, res) => {
   const name = req.query.displayName;
