@@ -5,6 +5,7 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
 import { Button } from "react-bootstrap"
+import Axios from 'axios';
 
 import ReportSummary from "./ReportSummary";
 import ProfileChart from "./ProfileChart";
@@ -14,6 +15,7 @@ const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
 const removeFollowAPI = "http://www.destinyreportcard.com:3001/removeFollow";
+const loginAPI = "http://www.destinyreportcard.com:3001/login";
 
 class ReportCard extends Component {
   constructor(props) {
