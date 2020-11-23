@@ -312,7 +312,11 @@ app.post("/login", (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
   
-  db.query("SELECT * FROM users WHERE email = ?",
+  db.query(`SELECT u.* , p.displayName, p.membershipType, c.emblemIcon
+  FROM users u , player p, characters c
+  WHERE email = ? AND u.membershipID=p.membershipID AND p.membershipID = c.membershipID
+  group by c.membershipID
+  `,
   email,
   (err, result) =>{
     if (err) {
