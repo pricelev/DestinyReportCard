@@ -233,13 +233,7 @@ async function updatePlayer(memID, memType) {
   );
 
 }
-function sleep(milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
-}
+
 async function getReportCard(memID,memType) {
  await updatePlayer(memID,memType);
 
@@ -368,7 +362,9 @@ async function getLeaderboard(type) {
   return leaderboard;
 }
 
-async function getFollowList(email){
+
+// get the users list of people they follow
+async function getFollowingList(email){
   let db = new Database();
   let q =    `   Select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
   sum(publicevents) as publicevents, p.pvpkd, p.pvpWL, p.CombatRatingPvP,sum(c.trialswins)/sum(c.trialsmatches) as trialsRecord, p.triumphscore ,c.emblemIcon, p.membershipType
@@ -379,6 +375,7 @@ async function getFollowList(email){
   db.close();
   return list;
 }
+
 
 async function addFollow(email,memID,followID){
   let q = `REPLACE into follower (email,membershipID,followsID) 
@@ -403,7 +400,7 @@ module.exports = {
   getReportCard,
   getMemberStats,
   getLeaderboard,
-  getFollowList,
+  getFollowingList,
   addFollow,
   removeFollow
 };

@@ -188,11 +188,12 @@ app.get("/getLeaderboard", (req, res) => {
   }
 });
 
-app.get("/followList",(req,res)=>{
+app.get("/followingList",(req,res)=>{
 
   const email = req.query.email;
-  DB.getFollowList(email).then((data)=> res.send(data));
+  DB.getFollowingList(email).then((data)=> res.send(data));
 });
+
 
 app.post("/addFollow",(req,res)=>{
 
