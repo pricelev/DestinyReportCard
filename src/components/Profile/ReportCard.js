@@ -96,7 +96,8 @@ class ReportCard extends Component {
           followID: this.state.memId,
         }).then((response) => {
           console.log(response);
-          if (response.data == true) {
+          console.log(response.data.isFollow);
+          if (response.data.isFollow == true) {
             this.setState({
               following: true,
             });
