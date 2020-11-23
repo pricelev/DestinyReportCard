@@ -59,6 +59,14 @@ app.use(
 
 const port = 3001;
 
+/**
+ * Queries both bungie and destinyreportcard.com for users matching given name
+ * @property endpoint: www.destinyreportcard.com:3001/
+ * @name DestinyReportCardApi
+ * 
+*]
+ */
+
 
 //api interface for get player, when request comes in we need to:
 //1: query database for any existing players by that name
