@@ -50,7 +50,7 @@ class Searchbar extends Component {
   };
 
   getInfo = () => {
-    fetch(CORS + API + this.state.query)
+    fetch( API + this.state.query)
       .then((response) => response.json())
       .then((data) => {
         if (data) {
