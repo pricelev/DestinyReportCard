@@ -516,9 +516,9 @@ app.post("/addFollow",(req,res)=>{
 });
 
 app.post("/removeFollow",(req,res)=>{
-  const email = req.query.email;
-  const memID = req.query.membershipID;
-  const followID = req.query.followID;
+  const email = req.body.email;
+  const memID = req.body.membershipID;
+  const followID = req.body.followID;
   if (!memID || !email || !followID) {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
