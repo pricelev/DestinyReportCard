@@ -298,7 +298,7 @@ app.get("/login", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   if (req.session.user) {
-    res.send({loggedIn: true, user: req.session.user})
+    res.send({loggedIn: true, user: req.session.user, membershipId: req.session.membershipId, membershipType: req.session.membershipType, emblemIcon: req.session.emblemIcon});
   }
   else {
     res.send({loggedIn: false });
@@ -323,6 +323,9 @@ app.post("/login", (req, res) => {
       bcrypt.compare(password, result[0].password, (err, response) => {
         if (response){
           req.session.user = result;
+          req.session.membershipType=3;
+          req.session.membershipId=4611686018468548442;
+          req.session.emblemIcon = "https://www.bungie.net/common/destiny2_content/icons/69adea04559ff05a3422358109747187.jpg";
           console.log(req.session.user);
           res.send(result);
         }
