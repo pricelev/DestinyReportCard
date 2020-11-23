@@ -21,7 +21,7 @@ function Topnav() {
   let history = useHistory();
 
   const logout = () => {
-    Axios.get(CORS + logoutAPI, {
+    Axios.get(logoutAPI, {
     }).then((response) => {
       console.log(response);
     });
@@ -30,7 +30,7 @@ function Topnav() {
   Axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    Axios.get(CORS + loginAPI).then((response) => {
+    Axios.get(loginAPI).then((response) => {
       if (response.data.loggedIn == true){
         setloginStatus(true);
       }
