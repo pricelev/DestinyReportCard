@@ -456,7 +456,7 @@ app.get("/getLeaderboard", (req, res) => {
  * @param {query param} email unique member ID number used by destinyreportcard and bungie
  * @returns {Object} List of objects
  * @name followingList
- * @example get: http://www.destinyreportcard.com:3001/updatePlayer/?membershipId=4611686018468548442&membershipType=3
+ * @example get: http://www.destinyreportcard.com:3001/followingList
  * Object Response
  * [
  *   {
@@ -504,12 +504,12 @@ app.get("/followingList",(req,res)=>{
 
 /**
  *  Follower a player 
- * @param {query param} email Email of the logged in user
- * @param {query param} membershipID ID linked to the loggin in user
- * @param {query param} membershipID ID linked to the loggin in user
+ * @param {body param} email Email of the logged in user
+ * @param {body param} membershipID ID linked to the loggin in user
+ * @param {body param} followID ID linked to the loggin in user
  * @returns {status} 200 on success
  * @name addFollow
- * @example post: http://www.destinyreportcard.com:3001/updatePlayer/?membershipId=4611686018468548442&membershipType=3
+ * @example post: http://www.destinyreportcard.com:3001/addFollow
  * 
  */
 app.post("/addFollow",(req,res)=>{
@@ -525,6 +525,16 @@ app.post("/addFollow",(req,res)=>{
   })
 });
 
+/**
+ *  Lookup to see if the current user is following a player
+ * @param {body param} email Email of the logged in user
+ * @param {body param} membershipID ID linked to the loggin in user
+ * @param {body param} followID ID linked to the loggin in user
+ * @returns {boolean} true if player follows them, false otherwise
+ * @name addFollow
+ * @example get: http://www.destinyreportcard.com:3001/checkFollow
+ * 
+ */
 app.get("/checkFollow",(req,res)=>{
   const email = req.body.email;
   const memID = req.body.membershipID;
