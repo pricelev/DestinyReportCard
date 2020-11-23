@@ -502,6 +502,31 @@ app.get("/followingList",(req,res)=>{
 });
 
 
+
+
+/**
+ *  Lookup to see if the current user is following a player
+ * @param {body param} email Email of the logged in user
+ * @param {body param} membershipID ID linked to the loggin in user
+ * @param {body param} followID ID linked to the loggin in user
+ * @returns {boolean} true if player follows them, false otherwise
+ * @name checkFollow
+ * @example get: http://www.destinyreportcard.com:3001/checkFollow
+ * 
+ */
+app.get("/checkFollow",(req,res)=>{
+  const email = req.body.email;
+  const memID = req.body.membershipID;
+  const followID = req.body.followID;
+  DB.checkFollower(email,memID,followID).then((data) =>{
+    if(data>0)
+      res.send(true)
+    else{
+      res.send(false);
+    }
+  })
+});
+
 /**
  *  Follower a player 
  * @param {body param} email Email of the logged in user
@@ -526,28 +551,15 @@ app.post("/addFollow",(req,res)=>{
 });
 
 /**
- *  Lookup to see if the current user is following a player
+ *  Remove of a followed player from the current players follows
  * @param {body param} email Email of the logged in user
  * @param {body param} membershipID ID linked to the loggin in user
  * @param {body param} followID ID linked to the loggin in user
- * @returns {boolean} true if player follows them, false otherwise
- * @name addFollow
- * @example get: http://www.destinyreportcard.com:3001/checkFollow
+ * @returns {status} 200 on success
+ * @name removeFollow
+ * @example post: http://www.destinyreportcard.com:3001/removeFollow
  * 
  */
-app.get("/checkFollow",(req,res)=>{
-  const email = req.body.email;
-  const memID = req.body.membershipID;
-  const followID = req.body.followID;
-  DB.checkFollower(email,memID,followID).then((data) =>{
-    if(data>0)
-      res.send(true)
-    else{
-      res.send(false);
-    }
-  })
-});
-
 app.post("/removeFollow",(req,res)=>{
   const email = req.body.email;
   const memID = req.body.membershipID;
