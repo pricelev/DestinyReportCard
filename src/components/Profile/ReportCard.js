@@ -215,7 +215,7 @@ class ReportCard extends Component {
                     >Following</a>
                   </Row>
                   <Row>
-                    {loginStatus == true && following == false && (
+                    {this.state.loginStatus == true && this.state.following == false && (
                     <Button
                       className="repFollowButton"
                       style={{marginTop: 10}}
@@ -225,7 +225,7 @@ class ReportCard extends Component {
                       Follow
                     </Button>
                     )}
-                    {loginStatus == true && following == true &&(
+                    {this.state.loginStatus == true && this.state.following == true &&(
                     <Button
                       className="repFollowButton"
                       style={{marginTop: 10}}
