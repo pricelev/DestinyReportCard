@@ -116,15 +116,6 @@ class Followers extends Component {
                                 <Col md="auto" className="display-name">
                                   {player.DisplayName}
                                 </Col>
-                                <Col md="auto">
-                                  <Button
-                                    className="followButton"
-                                    type="submit"
-                                    onClick={this.follow}
-                                  >
-                                    Follow
-                                  </Button>
-                                </Col>
                               </Row>
                             </div>
                           </Card>
