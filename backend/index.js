@@ -143,6 +143,9 @@ app.get("/getPlayer", (req, res) => {
               "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
             break;
         }
+        if(allPlayers.length ==0){
+          allPlayers.push(temp);
+        }
         allPlayers.forEach(mem =>{
          
           if(mem.MembershipID != temp.MembershipID){
@@ -152,6 +155,7 @@ app.get("/getPlayer", (req, res) => {
         });
         if(flag==true)
           allPlayers.push(temp);
+        
       }
       res.send(allPlayers);
     })
