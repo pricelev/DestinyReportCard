@@ -10,15 +10,15 @@ const API = "http://www.destinyreportcard.com:3001/getLeaderboard/?type=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 
 const endpoints = [
-  CORS + "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvPKD",
-  CORS + "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvEKD",
-  CORS +
+   "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvPKD",
+  "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvEKD",
+  
     "http://www.destinyreportcard.com:3001/getLeaderboard/?type=RaidClears",
-  CORS +
+  
     "http://www.destinyreportcard.com:3001/getLeaderboard/?type=Nightfalls",
-  CORS +
+  
     "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PublicEvents",
-  CORS +
+  
     "http://www.destinyreportcard.com:3001/getLeaderboard/?type=StrikeCompletions",
 ];
 
