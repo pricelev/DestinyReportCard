@@ -51,7 +51,7 @@ function Topnav() {
           </Nav.Link>
           { loginStatus == true &&
           <Nav.Link href="/profile" id="nav-item-white">
-            Profile (MOCKUP)
+            Profile
           </Nav.Link>
           }
         </Nav>
