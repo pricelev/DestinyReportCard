@@ -7,7 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import "../PlayerSearch/PlayerSearch.css";
 import { Button } from "react-bootstrap";
 
-const API = "http://www.destinyreportcard.com:3001/followingList/?email=";
+const API = "http://www.destinyreportcard.com:3001/followingList";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 const loginAPI = "http://www.destinyreportcard.com:3001/login";
 
