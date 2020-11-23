@@ -88,15 +88,15 @@ class ReportCard extends Component {
           loginStatus: true,
         });
         console.log(response.data.user[0].email);
-        let email = response.data.user[0].email;
+        let emails = response.data.user[0].email;
         console.log(response.data.user[0].membershipID);
-        let membershipID = response.data.user[0].membershipID;
+        let membershipIDs = response.data.user[0].membershipID;
         console.log(this.state.memId);
-        let followID = this.state.memId
+        let followIDs = this.state.memId
         Axios.get(checkFollowAPI, {
-          email: email,
-          membershipID: membershipID,
-          followID: followID,
+          email: emails,
+          membershipID: membershipIDs,
+          followID: followIDs,
         }).then((response) => {
           console.log(response);
           console.log(response.data.isFollow);
