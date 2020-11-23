@@ -94,9 +94,9 @@ class ReportCard extends Component {
         console.log(this.state.memId);
         let followIDs = this.state.memId
         Axios.get(checkFollowAPI, {
-          email: emails,
-          membershipID: membershipIDs,
-          followID: followIDs,
+          email: "tlnjrtlnjr@yahoo.com",
+          membershipID: "4",
+          followID: "kdakdna",
         }).then((response) => {
           console.log(response);
           console.log(response.data.isFollow);
