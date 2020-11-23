@@ -46,8 +46,13 @@ function Topnav() {
             Home
           </Nav.Link>
           {loginStatus == true && (
-            <Nav.Link href="/following" id="nav-item-white">
+            <Nav.Link href="/profile" id="nav-item-white">
               Profile
+            </Nav.Link>
+          )}
+          {loginStatus == true && (
+            <Nav.Link href="/following" id="nav-item-white">
+              Following
             </Nav.Link>
           )}
           <Nav.Link
