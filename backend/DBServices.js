@@ -394,6 +394,14 @@ async function removeFollow(email,memID,followID){
  
 }
 
+async function checkFollower(email,memID,followID){
+  let q = `select * from follower where email="`+email+`" AND membershipID="`+memID+`" AND followsID="`+followID+`"`;
+  let db = new Database();
+  let run =await db.query(q)
+  return run.length;
+  
+}
+
 module.exports = {
   searchPlayer,
   updatePlayer,
@@ -402,5 +410,6 @@ module.exports = {
   getLeaderboard,
   getFollowingList,
   addFollow,
-  removeFollow
+  removeFollow,
+  checkFollower
 };

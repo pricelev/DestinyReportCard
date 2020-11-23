@@ -525,6 +525,19 @@ app.post("/addFollow",(req,res)=>{
   })
 });
 
+app.get("/checkFollow",(req,res)=>{
+  const email = req.query.email;
+  const memID = req.query.membershipID;
+  const followID = req.query.followID;
+  DB.checkFollower(email,memID,followID).then((data) =>{
+    if(data>0)
+      res.send(true)
+    else{
+      res.send(false);
+    }
+  })
+});
+
 app.post("/removeFollow",(req,res)=>{
   const email = req.body.email;
   const memID = req.body.membershipID;
@@ -533,7 +546,8 @@ app.post("/removeFollow",(req,res)=>{
     throw new Error("REQUIRED PARAMETER MISSING");
   }
   DB.removeFollow(email,memID,followID).then((data)=>{
-    res.sendStatus(200);
+
+    res.send(200);
   })
 });
 
