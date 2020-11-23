@@ -38,7 +38,7 @@ function Topnav() {
         setloginStatus(false);
       }
     });
-  });
+  }, []);
 
   return (
     <Navbar collapseOnSelect expand="lg" fixed="top">
