@@ -497,7 +497,8 @@ app.get("/getLeaderboard", (req, res) => {
  */
 app.get("/followingList",(req,res)=>{
 
-  const email = req.body.email;
+  const email = req.query.email;
+  console.log(email);
   DB.getFollowingList(email).then((data)=> res.send(data));
 });
 
