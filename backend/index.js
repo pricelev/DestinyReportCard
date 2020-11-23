@@ -156,7 +156,6 @@ app.get("/getPlayer", (req, res) => {
       res.send(allPlayers);
     })
     .catch((error) => {
-      console.log(error);
     });
 });
 
@@ -498,7 +497,6 @@ app.get("/getLeaderboard", (req, res) => {
 app.get("/followingList",(req,res)=>{
 
   const email = req.query.email;
-  console.log(email);
   DB.getFollowingList(email).then((data)=> res.send(data));
 });
 
@@ -519,12 +517,6 @@ app.get("/checkFollow",(req,res)=>{
   const email = req.query.email;
   const memID = req.query.membershipID;
   const followID = req.query.followID;
-  console.log(followID);
-  console.log(email);
-  console.log(memID);
-  console.log(req.query);
-  console.log(req.params);
-  console.log()
   DB.checkFollower(email,memID,followID).then((data) =>{
     if(data>0)
       res.send({isFollow:true})
