@@ -5,6 +5,9 @@
  * 
 *]
  */
+function decoy(){
+  //im just a decoy for documentation
+}
 
 const Api = require("./ApiServices.js");
 const DB = require("./DBServices.js");
