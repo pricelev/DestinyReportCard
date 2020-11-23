@@ -515,9 +515,9 @@ app.get("/followingList",(req,res)=>{
  * 
  */
 app.get("/checkFollow",(req,res)=>{
-  const email = req.body.email;
-  const memID = req.body.membershipID;
-  const followID = req.body.followID;
+  const email = req.query.email;
+  const memID = req.query.membershipID;
+  const followID = req.query.followID;
   console.log(followID);
   console.log(email);
   console.log(memID);
