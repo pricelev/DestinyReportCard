@@ -381,7 +381,9 @@ async function addFollow(email,memID,followID){
   let q = `REPLACE into follower (email,membershipID,followsID) 
   VALUES ("`+email+`","`+memID+`","`+followID+`")`;
   let db = new Database();
-  return await db.query(q);
+  let res= await db.query(q);
+  db.close();
+  return res;
  
 }
 
@@ -389,8 +391,9 @@ async function removeFollow(email,memID,followID){
   let q = `Delete from follower 
   where email="`+email+`" AND membershipID="`+memID+`" AND followsID="`+followID+`"`;
   console.log(q);
-  let db = new Database();
-  return await db.query(q);
+  let res= await db.query(q);
+  db.close();
+  return res;
  
 }
 
@@ -399,6 +402,7 @@ async function checkFollower(email,memID,followID){
   console.log(q);
   let db = new Database();
   let run =await db.query(q);
+  db.close();
   console.log(run);
   return run.length;
   
