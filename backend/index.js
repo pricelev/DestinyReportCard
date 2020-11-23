@@ -175,14 +175,14 @@ app.listen(port, () => {
  * @returns {Object} JSON object filled with player stats
  * @name reportCard
  * @example get: http://www.destinyreportcard.com:3001/reportCard/?membershipId=4611686018468548442&membershipType=3
- * this is wehre the object should be{
+ * reponse object:
  * 
  * {
-    "playerInfo": {
-        "membershipID": {
-            "value": "4611686018468548442"
-        },
-        "DisplayName": {
+ *   "playerInfo": {
+ *       "membershipID": {
+ *           "value": "4611686018468548442"
+ *       },
+ *       "DisplayName": {
             "value": "terryboot"
         },
         "averageGrade": 80.76923076923077
