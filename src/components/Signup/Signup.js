@@ -9,6 +9,7 @@ import {
   Col,
 } from "react-bootstrap";
 import "./Signup.css";
+import Searchbar from './SearchbarRegister';
 import Axios from "axios";
 
 export default function Signup() {
@@ -63,15 +64,7 @@ export default function Signup() {
                 type="password"
               />
             </FormGroup>
-            <FormGroup controlId="text" bsSize="large">
-              <FormLabel>Membership ID</FormLabel>
-              <FormControl
-                autoFocus
-                type="text"
-                value={membershipIDReg}
-                onChange={(e) => setMembershipID(e.target.value)}
-              />
-            </FormGroup>
+            <Searchbar />
             <Button
               block
               bsSize="large"
