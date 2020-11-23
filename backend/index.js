@@ -100,9 +100,11 @@ app.get("/getPlayer", (req, res) => {
           steam: rows.Steam,
           membershipType: rows.MembershipType,
         };
+        
         allPlayers.push(temp);
       }
       for (rows of apiResults) {
+        let flag = false;
         let temp = {
           DisplayName: rows.displayName,
           MembershipID: rows.membershipId,
@@ -130,7 +132,13 @@ app.get("/getPlayer", (req, res) => {
               "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
             break;
         }
-        allPlayers.push(temp);
+        allPlayers.forEach(memID =>{
+          if(memID == temp.displayName){
+            flag = true;
+          }
+        })
+        if(flag)
+          allPlayers.push(temp);
       }
       res.send(allPlayers);
     })
@@ -418,7 +426,7 @@ app.post("/login", (req, res) => {
   db.query(`SELECT u.* , p.displayName, p.membershipType, c.emblemIcon
   FROM users u , player p, characters c
   WHERE email = ? AND u.membershipID=p.membershipID AND p.membershipID = c.membershipID
-  group by c.membershipID
+  group by c.membershipIDt
   `,
   email,
   (err, result) =>{
