@@ -143,6 +143,14 @@ app.get("/getPlayer", (req, res) => {
   Api method for client to request a player update
   Requires membership id param
 */
+/**
+ * Queries both bungie and destinyreportcard.com for users matching given name
+ * @param {String} displayName username to search for
+ * @returns {Object} Array of matching player information
+ * @name getPlayer
+ * @example get: http://www.destinyreportcard.com:3001/getPlayer/?displayName=terryboot
+ * @property get
+ */
 app.get("/updatePlayer", (req, res) => {
   const memID = req.query.membershipId + "";
   const memType = req.query.membershipType;
