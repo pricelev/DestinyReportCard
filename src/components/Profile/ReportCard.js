@@ -92,6 +92,7 @@ class ReportCard extends Component {
           membershipID: response.data.user[0].membershipID,
           followID: this.state.memId,
         }).then((response) => {
+          console.log(response);
           if (response.data == true) {
             this.setState({
               following: true,
