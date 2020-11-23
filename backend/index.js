@@ -254,7 +254,7 @@ app.post("/removeFollow",(req,res)=>{
 
 //api method for registering new user
 app.post("/register", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
+  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   const email = req.body.email;
   const password = req.body.password;
@@ -295,7 +295,7 @@ app.post("/register", (req, res) => {
 
 //check login status
 app.get("/login", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
+  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   if (req.session.user) {
     res.send({loggedIn: true, user: req.session.user})
@@ -307,7 +307,7 @@ app.get("/login", (req, res) => {
 
 //api method for logging in
 app.post("/login", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
+  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   const email = req.body.email;
   const password = req.body.password;
@@ -339,7 +339,7 @@ app.post("/login", (req, res) => {
 
 //api method for logging out
 app.get("/logout", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://destinyreportcard.com');
+  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
   if (req.session.user) {
     res.clearCookie('UserID');
