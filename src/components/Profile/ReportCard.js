@@ -15,6 +15,7 @@ const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
 const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
 const removeFollowAPI = "http://www.destinyreportcard.com:3001/removeFollow";
+const checkFollowAPI = "http://www.destinyreportcard.com:3001/checkFollow";
 const loginAPI = "http://www.destinyreportcard.com:3001/login";
 
 
@@ -34,18 +35,6 @@ class ReportCard extends Component {
   }
 
   componentDidMount() {
-    Axios.get(loginAPI).then((response) => {
-      if (response.data.loggedIn == true) {
-        this.setState({
-          loginStatus: true,
-        });
-      }
-      else {
-        this.setState({
-          loginStatus: false,
-        });
-      }
-    });
     fetch(
       CORS + API + this.state.memId + "&membershipType=" + this.state.memType
     )
@@ -92,7 +81,35 @@ class ReportCard extends Component {
       .catch((error) => {
         console.log(error);
       });
-    
+
+    Axios.get(loginAPI).then((response) => {
+      if (response.data.loggedIn == true) {
+        this.setState({
+          loginStatus: true,
+        });
+        Axios.get(checkFollowAPI, {
+          email: response.data.user[0].email,
+          membershipID: response.data.user[0].membershipID,
+          followID: this.state.memId,
+        }).then((response) => {
+          if (response == true) {
+            this.setState({
+              following: true,
+            });
+          }
+          else {
+            this.setState({
+            following: false,
+            });
+          }
+        });
+      }
+      else {
+        this.setState({
+          loginStatus: false,
+        });
+      }
+    });
   }
 
   follow = () => {
