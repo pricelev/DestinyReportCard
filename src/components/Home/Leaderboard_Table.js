@@ -6,7 +6,7 @@ class Leaderboard_Table extends Component {
   render() {
     let link = "../reportcard/";
     const row = (item, rank, type) => (
-      <tr>
+      <tr key={item.DisplayName + "-object"}>
         <td>{rank}</td>
         <td>
           <a
