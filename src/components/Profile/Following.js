@@ -110,7 +110,7 @@ class Following extends Component {
                   <Col lg={1}></Col>
                   <Col lg={10}>
                     {this.state.players.map((player, index) => {
-                      let emblem = player.emblem;
+                      let emblem = player.emblemIcon;
                       if (emblem == steam_white) {
                         emblem = "/steam-icon.png";
                       }
@@ -120,7 +120,7 @@ class Following extends Component {
                             link +
                             player.membershipType +
                             "/" +
-                            player.MembershipID
+                            player.membershipID
                           }
                         >
                           <Card className="result-card shadow p-3 mb-5 bg-white rounded">
