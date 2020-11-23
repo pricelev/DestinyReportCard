@@ -17,6 +17,7 @@ const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
 const removeFollowAPI = "http://www.destinyreportcard.com:3001/removeFollow";
 const loginAPI = "http://www.destinyreportcard.com:3001/login";
 
+
 class ReportCard extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +29,7 @@ class ReportCard extends Component {
       displayName: "",
       profPic: "/profile.jpg",
       following: false,
+      loginStatus: false,
     };
   }
 
@@ -213,6 +215,7 @@ class ReportCard extends Component {
                     >Following</a>
                   </Row>
                   <Row>
+                    {loginStatus == true && following == false && (
                     <Button
                       className="repFollowButton"
                       style={{marginTop: 10}}
@@ -221,6 +224,8 @@ class ReportCard extends Component {
                       >
                       Follow
                     </Button>
+                    )}
+                    {loginStatus == true && following == true &&(
                     <Button
                       className="repFollowButton"
                       style={{marginTop: 10}}
@@ -229,6 +234,7 @@ class ReportCard extends Component {
                       >
                       UnFollow
                     </Button>
+                    )}
                   </Row>
                 </Col>
               </Row>
