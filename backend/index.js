@@ -518,6 +518,10 @@ app.get("/checkFollow",(req,res)=>{
   const email = req.body.email;
   const memID = req.body.membershipID;
   const followID = req.body.followID;
+  console.log(followID);
+  console.log(email);
+  console.log(memID);
+  console.log(req.body);
   DB.checkFollower(email,memID,followID).then((data) =>{
     if(data>0)
       res.send({isFollow:true})
