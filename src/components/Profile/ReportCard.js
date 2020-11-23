@@ -153,7 +153,7 @@ class ReportCard extends Component {
                       href={
                         "./" +
                         this.state.memId + "/" +
-                        "followers"
+                        "following"
                       }
                       className="followLink"
                     >Following</a>
