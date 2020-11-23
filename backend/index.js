@@ -1,3 +1,11 @@
+/**
+ * Queries both bungie and destinyreportcard.com for users matching given name
+ * @param endpoint: www.destinyreportcard.com:3001/
+ * @name DestinyReportCardApi
+ * 
+*]
+ */
+
 const Api = require("./ApiServices.js");
 const DB = require("./DBServices.js");
 const mysql = require("mysql");
@@ -59,13 +67,7 @@ app.use(
 
 const port = 3001;
 
-/**
- * Queries both bungie and destinyreportcard.com for users matching given name
- * @property endpoint: www.destinyreportcard.com:3001/
- * @name DestinyReportCardApi
- * 
-*]
- */
+
 
 
 //api interface for get player, when request comes in we need to:
