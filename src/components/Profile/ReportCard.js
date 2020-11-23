@@ -90,7 +90,7 @@ class ReportCard extends Component {
         });
         Axios.post(followAPI, {
           email: response.data.user[0].email,
-          membershipId: response.data.user[0].membershipID,
+          membershipID: response.data.user[0].membershipID,
           followID: this.state.memId,
         }).then((response) => {
           this.setState({
@@ -114,7 +114,7 @@ class ReportCard extends Component {
         });
         Axios.post(removeFollowAPI, {
           email: response.data.user[0].email,
-          membershipId: response.data.user[0].membershipID,
+          membershipID: response.data.user[0].membershipID,
           followID: this.state.memId,
         }).then((response) => {
           this.setState({
