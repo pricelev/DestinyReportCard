@@ -12,6 +12,8 @@ import CharacterPanel from "./CharacterPanel";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
+const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
+const removeFollowAPI = "http://www.destinyreportcard.com:3001/removeFollow";
 
 class ReportCard extends Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class ReportCard extends Component {
       profileData: {},
       displayName: "",
       profPic: "/profile.jpg",
+      following: false,
     };
   }
 
@@ -75,6 +78,55 @@ class ReportCard extends Component {
       });
     
   }
+
+  follow = () => {
+    Axios.get(loginAPI).then((response) => {
+      console.log(response);
+      if (response.data.loggedIn == true) {
+        this.setState({
+          loginStatus: true,
+        });
+        Axios.post(followAPI, {
+          email: response.data.user[0].email,
+          membershipId: response.data.user[0].membershipID,
+          followID: this.state.memId,
+        }).then((response) => {
+          this.setState({
+            following: true,
+          })
+        });
+      } else {
+        this.setState({
+          loginStatus: false
+        });
+      }
+    });
+  };
+
+  unfollow = () => {
+    Axios.get(loginAPI).then((response) => {
+      console.log(response);
+      if (response.data.loggedIn == true) {
+        this.setState({
+          loginStatus: true,
+        });
+        Axios.post(removeFollowAPI, {
+          email: response.data.user[0].email,
+          membershipId: response.data.user[0].membershipID,
+          followID: this.state.memId,
+        }).then((response) => {
+          this.setState({
+            following: false,
+          })
+        });
+      } else {
+        this.setState({
+          loginStatus: false
+        });
+      }
+    });
+  };
+
   render() {
     if (this.state.isLoaded) {
       let aggregate = this.state.profileData.stats.playtime.grade;
@@ -166,6 +218,14 @@ class ReportCard extends Component {
                       onClick={this.follow}
                       >
                       Follow
+                    </Button>
+                    <Button
+                      className="repFollowButton"
+                      style={{marginTop: 10}}
+                      type="submit"
+                      onClick={this.unfollow}
+                      >
+                      UnFollow
                     </Button>
                   </Row>
                 </Col>
