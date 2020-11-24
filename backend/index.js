@@ -483,7 +483,7 @@ app.get("/getLeaderboard", (req, res) => {
 */
 /**
  *  Retrieves a list of players that a user follows
- * @param {query param} email unique member ID number used by destinyreportcard and bungie
+ * @param {query param} membershipID unique member ID number used by destinyreportcard and bungie
  * @returns {Object} List of objects
  * @name followingList
  * @example get: http://www.destinyreportcard.com:3001/followingList
@@ -538,7 +538,7 @@ app.get("/followingList",(req,res)=>{
 */
 /**
  *  Retrieves a list of players that follows a player
- * @param {query param} membershipID unique members ID to distinct players
+ * @param {query param} membershipID unique member ID number used by destinyreportcard and bungie
  * @returns {Object} List of objects
  * @name followerList
  * @example get: http://www.destinyreportcard.com:3001/followingList/?membershipID=4611686018468548442

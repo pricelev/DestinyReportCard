@@ -33,7 +33,7 @@ class Following extends Component {
         });
         Axios.get(API, {
           params: {
-            email: response.data.user[0].email,
+            membershipID: response.data.user[0].membershipID,
           },
         }).then((response) => {
           console.log(response.data);
