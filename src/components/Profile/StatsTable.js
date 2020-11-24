@@ -92,9 +92,9 @@ class StatsTable extends Component {
       data: this.props.data,
     };
     // REMOVE THIS NOW!!!
-    this.state = {
-      data: stats,
-    };
+    // this.state = {
+    //   data: stats,
+    // };
   }
 
   render() {
@@ -107,10 +107,23 @@ class StatsTable extends Component {
       </tr>
     );
 
-    let stats = this.state.data;
-    let table = Object.keys(stats).map((key, index) => {
-      console.log(key.value);
-      return row(table_headers[index], key.value, key.avg, key.stdDev);
+    let stats = Object.entries(this.state.data);
+    let table = stats.map((key, index) => {
+      console.log(key[1].value);
+      if (key[0] === "playtime") {
+        return row(
+          table_headers[index],
+          (key[1].value / 3600).toFixed(2),
+          (key[1].avg / 3600).toFixed(2),
+          (key[1].stdDev / 3600).toFixed(2)
+        );
+      }
+      return row(
+        table_headers[index],
+        key[1].value.toFixed(2),
+        key[1].avg.toFixed(2),
+        key[1].stdDev.toFixed(2)
+      );
     });
 
     return (

@@ -10,6 +10,7 @@ import Axios from "axios";
 import ReportSummary from "./ReportSummary";
 import ProfileChart from "./ProfileChart";
 import CharacterPanel from "./CharacterPanel";
+import StatsTable from "./StatsTable";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
 const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
@@ -222,6 +223,19 @@ class ReportCard extends Component {
 
       let character_data = this.state.profileData.characters.characterInfo;
       let profilepic = this.state.profPic;
+
+      let component;
+      if (this.state.myProfile) {
+        component = (
+          <ProfileChart
+            data={chart_data}
+            username={this.state.profileData.playerInfo.DisplayName.value}
+          />
+        );
+      } else {
+        component = <StatsTable data={this.state.profileData.stats} />;
+      }
+
       return (
         <div className="profile-container">
           <div className="profile-top">
@@ -274,10 +288,7 @@ class ReportCard extends Component {
             <div className="profile-main">
               <CharacterPanel data={character_data} />
               <ReportSummary grades={summary} />
-              <ProfileChart
-                data={chart_data}
-                username={this.state.profileData.playerInfo.DisplayName.value}
-              />
+              {component}
             </div>
           </Container>
         </div>
