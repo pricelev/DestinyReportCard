@@ -46,8 +46,21 @@ const sessionStore = new MySQLStore({
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
+var allowedOrigins = ['http://www.destinyreportcard.com:3000',
+                      'http://www.destinyreportcard.com:3001',
+                      'http://www.destinyreportcard.com'];
 app.use(cors({
-  origin: ["http://www.destinyreportcard.com"],
+  origin: function(origin, callback){
+    // allow requests with no origin 
+    // (like mobile apps or curl requests)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not ' +
+                'allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
   methods: ["GET", "POST"],
   credentials: true,
 }));
