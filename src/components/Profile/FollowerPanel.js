@@ -104,7 +104,7 @@ class FollowerPanel extends React.Component {
         <div className="m-3">This user is not following anyone.</div>
       );
     } else {
-      followingData = this.generateModalContent(this.state.followerList);
+      followingData = this.generateModalContent(this.state.followingList);
     }
 
     return (
