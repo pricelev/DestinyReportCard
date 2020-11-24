@@ -28,7 +28,9 @@ class Profile extends Component {
               </Col>
               <Col lg={6}>
                 <h1 className="top-username">Username</h1>
-                <FollowerPanel />
+                <div>
+                  <FollowerPanel />
+                </div>
               </Col>
             </Row>
           </Container>

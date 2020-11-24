@@ -254,6 +254,8 @@ class ReportCard extends Component {
                     <h1 className="top-username">
                       {this.state.profileData.playerInfo.DisplayName.value}
                     </h1>
+                  </Row>
+                  <Row>
                     <FollowerPanel />
                   </Row>
                   <Row>
