@@ -62,14 +62,14 @@ class FollowerPanel extends React.Component {
             className="link-btn"
             onClick={() => this.handleFollowerModal()}
           >
-            <b>(num)</b> Followers
+            <b>{this.state.followerList.length}</b> Followers
           </button>
           &nbsp;&nbsp;&nbsp;
           <button
             className="link-btn"
             onClick={() => this.handleFollowingModal()}
           >
-            <b>(num)</b> Following
+            <b>{this.state.followingList.length}</b> Following
           </button>
         </span>
 
