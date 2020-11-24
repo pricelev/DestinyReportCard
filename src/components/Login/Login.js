@@ -30,9 +30,7 @@ export default function Login() {
       } else {
         setloginStatus(response.data[0].email);
         history.push("/");
-        console.log(response.data);
       }
-      console.log(response.data);
     });
   };
 
@@ -40,7 +38,6 @@ export default function Login() {
     Axios.get(loginAPI).then((response) => {
       if (response.data.loggedIn === true) {
         setloginStatus(response.data.user[0].email);
-        console.log(response.data);
       }
     });
   }, []);

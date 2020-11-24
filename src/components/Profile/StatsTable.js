@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Row, Col, Table } from "react-bootstrap";
 import "./StatsTable.css";
 
+// for local testing only
 const stats = {
   playtime: {
     value: 10091655,
@@ -92,6 +93,7 @@ class StatsTable extends Component {
       data: this.props.data,
     };
     // COMMENT THIS BEFORE PUSHING
+    // UNCOMMENT IF YOU GET ERRORS RUNNING LOCALLY
     // this.state = {
     //   data: stats,
     // };

@@ -146,7 +146,7 @@ async function updatePlayer(memID, memType) {
   let triumph = 0;
   let combatRating = 0;
 
-  let Apipromise =Api.findProfile(memID, memType);
+  let Apipromise = Api.findProfile(memID, memType);
   let Apipromise2 = Api.getPlayerStats(memID, memType);
   let Apipromise3 = Api.getRecords(memID, memType);
 
@@ -172,7 +172,7 @@ async function updatePlayer(memID, memType) {
     }
   });
 
-   Apipromise2.then((response) => {
+  Apipromise2.then((response) => {
     const pve =
       response.data.Response.mergedAllCharacters.results.allPvE.allTime;
     const pvp =
@@ -185,7 +185,7 @@ async function updatePlayer(memID, memType) {
     combatRating = pvp.combatRating.basic.value;
   });
 
-   Apipromise3.then((response) => {
+  Apipromise3.then((response) => {
     triumph = response.data.Response.profileRecords.data.lifetimeScore;
   });
 
@@ -221,22 +221,15 @@ async function updatePlayer(memID, memType) {
       "," +
       triumph +
       ")";
-
-
-
   });
-  await db.query(q).then((data)=>{
-    
+  await db.query(q).then((data) => {
     db.close();
     return 200;
-  }
-  );
-
+  });
 }
 
-async function getReportCard(memID,memType) {
- await updatePlayer(memID,memType);
-
+async function getReportCard(memID, memType) {
+  await updatePlayer(memID, memType);
 
   let db = new Database();
   //gets a players stats from player table and character table
@@ -269,8 +262,6 @@ async function getReportCard(memID,memType) {
     const communityInfo = data[1][0];
     const characters = data[2];
     let grades = [];
-    console.log(playerInfo);
-    console.log(data[2].length);
     for (var col in playerInfo) {
       const value = playerInfo[col];
       const avg = communityInfo[col + "Avg"];
@@ -290,11 +281,9 @@ async function getReportCard(memID,memType) {
       characterInfo.push(char);
     });
     ret["characters"] = { characterInfo };
-    
   });
   db.close();
   return ret;
-
 }
 function getGrade(value, avg, stdDev) {
   const step = 0.5 * stdDev;
@@ -328,26 +317,43 @@ async function getMemberStats(memID) {
 async function getLeaderboard(type) {
   let db = new Database();
   let q;
-  
-  if(type == "PvEKD" || type == "PvPKD" || type == 'PvPWL' || type == "TriumphScore"){
-    q = "select MembershipID, MembershipType, DisplayName,"+type +" from player order by  "+type+" DESC Limit 15";
-    
-   
-  }
-  else if(type== "Time" ){
-    q = "select MembershipID, MembershipType, DisplayName, PVPTime+PVETime as Time from player order by  Time DESC Limit 15";
-    
-  }
-  else if(type == "RaidClears" || type == "PublicEvents" || type =="StrikeCompletions" || type == "Nightfalls"){
-    q = `select player.MembershipID,MembershipType,DisplayName, typeQ.`+type+` from player,
-    (select MembershipID, sum(`+type+`) as `+type+` from characters group by MembershipID) as typeQ
+
+  if (
+    type == "PvEKD" ||
+    type == "PvPKD" ||
+    type == "PvPWL" ||
+    type == "TriumphScore"
+  ) {
+    q =
+      "select MembershipID, MembershipType, DisplayName," +
+      type +
+      " from player order by  " +
+      type +
+      " DESC Limit 15";
+  } else if (type == "Time") {
+    q =
+      "select MembershipID, MembershipType, DisplayName, PVPTime+PVETime as Time from player order by  Time DESC Limit 15";
+  } else if (
+    type == "RaidClears" ||
+    type == "PublicEvents" ||
+    type == "StrikeCompletions" ||
+    type == "Nightfalls"
+  ) {
+    q =
+      `select player.MembershipID,MembershipType,DisplayName, typeQ.` +
+      type +
+      ` from player,
+    (select MembershipID, sum(` +
+      type +
+      `) as ` +
+      type +
+      ` from characters group by MembershipID) as typeQ
     where typeQ.MembershipID=player.MemberShipID
     order by ` +
       type +
       ` DESC
     Limit 15`;
-  }
-  else if(type == "Trials"){
+  } else if (type == "Trials") {
     q = `select player.MembershipID,MembershipType,DisplayName, typeQ.Trials from player,
     (select MembershipID, sum(trialsWins)/sum(trialsMatches) as Trials from characters group by MembershipID) as typeQ
     where typeQ.MembershipID=player.MemberShipID
@@ -362,61 +368,83 @@ async function getLeaderboard(type) {
   return leaderboard;
 }
 
-
 // get the users list of people they follow
-async function getFollowingList(memID){
+async function getFollowingList(memID) {
   let db = new Database();
-  let q =    `   Select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
+  let q =
+    `   Select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
   sum(publicevents) as publicevents, p.pvpkd, p.pvpWL, p.CombatRatingPvP,sum(c.trialswins)/sum(c.trialsmatches) as trialsRecord, p.triumphscore ,c.emblemIcon, p.membershipType
   from characters c , player p, follower f
- where c.membershipID = p.MembershipID AND c.membershipID=f.followsID and f.membershipID="`+memID+`"
+ where c.membershipID = p.MembershipID AND c.membershipID=f.followsID and f.membershipID="` +
+    memID +
+    `"
  group by p.membershipID`;
   let list = await db.query(q);
   db.close();
   return list;
-};
+}
 
-async function getFollowerList(memID){
+async function getFollowerList(memID) {
   let db = new Database();
-  let q =    `select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
+  let q =
+    `select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
   sum(publicevents) as publicevents, p.pvpkd, p.pvpWL, p.CombatRatingPvP,sum(c.trialswins)/sum(c.trialsmatches) as trialsRecord, p.triumphscore ,c.emblemIcon, p.membershipType
   from characters c , player p, follower f
- where c.membershipID = p.MembershipID AND c.membershipID=f.membershipID and f.followsID=`+memID+`
+ where c.membershipID = p.MembershipID AND c.membershipID=f.membershipID and f.followsID=` +
+    memID +
+    `
  group by p.membershipID`;
-  let list = await db.query(q)
+  let list = await db.query(q);
   db.close();
   return list;
-};
+}
 
-
-
-
-async function addFollow(email,memID,followID){
-  let q = `REPLACE into follower (email,membershipID,followsID) 
-  VALUES ("`+email+`","`+memID+`","`+followID+`")`;
+async function addFollow(email, memID, followID) {
+  let q =
+    `REPLACE into follower (email,membershipID,followsID) 
+  VALUES ("` +
+    email +
+    `","` +
+    memID +
+    `","` +
+    followID +
+    `")`;
   let db = new Database();
-  let res= await db.query(q);
+  let res = await db.query(q);
   db.close();
   return res;
-};
+}
 
-async function removeFollow(email,memID,followID){
-  let q = `Delete from follower 
-  where email="`+email+`" AND membershipID="`+memID+`" AND followsID="`+followID+`"`;
+async function removeFollow(email, memID, followID) {
+  let q =
+    `Delete from follower 
+  where email="` +
+    email +
+    `" AND membershipID="` +
+    memID +
+    `" AND followsID="` +
+    followID +
+    `"`;
   let db = new Database();
-  let res= await db.query(q);
+  let res = await db.query(q);
   db.close();
   return res;
-};
+}
 
-async function checkFollower(email,memID,followID){
-  let q = `select * from follower where email ="`+email+`" and followsID=`+followID+` and membershipID = `+memID+``;
+async function checkFollower(email, memID, followID) {
+  let q =
+    `select * from follower where email ="` +
+    email +
+    `" and followsID=` +
+    followID +
+    ` and membershipID = ` +
+    memID +
+    ``;
   let db = new Database();
-  let run =await db.query(q);
+  let run = await db.query(q);
   db.close();
-  console.log(run);
   return run.length;
-};
+}
 
 module.exports = {
   searchPlayer,
@@ -428,5 +456,5 @@ module.exports = {
   addFollow,
   removeFollow,
   checkFollower,
-  getFollowerList
+  getFollowerList,
 };

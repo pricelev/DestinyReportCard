@@ -3,7 +3,7 @@
  * endpoint: www.destinyreportcard.com:3001/
  * @name DestinyReportCardApi
  */
-function decoy(){
+function decoy() {
   //im just a decoy for documentation
 }
 
@@ -12,7 +12,7 @@ const DB = require("./DBServices.js");
 const mysql = require("mysql");
 const conf = require("./config.json");
 
-const cors = require("cors")
+const cors = require("cors");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -31,42 +31,50 @@ const db = mysql.createConnection({
   database: conf.database,
 });
 
-const sessionStore = new MySQLStore({
-  createDatabaseTable: true,
-  schema: {
-    tableName: 'User_Sessions',
-    columnNames: {
-      session_id: 'session_id',
-      expires: 'expires',
-      data: 'data'
-    }
-  }
-}, db);
+const sessionStore = new MySQLStore(
+  {
+    createDatabaseTable: true,
+    schema: {
+      tableName: "User_Sessions",
+      columnNames: {
+        session_id: "session_id",
+        expires: "expires",
+        data: "data",
+      },
+    },
+  },
+  db
+);
 
 app.use(express.json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: true}));
-var allowedOrigins = ['http://www.destinyreportcard.com:3000',
-                      'http://www.destinyreportcard.com:3001',
-                      'http://www.destinyreportcard.com',
-                      'http://destinyreportcard.com:3000',
-                      'http://destinyreportcard.com:3001',
-                      'http://destinyreportcard.com'];
-app.use(cors({
-  origin: function(origin, callback){
-    // allow requests with no origin 
-    // (like mobile apps or curl requests)
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){
-      var msg = 'The CORS policy for this site does not ' +
-                'allow access from the specified Origin.';
-      return callback(new Error(msg), false);
-    }
-    return callback(null, true);
-  },
-  methods: ["GET", "POST"],
-  credentials: true,
-}));
+app.use(bodyParser.urlencoded({ extended: true }));
+var allowedOrigins = [
+  "http://www.destinyreportcard.com:3000",
+  "http://www.destinyreportcard.com:3001",
+  "http://www.destinyreportcard.com",
+  "http://destinyreportcard.com:3000",
+  "http://destinyreportcard.com:3001",
+  "http://destinyreportcard.com",
+];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin
+      // (like mobile apps or curl requests)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    methods: ["GET", "POST"],
+    credentials: true,
+  })
+);
 
 app.use(
   session({
@@ -84,15 +92,11 @@ app.use(
 
 const port = 3001;
 
-
-
-
 //api interface for get player, when request comes in we need to:
 //1: query database for any existing players by that name
 //2: query bungie for non-existing players by that name
 //3: merge results
 //4: return results
-
 
 /**
  * Queries both bungie and destinyreportcard.com for users matching given name
@@ -111,7 +115,7 @@ const port = 3001;
  *       "steam": 1,
  *       "membershipType": 3
  *   }
-*]
+ *]
  */
 app.get("/getPlayer", (req, res) => {
   const name = req.query.displayName;
@@ -138,7 +142,7 @@ app.get("/getPlayer", (req, res) => {
           steam: rows.Steam,
           membershipType: rows.MembershipType,
         };
-        
+
         allPlayers.push(temp);
       }
       for (rows of apiResults) {
@@ -170,24 +174,19 @@ app.get("/getPlayer", (req, res) => {
               "https://www.bungie.net/img/theme/bungienet/icons/steamLogo.png";
             break;
         }
-        if(allPlayers.length ==0){
+        if (allPlayers.length == 0) {
           allPlayers.push(temp);
         }
-        allPlayers.forEach(mem =>{
-         
-          if(mem.MembershipID != temp.MembershipID){
-           
+        allPlayers.forEach((mem) => {
+          if (mem.MembershipID != temp.MembershipID) {
             flag = true;
           }
         });
-        if(flag==true)
-          allPlayers.push(temp);
-        
+        if (flag == true) allPlayers.push(temp);
       }
       res.send(allPlayers);
     })
-    .catch((error) => {
-    });
+    .catch((error) => {});
 });
 
 /*
@@ -201,7 +200,7 @@ app.get("/getPlayer", (req, res) => {
  * @returns {status} 200 on success
  * @name updatePlayer
  * @example get: http://www.destinyreportcard.com:3001/updatePlayer/?membershipId=4611686018468548442&membershipType=3
- * 
+ *
  */
 app.get("/updatePlayer", (req, res) => {
   const memID = req.query.membershipId + "";
@@ -227,7 +226,7 @@ app.listen(port, () => {
  * @name reportCard
  * @example get: http://www.destinyreportcard.com:3001/reportCard/?membershipId=4611686018468548442&membershipType=3
  * reponse object:
- * 
+ *
  * {
  *   "playerInfo": {
  *       "membershipID": {
@@ -332,10 +331,10 @@ app.listen(port, () => {
  *       }
  *   }
  *}
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 app.get("/reportCard", (req, res) => {
   const memID = req.query.membershipId;
@@ -344,13 +343,8 @@ app.get("/reportCard", (req, res) => {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
 
-    
-    DB.getReportCard(memID,memType).then((data) => res.send(data))
-
-
- 
+  DB.getReportCard(memID, memType).then((data) => res.send(data));
 });
-
 
 /**
  *  retrieves the leaderboard of a mode type from destinyreportcard based off of players in the db
@@ -450,8 +444,8 @@ app.get("/reportCard", (req, res) => {
  *       "DisplayName": "ST",
  *       "RaidClears": 0
  *   }
-*]
- * 
+ *]
+ *
  */
 app.get("/getLeaderboard", (req, res) => {
   const type = req.query.type;
@@ -475,7 +469,6 @@ app.get("/getLeaderboard", (req, res) => {
     throw new Error("Invalid paramater");
   }
 });
-
 
 /*
   Api method for client to request a player update
@@ -523,14 +516,12 @@ app.get("/getLeaderboard", (req, res) => {
  *       "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/ef696558825f40dc18234fd0851e9ae9.jpg",
  *       "membershipType": 3
  *   }
-*]
+ *]
  */
-app.get("/followingList",(req,res)=>{
-
+app.get("/followingList", (req, res) => {
   const memID = req.query.membershipID;
-  DB.getFollowingList(memID).then((data)=> res.send(data));
+  DB.getFollowingList(memID).then((data) => res.send(data));
 });
-
 
 /*
   Api method for client to request a player update
@@ -578,15 +569,12 @@ app.get("/followingList",(req,res)=>{
  *       "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/ef696558825f40dc18234fd0851e9ae9.jpg",
  *       "membershipType": 3
  *   }
-*]
+ *]
  */
-app.get("/followerList",(req,res)=>{
+app.get("/followerList", (req, res) => {
   const memID = req.query.membershipID;
-  DB.getFollowerList(memID).then((data)=> res.send(data));
+  DB.getFollowerList(memID).then((data) => res.send(data));
 });
-
-
-
 
 /**
  *  Lookup to see if the current user is following a player
@@ -596,42 +584,40 @@ app.get("/followerList",(req,res)=>{
  * @returns {boolean} true if player follows them, false otherwise
  * @name checkFollow
  * @example get: http://www.destinyreportcard.com:3001/checkFollow
- * 
+ *
  */
-app.get("/checkFollow",(req,res)=>{
+app.get("/checkFollow", (req, res) => {
   const email = req.query.email;
   const memID = req.query.membershipID;
   const followID = req.query.followID;
-  DB.checkFollower(email,memID,followID).then((data) =>{
-    if(data>0)
-      res.send({isFollow:true})
-    else{
-      res.send({isFollow:false});
+  DB.checkFollower(email, memID, followID).then((data) => {
+    if (data > 0) res.send({ isFollow: true });
+    else {
+      res.send({ isFollow: false });
     }
-  })
+  });
 });
 
 /**
- *  Follower a player 
+ *  Follower a player
  * @param {body param} email Email of the logged in user
  * @param {body param} membershipID ID linked to the loggin in user
  * @param {body param} followID ID linked to the loggin in user
  * @returns {status} 200 on success
  * @name addFollow
  * @example post: http://www.destinyreportcard.com:3001/addFollow
- * 
+ *
  */
-app.post("/addFollow",(req,res)=>{
-
+app.post("/addFollow", (req, res) => {
   const email = req.body.email;
   const memID = req.body.membershipID;
   const followID = req.body.followID;
-   if (!memID || !email || !followID) {
+  if (!memID || !email || !followID) {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
-  DB.addFollow(email,memID,followID).then((data)=>{
+  DB.addFollow(email, memID, followID).then((data) => {
     res.sendStatus(200);
-  })
+  });
 });
 
 /**
@@ -642,9 +628,9 @@ app.post("/addFollow",(req,res)=>{
  * @returns {status} 200 on success
  * @name removeFollow
  * @example post: http://www.destinyreportcard.com:3001/removeFollow
- * 
+ *
  */
-app.post("/removeFollow",(req,res)=>{
+app.post("/removeFollow", (req, res) => {
   const email = req.body.email;
   const memID = req.body.membershipID;
   const followID = req.body.followID;
@@ -652,10 +638,9 @@ app.post("/removeFollow",(req,res)=>{
   if (!memID || !email || !followID) {
     throw new Error("REQUIRED PARAMETER MISSING");
   }
-  DB.removeFollow(email,memID,followID).then((data)=>{
-
-  res.send(200);
-  })
+  DB.removeFollow(email, memID, followID).then((data) => {
+    res.send(200);
+  });
 });
 
 /**
@@ -666,11 +651,14 @@ app.post("/removeFollow",(req,res)=>{
  * @returns {object} message whether registration was successful or not
  * @name register
  * @example post: http://www.destinyreportcard.com:3001/register
- * 
+ *
  */
 app.post("/register", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "http://www.destinyreportcard.com"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   const email = req.body.email;
   const password = req.body.password;
   const membershipID = req.body.membershipID;
@@ -679,33 +667,33 @@ app.post("/register", (req, res) => {
     if (err) {
       console.log(err);
     }
-    db.query("INSERT INTO users (email, password, membershipID) VALUES (?, ?, ?)",
-    [email, hash, membershipID],
-    (err, result) =>{
-      console.log(err);
-    });
+    db.query(
+      "INSERT INTO users (email, password, membershipID) VALUES (?, ?, ?)",
+      [email, hash, membershipID],
+      (err, result) => {
+        console.log(err);
+      }
+    );
   });
-  db.query("SELECT * FROM users WHERE email = ?",
-  email,
-  (err, result) =>{
+  db.query("SELECT * FROM users WHERE email = ?", email, (err, result) => {
     if (err) {
-      res.send({err: err});
+      res.send({ err: err });
     }
-    if (result.length > 0){
+    if (result.length > 0) {
       bcrypt.compare(password, result[0].password, (err, response) => {
-        if (response){
-          res.send({message: "Registration successful! You may now login."});
-        }
-        else {
-          res.send({message: "Email already registered. Please choose a different email"})
+        if (response) {
+          res.send({ message: "Registration successful! You may now login." });
+        } else {
+          res.send({
+            message:
+              "Email already registered. Please choose a different email",
+          });
         }
       });
-    }
-    else {
-      res.send({message: "Registration failed. Please try again."})
+    } else {
+      res.send({ message: "Registration failed. Please try again." });
     }
   });
-
 });
 
 /**
@@ -713,16 +701,24 @@ app.post("/register", (req, res) => {
  * @returns {object} status of whether a user is logged in and that user's information
  * @name login
  * @example get: http://www.destinyreportcard.com:3001/login
- * 
+ *
  */
 app.get("/login", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "http://www.destinyreportcard.com"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   if (req.session.user) {
-    res.send({loggedIn: true, user: req.session.user, membershipId: req.session.membershipId, membershipType: req.session.membershipType, emblemIcon: req.session.emblemIcon});
-  }
-  else {
-    res.send({loggedIn: false });
+    res.send({
+      loggedIn: true,
+      user: req.session.user,
+      membershipId: req.session.membershipId,
+      membershipType: req.session.membershipType,
+      emblemIcon: req.session.emblemIcon,
+    });
+  } else {
+    res.send({ loggedIn: false });
   }
 });
 
@@ -733,41 +729,43 @@ app.get("/login", (req, res) => {
  * @returns {object} message whether login was successful or not and user data if login is successful
  * @name login
  * @example post: http://www.destinyreportcard.com:3001/login
- * 
+ *
  */
 app.post("/login", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "http://www.destinyreportcard.com"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   const email = req.body.email;
   const password = req.body.password;
-  
-  db.query(`SELECT u.* , p.displayName, p.membershipType, c.emblemIcon
+
+  db.query(
+    `SELECT u.* , p.displayName, p.membershipType, c.emblemIcon
   FROM users u , player p, characters c
   WHERE email = ? AND u.membershipID=p.membershipID AND p.membershipID = c.membershipID
   group by c.membershipID
   `,
-  email,
-  (err, result) =>{
-    if (err) {
-      res.send({err: err});
-    }
+    email,
+    (err, result) => {
+      if (err) {
+        res.send({ err: err });
+      }
 
-    if (result.length > 0){
-      bcrypt.compare(password, result[0].password, (err, response) => {
-        if (response){
-          req.session.user = result;
-          console.log(req.session.user);
-          res.send(result);
-        }
-        else {
-          res.send({message: "Wrong username/password combination."});
-        }
-      });
+      if (result.length > 0) {
+        bcrypt.compare(password, result[0].password, (err, response) => {
+          if (response) {
+            req.session.user = result;
+            res.send(result);
+          } else {
+            res.send({ message: "Wrong username/password combination." });
+          }
+        });
+      } else {
+        res.send({ message: "User does not exist." });
+      }
     }
-    else {
-      res.send({message: "User does not exist."});
-    }
-  });
+  );
 });
 
 /**
@@ -775,14 +773,17 @@ app.post("/login", (req, res) => {
  * @returns {object} object containing login status set to false
  * @name logout
  * @example get: http://www.destinyreportcard.com:3001/logout
- * 
+ *
  */
 app.get("/logout", (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
-  res.setHeader('Access-Control-Allow-Credentials', 'true');
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "http://www.destinyreportcard.com"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   if (req.session.user) {
-    res.clearCookie('UserID');
+    res.clearCookie("UserID");
     req.session.destroy();
-    res.send({loggedIn: false});
+    res.send({ loggedIn: false });
   }
 });

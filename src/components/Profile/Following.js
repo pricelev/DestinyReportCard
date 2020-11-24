@@ -36,7 +36,6 @@ class Following extends Component {
             membershipID: response.data.user[0].membershipID,
           },
         }).then((response) => {
-          console.log(response.data);
           this.setState({
             players: response.data,
             isLoaded: true,

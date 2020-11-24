@@ -75,7 +75,6 @@ class ReportCard extends Component {
             displayName: data.playerInfo.DisplayName.value,
           });
         }
-        console.log(data);
       })
       .catch((error) => {
         console.log(error);
@@ -86,11 +85,8 @@ class ReportCard extends Component {
         this.setState({
           loginStatus: true,
         });
-        console.log(response.data.user[0].email);
         let email = response.data.user[0].email;
-        console.log(response.data.user[0].membershipID);
         let membershipID = response.data.user[0].membershipID;
-        console.log(this.state.memId);
         let followID = this.state.memId;
         if (followID === membershipID) {
           this.setState({
@@ -101,7 +97,6 @@ class ReportCard extends Component {
             myProfile: false,
           });
         }
-        console.log(this.state.myProfile);
         Axios.get(checkFollowAPI, {
           params: {
             email: email,
@@ -109,8 +104,6 @@ class ReportCard extends Component {
             followID: followID,
           },
         }).then((response) => {
-          console.log(response);
-          console.log(response.data.isFollow);
           if (response.data.isFollow === true) {
             this.setState({
               following: true,
@@ -131,7 +124,6 @@ class ReportCard extends Component {
 
   follow = () => {
     Axios.get(loginAPI).then((response) => {
-      console.log(response);
       if (response.data.loggedIn === true) {
         Axios.post(followAPI, {
           email: response.data.user[0].email,
@@ -152,7 +144,6 @@ class ReportCard extends Component {
 
   unfollow = () => {
     Axios.get(loginAPI).then((response) => {
-      console.log(response);
       if (response.data.loggedIn === true) {
         Axios.post(removeFollowAPI, {
           email: response.data.user[0].email,
@@ -256,7 +247,7 @@ class ReportCard extends Component {
                     </h1>
                   </Row>
                   <Row>
-                    <FollowerPanel memID={this.state.memId}/>
+                    <FollowerPanel memID={this.state.memId} />
                   </Row>
                   <Row>
                     {this.state.loginStatus === true &&

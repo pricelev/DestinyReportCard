@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Modal, ListGroup } from "react-bootstrap";
+import { Modal, ListGroup, Row, Col } from "react-bootstrap";
 import "./FollowerPanel.css";
 import Axios from "axios";
 
@@ -17,6 +17,19 @@ class FollowerPanel extends React.Component {
       followerList: [],
       followingList: [],
     };
+    // FOR LOCAL TESTING
+    // this.state = {
+    //   followerList: [
+    //     { DisplayName: "testchar", emblemIcon: "./steam-icon.png" },
+    //     { DisplayName: "testchar", emblemIcon: "./xbox-icon.png" },
+    //     { DisplayName: "testchar", emblemIcon: "./ps-icon.png" },
+    //     { DisplayName: "testchar", emblemIcon: "./steam-icon.png" },
+    //   ],
+    //   followingList: [
+    //     { DisplayName: "testchar", emblemIcon: "./steam-icon.png" },
+    //     { DisplayName: "testchar", emblemIcon: "./steam-icon.png" },
+    //   ],
+    // };
   }
 
   componentDidMount() {
@@ -25,9 +38,7 @@ class FollowerPanel extends React.Component {
         membershipID: this.state.memID,
       },
     }).then((response) => {
-      console.log(response.data);
       this.setState({
-        followingList: response.data,
         isLoaded: true,
       });
     });
@@ -36,14 +47,11 @@ class FollowerPanel extends React.Component {
         membershipID: this.state.memID,
       },
     }).then((response) => {
-      console.log(response.data);
       this.setState({
         followerList: response.data,
         isLoaded: true,
       });
     });
-    console.log(this.state.followerList);
-    console.log(this.state.followingList);
   }
 
   handleFollowerModal() {
@@ -54,7 +62,50 @@ class FollowerPanel extends React.Component {
     this.setState({ followingModal: !this.state.followingModal });
   }
 
+  generateModalContent(arr) {
+    return arr.map((follower, index) => {
+      let displayName = follower.DisplayName;
+      let emblem = follower.emblemIcon;
+      return (
+        <a
+          href={
+            "http://www.destinyreportcard.com/reportcard/" +
+            follower.membershipType +
+            "/" +
+            follower.membershipID
+          }
+        >
+          <ListGroup.Item className="pl-4">
+            <Row>
+              <Col lg={1} className="p-1">
+                <img src={emblem} width="40" alt="Player Emblem" />
+              </Col>
+              <Col className="mt-2 follower-modal-text">{displayName}</Col>
+            </Row>
+          </ListGroup.Item>
+        </a>
+      );
+    });
+  }
+
   render() {
+    let followerData;
+    let followingData;
+
+    if (this.state.followerList.length === 0) {
+      followerData = <div className="m-3">This user has no followers.</div>;
+    } else {
+      followerData = this.generateModalContent(this.state.followerList);
+    }
+
+    if (this.state.followingList.length === 0) {
+      followingData = (
+        <div className="m-3">This user is not following anyone.</div>
+      );
+    } else {
+      followingData = this.generateModalContent(this.state.followerList);
+    }
+
     return (
       <div className="follower-panel-container">
         <span>
@@ -81,29 +132,8 @@ class FollowerPanel extends React.Component {
           <Modal.Header closeButton onClick={() => this.handleFollowerModal()}>
             <Modal.Title>Followers</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-             {this.state.followerList.map((follower, index) => {
-                  let displayName = follower.DisplayName;
-                  let emblem = follower.emblemIcon;
-                  return(
-                    <ListGroup variant="flush">
-                      <a href={
-                            "http://www.destinyreportcard.com/reportcard/" +
-                            follower.membershipType +
-                            "/" +
-                            follower.membershipID
-                          }>
-                        <img
-                          src={emblem}
-                          width="40"
-                          alt="Player Emblem"
-                        ></img>
-                        <ListGroup.Item>{displayName}</ListGroup.Item>
-                      </a>
-                    </ListGroup>
-                  )
-                })
-              }
+          <Modal.Body className="p-0">
+            <ListGroup variant="flush">{followerData}</ListGroup>
           </Modal.Body>
         </Modal>
 
@@ -115,29 +145,8 @@ class FollowerPanel extends React.Component {
           <Modal.Header closeButton onClick={() => this.handleFollowingModal()}>
             <Modal.Title>Following</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-          {this.state.followingList.map((following, index) => {
-                  let displayName = following.DisplayName;
-                  let emblem = following.emblemIcon;
-                  return(
-                    <ListGroup variant="flush">
-                      <a href={
-                            "http://www.destinyreportcard.com/reportcard/" +
-                            following.membershipType +
-                            "/" +
-                            following.membershipID
-                          }>
-                        <img
-                          src={emblem}
-                          width="40"
-                          alt="Player Emblem"
-                        ></img>
-                        <ListGroup.Item>{displayName}</ListGroup.Item>
-                      </a>
-                    </ListGroup>
-                  )
-                })
-              }
+          <Modal.Body className="p-0">
+            <ListGroup variant="flush">{followingData}</ListGroup>
           </Modal.Body>
         </Modal>
       </div>

@@ -27,7 +27,6 @@ function Topnav() {
 
   useEffect(() => {
     Axios.get(loginAPI).then((response) => {
-      console.log(response);
       if (response.data.loggedIn === true) {
         setloginStatus(true);
         setmemId(response.data.user[0].membershipID);

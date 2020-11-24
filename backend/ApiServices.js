@@ -25,7 +25,6 @@ function findProfile(memID, memType) {
     "/Profile/" +
     memID +
     "/?components=100";
-  console.log(path);
   return axios({
     method: "get",
     url: path,

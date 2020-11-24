@@ -23,7 +23,6 @@ export default function Signup() {
       membershipID: membershipIDReg,
     }).then((response) => {
       setregisterStatus(response.data.message);
-      console.log(response);
     });
   };
 
