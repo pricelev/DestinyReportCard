@@ -13,7 +13,6 @@ Marcel Yuwono, Levy Price, Austin McGee, Suhas Dundigalla
 
 http://www.destinyreportcard.com/
 
-http://ec2-3-133-157-251.us-east-2.compute.amazonaws.com:3000/
 
 ## Documentation
 
