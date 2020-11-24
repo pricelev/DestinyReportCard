@@ -31,8 +31,8 @@ export default function Login() {
       if (response.data.message) {
         setloginStatus(response.data.message);
       } else {
-        //setloginStatus(response.data[0].email);
-        //history.push("/");
+        setloginStatus(response.data[0].email);
+        history.push("/");
         console.log(response.data);
       }
       console.log(response.data);
