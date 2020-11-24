@@ -101,7 +101,7 @@ class Following extends Component {
             <Col lg={8}>
               <div className="result-container">
                 <div className="search-header">
-                  <h1> {this.state.displayName} is following: </h1>
+                  <h1> You are following: </h1>
                 </div>
                 <Row>
                   <Col lg={1}></Col>
