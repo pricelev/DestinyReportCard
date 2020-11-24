@@ -23,6 +23,7 @@ function Topnav() {
   const logout = () => {
     Axios.get(logoutAPI, {}).then((response) => {
       console.log(response);
+      setloginStatus(false);
       history.push("/");
     });
   };
