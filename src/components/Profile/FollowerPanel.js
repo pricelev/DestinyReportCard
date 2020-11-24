@@ -1,6 +1,7 @@
 import React from "react";
 import { Button, Modal, ListGroup } from "react-bootstrap";
 import "./FollowerPanel.css";
+import Axios from "axios";
 
 const followingAPI = "http://www.destinyreportcard.com:3001/followingList";
 const followerAPI = "http://www.destinyreportcard.com:3001/followerList";
@@ -30,7 +31,7 @@ class FollowerPanel extends React.Component {
         isLoaded: true,
       });
     });
-    Axios.get(followingAPI, {
+    Axios.get(followerAPI, {
       params: {
         membershipID: this.state.memID,
       },
@@ -41,8 +42,8 @@ class FollowerPanel extends React.Component {
         isLoaded: true,
       });
     });
-    console.log(followerList);
-    console.log(followingList);
+    console.log(this.state.followerList);
+    console.log(this.state.followingList);
   }
 
   handleFollowerModal() {
