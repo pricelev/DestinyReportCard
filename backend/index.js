@@ -354,6 +354,7 @@ app.get("/reportCard", (req, res) => {
  * @returns {object} objects filled wiht a desc list of players
  * @name getLeaderboard
  * @example get: http://www.destinyreportcard.com:3001/getLeaderboard/?type=RaidClears
+ * valid types: PvEKD, PvPKD, PvPWL, TriumphScore, Time, RaidClears, PublicEvents, StrikeCompletions, Nightfalls, Trials
  * returns object:
  * [
  *   {
