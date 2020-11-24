@@ -16,8 +16,8 @@ class Profile extends Component {
     super(props);
     this.state = {
       isLoaded: false,
-      memType: this.props.match.params.membershipType,
-      memId: this.props.match.params.membershipId,
+      memType: 0,
+      memId: 0,
       profileData: {},
       displayName: "",
       profPic: "/profile.jpg",
