@@ -5,11 +5,14 @@ import Button from "react-bootstrap/Button";
 import "./Topnav.css";
 import { Link } from "react-router-dom";
 import Axios from "axios";
+import { useHistory } from "react-router-dom";
 
 function Topnav() {
   const logoutAPI = "http://www.destinyreportcard.com:3001/logout";
   const loginAPI = "http://www.destinyreportcard.com:3001/login";
   const profileRoute = "http://www.destinyreportcard.com/reportcard/";
+  
+  let history = useHistory();
 
   const [loginStatus, setloginStatus] = useState(false);
   const [memId, setmemId] = useState("");
@@ -20,6 +23,7 @@ function Topnav() {
   const logout = () => {
     Axios.get(logoutAPI, {}).then((response) => {
       console.log(response);
+      history.push("/");
     });
   };
 
