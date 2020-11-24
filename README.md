@@ -13,6 +13,7 @@ Marcel Yuwono, Levy Price, Austin McGee, Suhas Dundigalla
 
 http://www.destinyreportcard.com/
 
+Make sure "www" is included in your URL, this is a known issue
 
 ## Documentation
 
