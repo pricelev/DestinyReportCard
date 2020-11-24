@@ -15,11 +15,11 @@ http://www.destinyreportcard.com/
 
 Make sure "www" is included in your URL, this is a known issue
 
-## TesterInfo
+## Tester Info
 Use this membershipID for registration unless you know yours
 4611686018428735820
 
-## Documentation
+## API Documentation
 
 http://www.destinyreportcard.com/api/
 
@@ -27,4 +27,4 @@ http://www.destinyreportcard.com/api/
 
 Icons by [FlatIcon](https://www.flaticon.com/authors/freepik)
 
-Backgrounds by [Bungee](https://www.bungie.net/)
+Backgrounds by [Bungie](https://www.bungie.net/)
