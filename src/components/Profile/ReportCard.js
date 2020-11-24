@@ -4,8 +4,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
-import { Button } from "react-bootstrap"
-import Axios from 'axios';
+import { Button } from "react-bootstrap";
+import Axios from "axios";
 
 import ReportSummary from "./ReportSummary";
 import ProfileChart from "./ProfileChart";
@@ -17,7 +17,6 @@ const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
 const removeFollowAPI = "http://www.destinyreportcard.com:3001/removeFollow";
 const checkFollowAPI = "http://www.destinyreportcard.com:3001/checkFollow";
 const loginAPI = "http://www.destinyreportcard.com:3001/login";
-
 
 class ReportCard extends Component {
   constructor(props) {
@@ -35,9 +34,7 @@ class ReportCard extends Component {
   }
 
   componentDidMount() {
-    fetch(
-     API + this.state.memId + "&membershipType=" + this.state.memType
-    )
+    fetch(API + this.state.memId + "&membershipType=" + this.state.memType)
       .then((response) => response.json())
       .then((data) => {
         if (data) {
@@ -67,9 +64,9 @@ class ReportCard extends Component {
           } else {
             this.setState({
               profPic: data.characters.characterInfo[0].emblemIcon,
-            })
+            });
           }
-          
+
           this.setState({
             isLoaded: true,
             profileData: data,
@@ -98,7 +95,7 @@ class ReportCard extends Component {
             email: email,
             membershipID: membershipID,
             followID: followID,
-          }
+          },
         }).then((response) => {
           console.log(response);
           console.log(response.data.isFollow);
@@ -106,15 +103,13 @@ class ReportCard extends Component {
             this.setState({
               following: true,
             });
-          }
-          else {
+          } else {
             this.setState({
-            following: false,
+              following: false,
             });
           }
         });
-      }
-      else {
+      } else {
         this.setState({
           loginStatus: false,
         });
@@ -133,11 +128,11 @@ class ReportCard extends Component {
         }).then((response) => {
           this.setState({
             following: true,
-          })
+          });
         });
       } else {
         this.setState({
-          loginStatus: false
+          loginStatus: false,
         });
       }
     });
@@ -154,11 +149,11 @@ class ReportCard extends Component {
         }).then((response) => {
           this.setState({
             following: false,
-          })
+          });
         });
       } else {
         this.setState({
-          loginStatus: false
+          loginStatus: false,
         });
       }
     });
@@ -174,7 +169,6 @@ class ReportCard extends Component {
       let triumph_grade = this.state.profileData.stats.triumphscore.grade;
       let raids_grade = this.state.profileData.stats.raidclears.grade;
       let link = "../reportcard/";
-      
 
       let summary = [
         aggregate,
@@ -238,31 +232,31 @@ class ReportCard extends Component {
                     </h1>
                   </Row>
                   <Row>
-                    {this.state.loginStatus == true && this.state.following == false && (
-                    <Button
-                      className="repFollowButton"
-                      style={{marginTop: 10}}
-                      type="submit"
-                      onClick={this.follow}
-                      >
-                      Follow
-                    </Button>
-                    )}
-                    {this.state.loginStatus == true && this.state.following == true &&(
-                    <Button
-                      className="repFollowButton"
-                      style={{marginTop: 10}}
-                      type="submit"
-                      onClick={this.unfollow}
-                      >
-                      UnFollow
-                    </Button>
-                    )}
+                    {this.state.loginStatus == true &&
+                      this.state.following == false && (
+                        <Button
+                          className="repFollowButton"
+                          style={{ marginTop: 10 }}
+                          type="submit"
+                          onClick={this.follow}
+                        >
+                          Follow
+                        </Button>
+                      )}
+                    {this.state.loginStatus == true &&
+                      this.state.following == true && (
+                        <Button
+                          className="repFollowButton"
+                          style={{ marginTop: 10 }}
+                          type="submit"
+                          onClick={this.unfollow}
+                        >
+                          Unfollow
+                        </Button>
+                      )}
                   </Row>
                 </Col>
               </Row>
-              
-
             </Container>
           </div>
           <Container fluid className="profile-main-container">

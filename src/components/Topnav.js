@@ -45,12 +45,12 @@ function Topnav() {
           <Nav.Link href="/" id="nav-item-white">
             Home
           </Nav.Link>
-          {loginStatus == true && (
+          {loginStatus === true && (
             <Nav.Link href="/profile" id="nav-item-white">
               Profile
             </Nav.Link>
           )}
-          {loginStatus == true && (
+          {loginStatus === true && (
             <Nav.Link href="/following" id="nav-item-white">
               Following
             </Nav.Link>
@@ -63,17 +63,17 @@ function Topnav() {
           </Nav.Link>
         </Nav>
         <Nav>
-          {loginStatus == false && (
+          {loginStatus === false && (
             <Link to="/login">
               <Button className="nav-button">Login</Button>
             </Link>
           )}
-          {loginStatus == false && (
+          {loginStatus === false && (
             <Link to="/signup">
               <Button className="nav-button">Signup</Button>
             </Link>
           )}
-          {loginStatus == true && (
+          {loginStatus === true && (
             <Button className="nav-button" onClick={logout}>
               Logout
             </Button>
