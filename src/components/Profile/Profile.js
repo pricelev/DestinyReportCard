@@ -24,6 +24,7 @@ class Profile extends Component {
 
   componentDidMount() {
     Axios.get(loginAPI).then((response) => {
+      console.log(response);
       if (response.data.loggedIn == true) {
         this.setState({
           loginStatus: true,
