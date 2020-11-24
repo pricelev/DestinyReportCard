@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import ReportSummary from "./ReportSummary";
 import CharacterPanel from "./CharacterPanel";
 import StatsTable from "./StatsTable";
+import FollowerPanel from "./FollowerPanel";
 
 /*
   THIS CLASS IS FOR LOCAL TESTING PURPOSES ONLY, EVERYTHING IS MOVED TO REPORTCARD.JS
@@ -27,6 +28,7 @@ class Profile extends Component {
               </Col>
               <Col lg={6}>
                 <h1 className="top-username">Username</h1>
+                <FollowerPanel />
               </Col>
             </Row>
           </Container>

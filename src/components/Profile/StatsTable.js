@@ -91,7 +91,7 @@ class StatsTable extends Component {
     this.state = {
       data: this.props.data,
     };
-    // REMOVE THIS NOW!!!
+    // COMMENT THIS BEFORE PUSHING
     // this.state = {
     //   data: stats,
     // };
@@ -109,7 +109,6 @@ class StatsTable extends Component {
 
     let stats = Object.entries(this.state.data);
     let table = stats.map((key, index) => {
-      console.log(key[1].value);
       if (key[0] === "playtime") {
         return row(
           table_headers[index],
@@ -128,7 +127,7 @@ class StatsTable extends Component {
 
     return (
       <div className="stats-table-container">
-        <Row>
+        <Row className="m-0">
           <Col lg={{ span: 8, offset: 2 }}>
             <Table striped bordered hover className="table-blue">
               <thead>

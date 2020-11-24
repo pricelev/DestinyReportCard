@@ -12,6 +12,7 @@ import PlayerSearch from "./components/PlayerSearch/PlayerSearch";
 import Login from "./components/Login/Login";
 import Signup from "./components/Signup/Signup";
 import Following from "./components/Profile/Following";
+import Page404 from "./components/Page404";
 
 class App extends Component {
   render() {
@@ -38,6 +39,7 @@ class App extends Component {
           <Route exact path="/signup">
             <Signup />
           </Route>
+          <Route component={Page404} />
           <Footer />
         </div>
       </BrowserRouter>

@@ -47,6 +47,12 @@ function Topnav() {
           <Nav.Link href="/" id="nav-item-white">
             Home
           </Nav.Link>
+          <Nav.Link
+            href="http://destinyreportcard.com/api/"
+            id="nav-item-white"
+          >
+            Documentation
+          </Nav.Link>
           {loginStatus === true && (
             <Nav.Link
               href={profileRoute + memType + "/" + memId}
@@ -60,12 +66,6 @@ function Topnav() {
               Following
             </Nav.Link>
           )}
-          <Nav.Link
-            href="http://destinyreportcard.com/api/"
-            id="nav-item-white"
-          >
-            Documentation
-          </Nav.Link>
         </Nav>
         <Nav>
           {loginStatus === false && (

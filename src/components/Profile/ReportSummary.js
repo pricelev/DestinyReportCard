@@ -50,9 +50,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-1">
-                          <img src="./grade_b.png" alt="letter_grade"></img>
-                        </div>
+                        <div className="score-img" id="pos-1"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -67,9 +65,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-2">
-                          <img src="./grade_a.png" alt="letter_grade"></img>
-                        </div>
+                        <div className="score-img" id="pos-2"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -86,9 +82,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-3">
-                          <img src="./grade_cplus.png" alt="letter_grade"></img>
-                        </div>
+                        <div className="score-img" id="pos-3"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -103,9 +97,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-4">
-                          <img src="./grade_d.png" alt="letter_grade"></img>
-                        </div>
+                        <div className="score-img" id="pos-4"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -122,12 +114,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-5">
-                          <img
-                            src="./grade_aminus.png"
-                            alt="letter_grade"
-                          ></img>
-                        </div>
+                        <div className="score-img" id="pos-5"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -142,9 +129,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-6">
-                          <img src="./grade_bplus.png" alt="letter_grade"></img>
-                        </div>
+                        <div className="score-img" id="pos-6"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
