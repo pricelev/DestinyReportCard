@@ -12,7 +12,6 @@ import ProfileChart from "./ProfileChart";
 import CharacterPanel from "./CharacterPanel";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
-const CORS = "https://cors-anywhere.herokuapp.com/";
 const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
 const removeFollowAPI = "http://www.destinyreportcard.com:3001/removeFollow";
 const checkFollowAPI = "http://www.destinyreportcard.com:3001/checkFollow";
@@ -81,7 +80,7 @@ class ReportCard extends Component {
       });
 
     Axios.get(loginAPI).then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         this.setState({
           loginStatus: true,
         });
@@ -95,8 +94,7 @@ class ReportCard extends Component {
           this.setState({
             myProfile: true,
           });
-        }
-        else {
+        } else {
           this.setState({
             myProfile: false,
           });
@@ -111,7 +109,7 @@ class ReportCard extends Component {
         }).then((response) => {
           console.log(response);
           console.log(response.data.isFollow);
-          if (response.data.isFollow == true) {
+          if (response.data.isFollow === true) {
             this.setState({
               following: true,
             });
@@ -132,7 +130,7 @@ class ReportCard extends Component {
   follow = () => {
     Axios.get(loginAPI).then((response) => {
       console.log(response);
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         Axios.post(followAPI, {
           email: response.data.user[0].email,
           membershipID: response.data.user[0].membershipID,
@@ -153,7 +151,7 @@ class ReportCard extends Component {
   unfollow = () => {
     Axios.get(loginAPI).then((response) => {
       console.log(response);
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         Axios.post(removeFollowAPI, {
           email: response.data.user[0].email,
           membershipID: response.data.user[0].membershipID,
@@ -180,7 +178,6 @@ class ReportCard extends Component {
       let strikes_grade = this.state.profileData.stats.strikecompletions.grade;
       let triumph_grade = this.state.profileData.stats.triumphscore.grade;
       let raids_grade = this.state.profileData.stats.raidclears.grade;
-      let link = "../reportcard/";
 
       let summary = [
         aggregate,
@@ -244,9 +241,9 @@ class ReportCard extends Component {
                     </h1>
                   </Row>
                   <Row>
-                    {this.state.loginStatus == true &&
-                      this.state.following == false && 
-                      this.state.myProfile == false &&  (
+                    {this.state.loginStatus === true &&
+                      this.state.following === false &&
+                      this.state.myProfile === false && (
                         <Button
                           className="repFollowButton"
                           style={{ marginTop: 10 }}
@@ -256,9 +253,9 @@ class ReportCard extends Component {
                           Follow
                         </Button>
                       )}
-                    {this.state.loginStatus == true &&
-                      this.state.following == true && 
-                      this.state.myProfile == false && (
+                    {this.state.loginStatus === true &&
+                      this.state.following === true &&
+                      this.state.myProfile === false && (
                         <Button
                           className="repFollowButton"
                           style={{ marginTop: 10 }}

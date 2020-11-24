@@ -3,20 +3,15 @@ import "./Profile.css";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
-import ProfileChart from "./ProfileChart";
 import ReportSummary from "./ReportSummary";
 import CharacterPanel from "./CharacterPanel";
-import Axios from "axios";
+import StatsTable from "./StatsTable";
 
-const loginAPI = "http://www.destinyreportcard.com:3001/login";
-const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
-const CORS = "https://cors-anywhere.herokuapp.com/";
+/*
+  THIS CLASS IS FOR LOCAL TESTING PURPOSES ONLY, EVERYTHING IS MOVED TO REPORTCARD.JS
+*/
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     return (
       <div className="profile-container">
@@ -24,7 +19,11 @@ class Profile extends Component {
           <Container>
             <Row>
               <Col lg={2}>
-                <img src="profile.jpg" className="profile-img rounded-circle" />
+                <img
+                  src="profile.jpg"
+                  className="profile-img rounded-circle"
+                  alt="profile-pic"
+                />
               </Col>
               <Col lg={6}>
                 <h1 className="top-username">Username</h1>
@@ -42,7 +41,7 @@ class Profile extends Component {
               ]}
             />
             <ReportSummary grades={[0, 0, 0, 0, 0, 0, 0]} />
-            <ProfileChart />
+            <StatsTable />
           </div>
         </Container>
       </div>

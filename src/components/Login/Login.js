@@ -11,12 +11,9 @@ import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
 export default function Login() {
-  const CORS = "https://cors-anywhere.herokuapp.com/";
   const loginAPI = "http://www.destinyreportcard.com:3001/login";
-
   const [emailReg, setEmail] = useState("");
   const [passwordReg, setPassword] = useState("");
-
   const [loginStatus, setloginStatus] = useState("");
 
   Axios.defaults.withCredentials = true;
@@ -41,7 +38,7 @@ export default function Login() {
 
   useEffect(() => {
     Axios.get(loginAPI).then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         setloginStatus(response.data.user[0].email);
         console.log(response.data);
       }
@@ -89,7 +86,9 @@ export default function Login() {
             </Button>
           </form>
           <br></br>
-          <a href="../signup" style={{textDecoration: "underline"}}>Don't have an account? Sign up here!</a>
+          <a href="../signup" style={{ textDecoration: "underline" }}>
+            Don't have an account? Sign up here!
+          </a>
           <h1>{loginStatus}</h1>
         </div>
       </Card>

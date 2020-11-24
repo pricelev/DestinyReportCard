@@ -6,20 +6,17 @@ import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Carousel from "react-bootstrap/Carousel";
 
-const API = "http://www.destinyreportcard.com:3001/getLeaderboard/?type=";
-const CORS = "https://cors-anywhere.herokuapp.com/";
-
 const endpoints = [
-   "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvPKD",
+  "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvPKD",
   "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PvEKD",
-  
-    "http://www.destinyreportcard.com:3001/getLeaderboard/?type=RaidClears",
-  
-    "http://www.destinyreportcard.com:3001/getLeaderboard/?type=Nightfalls",
-  
-    "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PublicEvents",
-  
-    "http://www.destinyreportcard.com:3001/getLeaderboard/?type=StrikeCompletions",
+
+  "http://www.destinyreportcard.com:3001/getLeaderboard/?type=RaidClears",
+
+  "http://www.destinyreportcard.com:3001/getLeaderboard/?type=Nightfalls",
+
+  "http://www.destinyreportcard.com:3001/getLeaderboard/?type=PublicEvents",
+
+  "http://www.destinyreportcard.com:3001/getLeaderboard/?type=StrikeCompletions",
 ];
 
 class Leaderboard extends Component {
@@ -53,7 +50,6 @@ class Leaderboard extends Component {
 
   render() {
     if (this.state.isLoaded) {
-      let data = this.state.data;
       return (
         <div className="leaderboard-container">
           <Container>

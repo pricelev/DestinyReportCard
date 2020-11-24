@@ -5,22 +5,15 @@ import {
   FormControl,
   FormLabel,
   Card,
-  Row,
-  Col,
 } from "react-bootstrap";
 import "./Signup.css";
-import Searchbar from './SearchbarRegister';
 import Axios from "axios";
 
 export default function Signup() {
-  const CORS = "https://cors-anywhere.herokuapp.com/";
   const registerAPI = "http://www.destinyreportcard.com:3001/register";
-  
-
   const [emailReg, setEmail] = useState("");
   const [passwordReg, setPassword] = useState("");
   const [membershipIDReg, setMembershipID] = useState("");
-
   const [registerStatus, setregisterStatus] = useState("");
 
   const register = () => {

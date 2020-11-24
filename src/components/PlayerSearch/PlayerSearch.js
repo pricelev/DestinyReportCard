@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Axios from 'axios';
+import Axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
@@ -58,13 +58,9 @@ class PlayerSearch extends Component {
     //   players: test_data,
     // });
   }
-  
+
   follow = () => {
-    Axios.post(CORS + followAPI, {
-      
-    }).then((response) => {
-      
-    });
+    Axios.post(CORS + followAPI, {}).then((response) => {});
   };
 
   render() {
@@ -109,7 +105,7 @@ class PlayerSearch extends Component {
                   <Col lg={10}>
                     {this.state.players.map((player, index) => {
                       let emblem = player.emblem;
-                      if (emblem == steam_white) {
+                      if (emblem === steam_white) {
                         emblem = "/steam-icon.png";
                       }
                       return (

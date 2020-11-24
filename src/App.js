@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import Topnav from "./components/Topnav";
 import Home from "./components/Home/Home";
@@ -26,11 +26,7 @@ class App extends Component {
             path="/reportcard/:membershipType/:membershipId"
             component={ReportCard}
           />
-          <Route
-            exact
-            path="/following"
-            component={Following}
-          />
+          <Route exact path="/following" component={Following} />
           <Route
             exact
             path="/PlayerSearch/:displayName"

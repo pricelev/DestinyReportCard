@@ -8,7 +8,7 @@ const SuggestionsRegister = (props) => {
   let link = "../reportcard/";
   const options = props.results.map((player, index) => {
     let emblem = player.emblem;
-    if (emblem == steam_white) {
+    if (emblem === steam_white) {
       emblem = "/steam-icon.png";
     }
 

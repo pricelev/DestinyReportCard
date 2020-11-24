@@ -4,7 +4,6 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Suggestions from "./SuggestionsRegister";
-import { fn } from "jquery";
 
 const API = "http://www.destinyreportcard.com:3001/getPlayer/?displayName=";
 const CORS = "https://cors-anywhere.herokuapp.com/";
@@ -26,7 +25,7 @@ class SearchbarRegister extends Component {
         fn(...args);
         timer = null;
       }, delay);
-    }
+    };
   }
 
   handleInputChange = () => {
@@ -91,7 +90,7 @@ class SearchbarRegister extends Component {
                     onChange={this.debounced(400, this.handleInputChange)}
                   />
                   <button onClick={handleSearch} className="search_icon">
-                    <img src="search.png"></img>
+                    <img src="search.png" alt="search-img"></img>
                   </button>
                   <div className="autocom-box" id="testing">
                     <div className="autocom-box1">
@@ -111,7 +110,7 @@ class SearchbarRegister extends Component {
 function handleSearch(e) {
   e.preventDefault();
   let name = document.getElementById("search_text").value;
-  if (name != "") {
+  if (name !== "") {
     window.location.replace("/playersearch/" + name);
   }
 }
