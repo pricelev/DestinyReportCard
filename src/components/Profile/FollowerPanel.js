@@ -88,9 +88,9 @@ class FollowerPanel extends React.Component {
                     <ListGroup variant="flush">
                       <a href={
                             "http://www.destinyreportcard.com/reportcard/" +
-                            player.membershipType +
+                            follower.membershipType +
                             "/" +
-                            player.MembershipID
+                            follower.MembershipID
                           }>
                         <ListGroup.Item>{displayName}</ListGroup.Item>
                       </a>
