@@ -73,6 +73,8 @@ class Profile extends Component {
                 profileData: data,
                 displayName: data.playerInfo.DisplayName.value,
               });
+              console.log(profileData);
+              console.log(displayName);
             }
             console.log(data);
           })
@@ -86,6 +88,8 @@ class Profile extends Component {
         });
       }
     });
+    console.log(profileData);
+    console.log(displayName);
   }
 
   render() {
