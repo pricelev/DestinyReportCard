@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Topnav from "./components/Topnav";
 import Home from "./components/Home/Home";
@@ -20,25 +20,28 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Topnav />
-          <Route exact path="/" component={Home} exact />
-          <Route path="/profile" component={Profile} />
-          <Route
-            exact
-            path="/reportcard/:membershipType/:membershipId"
-            component={ReportCard}
-          />
-          <Route exact path="/following" component={Following} />
-          <Route
-            exact
-            path="/PlayerSearch/:displayName"
-            component={PlayerSearch}
-          />
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/signup">
-            <Signup />
-          </Route>
+          <Switch>
+            <Route exact path="/" component={Home} exact />
+            <Route path="/profile" component={Profile} />
+            <Route
+              exact
+              path="/reportcard/:membershipType/:membershipId"
+              component={ReportCard}
+            />
+            <Route exact path="/following" component={Following} />
+            <Route
+              exact
+              path="/PlayerSearch/:displayName"
+              component={PlayerSearch}
+            />
+            <Route exact path="/login">
+              <Login />
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
+            <Route component={Page404} />
+          </Switch>
           <Footer />
         </div>
       </BrowserRouter>
