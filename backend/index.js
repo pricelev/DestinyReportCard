@@ -1,7 +1,7 @@
 /**
- * @param endpoint: www.destinyreportcard.com:3001/
  * @name DestinyReportCardApi
- * 
+ * Provides the api services for DestinyReportCard.com
+ * endpoint: www.destinyreportcard.com:3001/
  */
 function decoy(){
   //im just a decoy for documentation
