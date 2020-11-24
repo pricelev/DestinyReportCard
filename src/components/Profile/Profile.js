@@ -19,19 +19,67 @@ class Profile extends Component {
       isLoaded: false,
       memType: 0,
       memId: 0,
+      profileData: {},
+      displayName: "",
+      profPic: "/profile.jpg",
       loginStatus: false,
     };
   }
 
   componentDidMount() {
     Axios.get(loginAPI).then((response) => {
-      console.log(response);
       if (response.data.loggedIn == true) {
         this.setState({
           loginStatus: true,
           memType: response.data.user[0].membershipType,
           memId: response.data.user[0].membershipId,
         });
+        fetch(
+          CORS + API + this.state.memId + "&membershipType=" + this.state.memType
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            if (data) {
+              if (data.characters.characterInfo.length === 3) {
+                let character1 = data.characters.characterInfo[0];
+                let character2 = data.characters.characterInfo[1];
+                let character3 = data.characters.characterInfo[2];
+                if (character1.LightLevel >= character2.LightLevel) {
+                  if (character1.LightLevel >= character3.LightLevel) {
+                    this.setState({
+                      profPic: character1.emblemIcon,
+                    });
+                  } else {
+                    this.setState({
+                      profPic: character3.emblemIcon,
+                    });
+                  }
+                } else if (character2.LightLevel >= character3.LightLevel) {
+                  this.setState({
+                    profPic: character2.emblemIcon,
+                  });
+                } else {
+                  this.setState({
+                    profPic: character3.emblemIcon,
+                  });
+                }
+              } else {
+                this.setState({
+                  profPic: data.characters.characterInfo[0].emblemIcon,
+                })
+              }
+              
+              this.setState({
+                isLoaded: true,
+                profileData: data,
+                displayName: data.playerInfo.DisplayName.value,
+              });
+            }
+            console.log(data);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
       else {
         this.setState({
@@ -39,6 +87,7 @@ class Profile extends Component {
         });
       }
     });
+    console.log(playerInfo);
   };
 
   render() {
