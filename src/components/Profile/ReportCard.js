@@ -256,7 +256,7 @@ class ReportCard extends Component {
                     </h1>
                   </Row>
                   <Row>
-                    <FollowerPanel memID={this.state.memID}/>
+                    <FollowerPanel memID={this.state.memId}/>
                   </Row>
                   <Row>
                     {this.state.loginStatus === true &&
