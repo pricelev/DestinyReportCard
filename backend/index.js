@@ -527,8 +527,8 @@ app.get("/getLeaderboard", (req, res) => {
  */
 app.get("/followingList",(req,res)=>{
 
-  const email = req.query.email;
-  DB.getFollowingList(email).then((data)=> res.send(data));
+  const memID = req.query.membershipID;
+  DB.getFollowingList(memID).then((data)=> res.send(data));
 });
 
 

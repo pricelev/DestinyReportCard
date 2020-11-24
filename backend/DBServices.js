@@ -364,12 +364,12 @@ async function getLeaderboard(type) {
 
 
 // get the users list of people they follow
-async function getFollowingList(email){
+async function getFollowingList(memID){
   let db = new Database();
   let q =    `   Select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
   sum(publicevents) as publicevents, p.pvpkd, p.pvpWL, p.CombatRatingPvP,sum(c.trialswins)/sum(c.trialsmatches) as trialsRecord, p.triumphscore ,c.emblemIcon, p.membershipType
   from characters c , player p, follower f
- where c.membershipID = p.MembershipID AND c.membershipID=f.followsID and f.email="`+email+`"
+ where c.membershipID = p.MembershipID AND c.membershipID=f.followsID and f.membershipID="`+memID+`"
  group by p.membershipID`;
   let list = await db.query(q);
   db.close();
