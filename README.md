@@ -15,6 +15,10 @@ http://www.destinyreportcard.com/
 
 Make sure "www" is included in your URL, this is a known issue
 
+## TesterInfo
+Use this membershipID for registration unless you know yours
+4611686018428735820
+
 ## Documentation
 
 http://www.destinyreportcard.com/api/
