@@ -90,7 +90,7 @@ class Profile extends Component {
     });
     console.log(profileData);
     console.log(displayName);
-  }
+  };
 
   render() {
     return (
