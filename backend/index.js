@@ -718,7 +718,7 @@ app.post("/login", (req, res) => {
 
 /**
  *  Logs out a user
- * @returns {object} object contain login status set to false
+ * @returns {object} object containing login status set to false
  * @name logout
  * @example get: http://www.destinyreportcard.com:3001/logout
  * 
