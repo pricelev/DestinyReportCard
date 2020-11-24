@@ -7,8 +7,8 @@ const followingAPI = "http://www.destinyreportcard.com:3001/followingList";
 const followerAPI = "http://www.destinyreportcard.com:3001/followerList";
 
 class FollowerPanel extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       isLoading: false,
       followerModal: false,
