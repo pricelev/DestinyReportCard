@@ -1,0 +1,17 @@
+.error-section {
+  height: 700px;
+  background-image: url("/bg-05.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+}
+
+.error-msg {
+  padding-top: 300px;
+}
+
+.subtitle {
+  margin-top: 23px;
+  font-size: 22px;
+}

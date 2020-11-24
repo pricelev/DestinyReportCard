@@ -45,7 +45,7 @@ class CharacterPanel extends Component {
                     <Col></Col>
                     <Col>
                       <div className="power-level">
-                        <h3 id="power-level-1"></h3>
+                        <h3 id="power-level-1"> </h3>
                       </div>
                     </Col>
                   </Row>
@@ -57,7 +57,7 @@ class CharacterPanel extends Component {
                     <Col></Col>
                     <Col>
                       <div className="power-level">
-                        <h3 id="power-level-2"></h3>
+                        <h3 id="power-level-2"> </h3>
                       </div>
                     </Col>
                   </Row>
@@ -69,7 +69,7 @@ class CharacterPanel extends Component {
                     <Col></Col>
                     <Col>
                       <div className="power-level">
-                        <h3 id="power-level-3"></h3>
+                        <h3 id="power-level-3"> </h3>
                       </div>
                     </Col>
                   </Row>

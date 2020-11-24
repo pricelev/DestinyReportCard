@@ -16,11 +16,15 @@ class ReportSummary extends Component {
     let grades = this.props.grades;
     document.getElementById(
       "aggregate-grade"
-    ).innerHTML = `<img src=${this.getGradeIcon(grades[0])} />`;
+    ).innerHTML = `<img src=${this.getGradeIcon(
+      grades[0]
+    )} alt="letter_grade" />`;
     for (let i = 1; i < grades.length; i++) {
       document.getElementById(
         "pos-" + i
-      ).innerHTML = `<img src=${this.getGradeIcon(grades[i])} />`;
+      ).innerHTML = `<img src=${this.getGradeIcon(
+        grades[i]
+      )} alt="letter_grade" />`;
     }
   }
 
@@ -46,9 +50,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-1">
-                          <img src="./grade_b.png"></img>
-                        </div>
+                        <div className="score-img" id="pos-1"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -63,9 +65,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-2">
-                          <img src="./grade_a.png"></img>
-                        </div>
+                        <div className="score-img" id="pos-2"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -82,9 +82,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-3">
-                          <img src="./grade_cplus.png"></img>
-                        </div>
+                        <div className="score-img" id="pos-3"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -99,9 +97,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-4">
-                          <img src="./grade_d.png"></img>
-                        </div>
+                        <div className="score-img" id="pos-4"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -118,9 +114,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-5">
-                          <img src="./grade_aminus.png"></img>
-                        </div>
+                        <div className="score-img" id="pos-5"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>
@@ -135,9 +129,7 @@ class ReportSummary extends Component {
                   <Card className="report-card-item">
                     <Row className="h-100">
                       <Col lg={3} className="score-img-container">
-                        <div className="score-img" id="pos-6">
-                          <img src="./grade_bplus.png"></img>
-                        </div>
+                        <div className="score-img" id="pos-6"></div>
                       </Col>
                       <Col lg={9}>
                         <br></br>

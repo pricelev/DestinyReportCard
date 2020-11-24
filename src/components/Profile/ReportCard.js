@@ -4,20 +4,20 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Container from "react-bootstrap/Container";
 import Spinner from "react-bootstrap/Spinner";
-import { Button } from "react-bootstrap"
-import Axios from 'axios';
+import { Button } from "react-bootstrap";
+import Axios from "axios";
 
 import ReportSummary from "./ReportSummary";
 import ProfileChart from "./ProfileChart";
 import CharacterPanel from "./CharacterPanel";
+import StatsTable from "./StatsTable";
+import FollowerPanel from "./FollowerPanel";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
-const CORS = "https://cors-anywhere.herokuapp.com/";
 const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
 const removeFollowAPI = "http://www.destinyreportcard.com:3001/removeFollow";
 const checkFollowAPI = "http://www.destinyreportcard.com:3001/checkFollow";
 const loginAPI = "http://www.destinyreportcard.com:3001/login";
-
 
 class ReportCard extends Component {
   constructor(props) {
@@ -31,13 +31,12 @@ class ReportCard extends Component {
       profPic: "/profile.jpg",
       following: false,
       loginStatus: false,
+      myProfile: false,
     };
   }
 
   componentDidMount() {
-    fetch(
-     API + this.state.memId + "&membershipType=" + this.state.memType
-    )
+    fetch(API + this.state.memId + "&membershipType=" + this.state.memType)
       .then((response) => response.json())
       .then((data) => {
         if (data) {
@@ -67,9 +66,9 @@ class ReportCard extends Component {
           } else {
             this.setState({
               profPic: data.characters.characterInfo[0].emblemIcon,
-            })
+            });
           }
-          
+
           this.setState({
             isLoaded: true,
             profileData: data,
@@ -83,7 +82,7 @@ class ReportCard extends Component {
       });
 
     Axios.get(loginAPI).then((response) => {
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         this.setState({
           loginStatus: true,
         });
@@ -93,28 +92,36 @@ class ReportCard extends Component {
         let membershipID = response.data.user[0].membershipID;
         console.log(this.state.memId);
         let followID = this.state.memId;
+        if (followID === membershipID) {
+          this.setState({
+            myProfile: true,
+          });
+        } else {
+          this.setState({
+            myProfile: false,
+          });
+        }
+        console.log(this.state.myProfile);
         Axios.get(checkFollowAPI, {
           params: {
             email: email,
             membershipID: membershipID,
             followID: followID,
-          }
+          },
         }).then((response) => {
           console.log(response);
           console.log(response.data.isFollow);
-          if (response.data.isFollow == true) {
+          if (response.data.isFollow === true) {
             this.setState({
               following: true,
             });
-          }
-          else {
+          } else {
             this.setState({
-            following: false,
+              following: false,
             });
           }
         });
-      }
-      else {
+      } else {
         this.setState({
           loginStatus: false,
         });
@@ -125,7 +132,7 @@ class ReportCard extends Component {
   follow = () => {
     Axios.get(loginAPI).then((response) => {
       console.log(response);
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         Axios.post(followAPI, {
           email: response.data.user[0].email,
           membershipID: response.data.user[0].membershipID,
@@ -133,11 +140,11 @@ class ReportCard extends Component {
         }).then((response) => {
           this.setState({
             following: true,
-          })
+          });
         });
       } else {
         this.setState({
-          loginStatus: false
+          loginStatus: false,
         });
       }
     });
@@ -146,7 +153,7 @@ class ReportCard extends Component {
   unfollow = () => {
     Axios.get(loginAPI).then((response) => {
       console.log(response);
-      if (response.data.loggedIn == true) {
+      if (response.data.loggedIn === true) {
         Axios.post(removeFollowAPI, {
           email: response.data.user[0].email,
           membershipID: response.data.user[0].membershipID,
@@ -154,11 +161,11 @@ class ReportCard extends Component {
         }).then((response) => {
           this.setState({
             following: false,
-          })
+          });
         });
       } else {
         this.setState({
-          loginStatus: false
+          loginStatus: false,
         });
       }
     });
@@ -173,8 +180,6 @@ class ReportCard extends Component {
       let strikes_grade = this.state.profileData.stats.strikecompletions.grade;
       let triumph_grade = this.state.profileData.stats.triumphscore.grade;
       let raids_grade = this.state.profileData.stats.raidclears.grade;
-      let link = "../reportcard/";
-      
 
       let summary = [
         aggregate,
@@ -219,6 +224,19 @@ class ReportCard extends Component {
 
       let character_data = this.state.profileData.characters.characterInfo;
       let profilepic = this.state.profPic;
+
+      let component;
+      if (this.state.myProfile) {
+        component = <StatsTable data={this.state.profileData.stats} />;
+      } else {
+        component = (
+          <ProfileChart
+            data={chart_data}
+            username={this.state.profileData.playerInfo.DisplayName.value}
+          />
+        );
+      }
+
       return (
         <div className="profile-container">
           <div className="profile-top">
@@ -238,41 +256,43 @@ class ReportCard extends Component {
                     </h1>
                   </Row>
                   <Row>
-                    {this.state.loginStatus == true && this.state.following == false && (
-                    <Button
-                      className="repFollowButton"
-                      style={{marginTop: 10}}
-                      type="submit"
-                      onClick={this.follow}
-                      >
-                      Follow
-                    </Button>
-                    )}
-                    {this.state.loginStatus == true && this.state.following == true &&(
-                    <Button
-                      className="repFollowButton"
-                      style={{marginTop: 10}}
-                      type="submit"
-                      onClick={this.unfollow}
-                      >
-                      UnFollow
-                    </Button>
-                    )}
+                    <FollowerPanel />
+                  </Row>
+                  <Row>
+                    {this.state.loginStatus === true &&
+                      this.state.following === false &&
+                      this.state.myProfile === false && (
+                        <Button
+                          className="repFollowButton"
+                          style={{ marginTop: 10 }}
+                          type="submit"
+                          onClick={this.follow}
+                        >
+                          Follow
+                        </Button>
+                      )}
+                    {this.state.loginStatus === true &&
+                      this.state.following === true &&
+                      this.state.myProfile === false && (
+                        <Button
+                          className="repFollowButton"
+                          style={{ marginTop: 10 }}
+                          type="submit"
+                          onClick={this.unfollow}
+                        >
+                          Unfollow
+                        </Button>
+                      )}
                   </Row>
                 </Col>
               </Row>
-              
-
             </Container>
           </div>
           <Container fluid className="profile-main-container">
             <div className="profile-main">
               <CharacterPanel data={character_data} />
               <ReportSummary grades={summary} />
-              <ProfileChart
-                data={chart_data}
-                username={this.state.profileData.playerInfo.DisplayName.value}
-              />
+              {component}
             </div>
           </Container>
         </div>

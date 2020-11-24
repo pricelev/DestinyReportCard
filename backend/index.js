@@ -658,7 +658,16 @@ app.post("/removeFollow",(req,res)=>{
   })
 });
 
-//api method for registering new user
+/**
+ *  Registers a new user
+ * @param {body param} email Email of the user
+ * @param {body param} membershipID ID linked to the user
+ * @param {body param} password Password of the user
+ * @returns {object} message whether registration was successful or not
+ * @name register
+ * @example post: http://www.destinyreportcard.com:3001/register
+ * 
+ */
 app.post("/register", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -699,7 +708,13 @@ app.post("/register", (req, res) => {
 
 });
 
-//check login status
+/**
+ *  Checks whether a user is currently logged in
+ * @returns {object} status of whether a user is logged in and that user's information
+ * @name login
+ * @example get: http://www.destinyreportcard.com:3001/login
+ * 
+ */
 app.get("/login", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -711,7 +726,15 @@ app.get("/login", (req, res) => {
   }
 });
 
-//api method for logging in
+/**
+ *  Logs in a registered user
+ * @param {body param} email Email of the user
+ * @param {body param} password Password of the user
+ * @returns {object} message whether login was successful or not and user data if login is successful
+ * @name login
+ * @example post: http://www.destinyreportcard.com:3001/login
+ * 
+ */
 app.post("/login", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
@@ -747,7 +770,13 @@ app.post("/login", (req, res) => {
   });
 });
 
-//api method for logging out
+/**
+ *  Logs out a user
+ * @returns {object} object containing login status set to false
+ * @name logout
+ * @example get: http://www.destinyreportcard.com:3001/logout
+ * 
+ */
 app.get("/logout", (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://www.destinyreportcard.com');
   res.setHeader('Access-Control-Allow-Credentials', 'true');

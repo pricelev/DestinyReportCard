@@ -1,14 +1,12 @@
 import React, { Component } from "react";
-import Axios from 'axios';
+import Axios from "axios";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
 import Spinner from "react-bootstrap/Spinner";
 import "../PlayerSearch/PlayerSearch.css";
-import { Button } from "react-bootstrap";
 
 const API = "http://www.destinyreportcard.com:3001/followingList";
-const CORS = "https://cors-anywhere.herokuapp.com/";
 const loginAPI = "http://www.destinyreportcard.com:3001/login";
 
 const steam_white =
@@ -31,28 +29,27 @@ class Following extends Component {
       if (response.data.loggedIn === true) {
         this.setState({
           loginstatus: true,
-          email: response.data.user[0].email
+          email: response.data.user[0].email,
         });
         Axios.get(API, {
           params: {
             email: response.data.user[0].email,
-          }
+          },
         }).then((response) => {
           console.log(response.data);
           this.setState({
             players: response.data,
             isLoaded: true,
-          })
+          });
         });
-      }
-      else {
+      } else {
         this.setState({
-          loginstatus: false
-        })
+          loginstatus: false,
+        });
       }
     });
   }
- /* componentDidMount() {
+  /* componentDidMount() {
     fetch(CORS + API)
       .then((response) => response.json())
       .then((data) => {
@@ -104,14 +101,14 @@ class Following extends Component {
             <Col lg={8}>
               <div className="result-container">
                 <div className="search-header">
-                  <h1> {this.state.displayName} is following: </h1>
+                  <h1> You are following: </h1>
                 </div>
                 <Row>
                   <Col lg={1}></Col>
                   <Col lg={10}>
                     {this.state.players.map((player, index) => {
                       let emblem = player.emblemIcon;
-                      if (emblem == steam_white) {
+                      if (emblem === steam_white) {
                         emblem = "/steam-icon.png";
                       }
                       return (
