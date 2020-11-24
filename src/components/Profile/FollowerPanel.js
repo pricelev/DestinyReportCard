@@ -84,6 +84,7 @@ class FollowerPanel extends React.Component {
           <Modal.Body>
              {this.state.followerList.map((follower, index) => {
                   let displayName = follower.DisplayName;
+                  let emblem = follower.emblemIcon;
                   return(
                     <ListGroup variant="flush">
                       <a href={
@@ -92,6 +93,11 @@ class FollowerPanel extends React.Component {
                             "/" +
                             follower.membershipID
                           }>
+                        <img
+                          src={emblem}
+                          width="40"
+                          alt="Player Emblem"
+                        ></img>
                         <ListGroup.Item>{displayName}</ListGroup.Item>
                       </a>
                     </ListGroup>
@@ -112,6 +118,7 @@ class FollowerPanel extends React.Component {
           <Modal.Body>
           {this.state.followingList.map((following, index) => {
                   let displayName = following.DisplayName;
+                  let emblem = following.emblemIcon;
                   return(
                     <ListGroup variant="flush">
                       <a href={
@@ -120,6 +127,11 @@ class FollowerPanel extends React.Component {
                             "/" +
                             following.membershipID
                           }>
+                        <img
+                          src={emblem}
+                          width="40"
+                          alt="Player Emblem"
+                        ></img>
                         <ListGroup.Item>{displayName}</ListGroup.Item>
                       </a>
                     </ListGroup>
