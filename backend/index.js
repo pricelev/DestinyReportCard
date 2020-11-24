@@ -48,7 +48,10 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({extended: true}));
 var allowedOrigins = ['http://www.destinyreportcard.com:3000',
                       'http://www.destinyreportcard.com:3001',
-                      'http://www.destinyreportcard.com'];
+                      'http://www.destinyreportcard.com',
+                      'http://destinyreportcard.com:3000',
+                      'http://destinyreportcard.com:3001',
+                      'http://destinyreportcard.com'];
 app.use(cors({
   origin: function(origin, callback){
     // allow requests with no origin 
