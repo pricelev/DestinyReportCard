@@ -30,6 +30,7 @@ class ReportCard extends Component {
       profPic: "/profile.jpg",
       following: false,
       loginStatus: false,
+      myProfile: false,
     };
   }
 
@@ -90,6 +91,17 @@ class ReportCard extends Component {
         let membershipID = response.data.user[0].membershipID;
         console.log(this.state.memId);
         let followID = this.state.memId;
+        if (followID === membershipID) {
+          this.setState({
+            myProfile: true,
+          });
+        }
+        else {
+          this.setState({
+            myProfile: false,
+          });
+        }
+        console.log(this.state.myProfile);
         Axios.get(checkFollowAPI, {
           params: {
             email: email,
