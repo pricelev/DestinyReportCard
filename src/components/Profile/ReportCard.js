@@ -226,14 +226,14 @@ class ReportCard extends Component {
 
       let component;
       if (this.state.myProfile) {
+        component = <StatsTable data={this.state.profileData.stats} />;
+      } else {
         component = (
           <ProfileChart
             data={chart_data}
             username={this.state.profileData.playerInfo.DisplayName.value}
           />
         );
-      } else {
-        component = <StatsTable data={this.state.profileData.stats} />;
       }
 
       return (
