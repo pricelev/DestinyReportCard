@@ -2,13 +2,47 @@ import React from "react";
 import { Button, Modal, ListGroup } from "react-bootstrap";
 import "./FollowerPanel.css";
 
+const followingAPI = "http://www.destinyreportcard.com:3001/followingList";
+const followerAPI = "http://www.destinyreportcard.com:3001/followerList";
+
 class FollowerPanel extends React.Component {
   constructor() {
     super();
     this.state = {
+      isLoading: false,
       followerModal: false,
       followingModal: false,
+      memID: this.props.memID,
+      followerList: [],
+      followingList: [],
     };
+  }
+
+  componentDidMount() {
+    Axios.get(followingAPI, {
+      params: {
+        membershipID: this.state.memID,
+      },
+    }).then((response) => {
+      console.log(response.data);
+      this.setState({
+        followingList: response.data,
+        isLoaded: true,
+      });
+    });
+    Axios.get(followingAPI, {
+      params: {
+        membershipID: this.state.memID,
+      },
+    }).then((response) => {
+      console.log(response.data);
+      this.setState({
+        followerList: response.data,
+        isLoaded: true,
+      });
+    });
+    console.log(followerList);
+    console.log(followingList);
   }
 
   handleFollowerModal() {
