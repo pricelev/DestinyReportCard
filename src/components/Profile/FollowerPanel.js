@@ -82,11 +82,22 @@ class FollowerPanel extends React.Component {
             <Modal.Title>Followers</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ListGroup variant="flush">
-              <ListGroup.Item>follower 1</ListGroup.Item>
-              <ListGroup.Item>follower 2</ListGroup.Item>
-              <ListGroup.Item>follower 3</ListGroup.Item>
-            </ListGroup>
+             {this.state.followerList.map((follower, index) => {
+                  let displayName = follower.DisplayName;
+                  return(
+                    <ListGroup variant="flush">
+                      <a href={
+                            "http://www.destinyreportcard.com/reportcard/" +
+                            player.membershipType +
+                            "/" +
+                            player.MembershipID
+                          }>
+                        <ListGroup.Item>{displayName}</ListGroup.Item>
+                      </a>
+                    </ListGroup>
+                  )
+                })
+              }
           </Modal.Body>
         </Modal>
 
