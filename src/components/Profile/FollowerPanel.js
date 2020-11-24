@@ -90,7 +90,7 @@ class FollowerPanel extends React.Component {
                             "http://www.destinyreportcard.com/reportcard/" +
                             follower.membershipType +
                             "/" +
-                            follower.MembershipID
+                            follower.membershipID
                           }>
                         <ListGroup.Item>{displayName}</ListGroup.Item>
                       </a>
@@ -110,11 +110,22 @@ class FollowerPanel extends React.Component {
             <Modal.Title>Following</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ListGroup variant="flush">
-              <ListGroup.Item>following 1</ListGroup.Item>
-              <ListGroup.Item>following 2</ListGroup.Item>
-              <ListGroup.Item>following 3</ListGroup.Item>
-            </ListGroup>
+          {this.state.followingList.map((following, index) => {
+                  let displayName = following.DisplayName;
+                  return(
+                    <ListGroup variant="flush">
+                      <a href={
+                            "http://www.destinyreportcard.com/reportcard/" +
+                            following.membershipType +
+                            "/" +
+                            following.membershipID
+                          }>
+                        <ListGroup.Item>{displayName}</ListGroup.Item>
+                      </a>
+                    </ListGroup>
+                  )
+                })
+              }
           </Modal.Body>
         </Modal>
       </div>
