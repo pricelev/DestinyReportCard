@@ -6,6 +6,7 @@ import Container from "react-bootstrap/Container";
 import ProfileChart from "./ProfileChart";
 import ReportSummary from "./ReportSummary";
 import CharacterPanel from "./CharacterPanel";
+import Axios from "axios";
 
 const loginAPI = "http://www.destinyreportcard.com:3001/login";
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
