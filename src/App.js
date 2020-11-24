@@ -39,7 +39,6 @@ class App extends Component {
           <Route exact path="/signup">
             <Signup />
           </Route>
-          <Route component={Page404} />
           <Footer />
         </div>
       </BrowserRouter>

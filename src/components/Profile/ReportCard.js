@@ -11,6 +11,7 @@ import ReportSummary from "./ReportSummary";
 import ProfileChart from "./ProfileChart";
 import CharacterPanel from "./CharacterPanel";
 import StatsTable from "./StatsTable";
+import FollowerPanel from "./FollowerPanel";
 
 const API = "http://www.destinyreportcard.com:3001/reportCard/?membershipId=";
 const followAPI = "http://www.destinyreportcard.com:3001/addFollow";
@@ -253,6 +254,7 @@ class ReportCard extends Component {
                     <h1 className="top-username">
                       {this.state.profileData.playerInfo.DisplayName.value}
                     </h1>
+                    <FollowerPanel />
                   </Row>
                   <Row>
                     {this.state.loginStatus === true &&
