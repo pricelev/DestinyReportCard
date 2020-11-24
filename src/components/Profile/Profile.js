@@ -87,7 +87,7 @@ class Profile extends Component {
         });
       }
     });
-    console.log(playerInfo);
+    console.log(profileData);
   };
 
   render() {
