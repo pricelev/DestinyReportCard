@@ -36,7 +36,7 @@ class ReportCard extends Component {
 
   componentDidMount() {
     fetch(
-      CORS + API + this.state.memId + "&membershipType=" + this.state.memType
+     API + this.state.memId + "&membershipType=" + this.state.memType
     )
       .then((response) => response.json())
       .then((data) => {
