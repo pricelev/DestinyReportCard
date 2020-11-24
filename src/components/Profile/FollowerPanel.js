@@ -39,6 +39,7 @@ class FollowerPanel extends React.Component {
       },
     }).then((response) => {
       this.setState({
+        followingList: response.data,
         isLoaded: true,
       });
     });
