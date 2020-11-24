@@ -1,9 +1,7 @@
 /**
- * Queries both bungie and destinyreportcard.com for users matching given name
  * @param endpoint: www.destinyreportcard.com:3001/
  * @name DestinyReportCardApi
  * 
-*]
  */
 function decoy(){
   //im just a decoy for documentation
