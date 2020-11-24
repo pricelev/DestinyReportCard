@@ -371,10 +371,24 @@ async function getFollowingList(email){
   from characters c , player p, follower f
  where c.membershipID = p.MembershipID AND c.membershipID=f.followsID and f.email="`+email+`"
  group by p.membershipID`;
+  let list = await db.query(q);
+  db.close();
+  return list;
+};
+
+async function getFollowerList(memID){
+  let db = new Database();
+  let q =    `select p.membershipID,p.DisplayName,SUM(c.playtime) as playtime, p.pvekd, sum(c.RaidClears) as raidclears, sum(c.strikecompletions) as strikecompletions, sum(c.nightfalls) as nightfalls, 
+  sum(publicevents) as publicevents, p.pvpkd, p.pvpWL, p.CombatRatingPvP,sum(c.trialswins)/sum(c.trialsmatches) as trialsRecord, p.triumphscore ,c.emblemIcon, p.membershipType
+  from characters c , player p, follower f
+ where c.membershipID = p.MembershipID AND c.membershipID=f.membershipID and f.followsID=`+memID+`
+ group by p.membershipID`;
   let list = await db.query(q)
   db.close();
   return list;
-}
+};
+
+
 
 
 async function addFollow(email,memID,followID){
@@ -384,31 +398,25 @@ async function addFollow(email,memID,followID){
   let res= await db.query(q);
   db.close();
   return res;
- 
-}
+};
 
 async function removeFollow(email,memID,followID){
   let q = `Delete from follower 
   where email="`+email+`" AND membershipID="`+memID+`" AND followsID="`+followID+`"`;
   let db = new Database();
-  console.log(q);
   let res= await db.query(q);
   db.close();
   return res;
- 
-}
+};
 
 async function checkFollower(email,memID,followID){
   let q = `select * from follower where email ="`+email+`" and followsID=`+followID+` and membershipID = `+memID+``;
- 
-  console.log(q);
   let db = new Database();
   let run =await db.query(q);
   db.close();
   console.log(run);
   return run.length;
-  
-}
+};
 
 module.exports = {
   searchPlayer,
@@ -419,5 +427,6 @@ module.exports = {
   getFollowingList,
   addFollow,
   removeFollow,
-  checkFollower
+  checkFollower,
+  getFollowerList
 };

@@ -532,6 +532,60 @@ app.get("/followingList",(req,res)=>{
 });
 
 
+/*
+  Api method for client to request a player update
+  Requires membership id param
+*/
+/**
+ *  Retrieves a list of players that follows a player
+ * @param {query param} membershipID unique members ID to distinct players
+ * @returns {Object} List of objects
+ * @name followingList
+ * @example get: http://www.destinyreportcard.com:3001/followingList/?membershipID=4611686018468548442
+ * Object Response
+ * [
+ *   {
+ *       "membershipID": "4611686018467284386",
+ *       "DisplayName": "Datto",
+ *       "playtime": 10086763,
+ *       "pvekd": 49.36,
+ *       "raidclears": 819,
+ *       "strikecompletions": 1672,
+ *       "nightfalls": 460,
+ *       "publicevents": 1768,
+ *       "pvpkd": 1.58,
+ *       "pvpWL": 1.8,
+ *       "CombatRatingPvP": 174,
+ *       "trialsRecord": 0.6728,
+ *       "triumphscore": 143042,
+ *       "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/99ad4e538b233298b16cc434e24f53c9.jpg",
+ *       "membershipType": 3
+ *   },
+ *   {
+ *       "membershipID": "4611686018476536768",
+ *       "DisplayName": "Frostie",
+ *       "playtime": 4143411,
+ *       "pvekd": 23.37,
+ *       "raidclears": 127,
+ *       "strikecompletions": 608,
+ *       "nightfalls": 191,
+ *       "publicevents": 665,
+ *       "pvpkd": 1.05,
+ *       "pvpWL": 0.7,
+ *       "CombatRatingPvP": 119,
+ *       "trialsRecord": 0.2695,
+ *       "triumphscore": 94587,
+ *       "emblemIcon": "https://www.bungie.net/common/destiny2_content/icons/ef696558825f40dc18234fd0851e9ae9.jpg",
+ *       "membershipType": 3
+ *   }
+*]
+ */
+app.get("/followerList",(req,res)=>{
+  const memID = req.query.membershipID;
+  DB.getFollowerList(memID).then((data)=> res.send(data));
+});
+
+
 
 
 /**
